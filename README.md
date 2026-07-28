@@ -155,7 +155,9 @@ The primary risks are teacher-extraction error, inadequate topology primitives, 
 
 ## Immediate objective
 
-Build two experimental gates:
+Build a first-principles experimental program that can run on a 16 GB Apple Silicon Mac. The program begins with representation, analytic-field and optimization sanity tests before attempting an end-to-end POC.
+
+The two product-facing gates remain:
 
 1. Demonstrate that a query-conditioned field can navigate a compiled semantic corpus.
 2. Demonstrate that a configured reasoning topology can solve unseen, verifiable multi-step constraint problems.
@@ -167,4 +169,6 @@ The second gate determines whether LTM performs reasoning rather than compressed
 - [Canonical architecture](docs/architecture.md)
 - [Inference and scaling](docs/inference-and-scaling.md)
 - [POC and evaluation plan](docs/poc-and-evaluation.md)
+- [Primary-literature map](docs/literature-review.md)
+- [First-principles experiment specification](docs/experiment-specification.md)
 - [Research abstract](docs/research-abstract.md)
