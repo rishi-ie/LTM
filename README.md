@@ -1,310 +1,170 @@
-# Latent Topology Model (LTM)
+# Latent Topology Models
 
-> A research project investigating whether general reasoning can emerge from continuous optimization over a learned cognitive topology rather than autoregressive language generation.
+Latent Topology Models (LTM) are a proposed reasoning and persistent-memory architecture designed to work alongside language models.
 
----
+An LLM handles ambiguous language, broad interaction and presentation. LTM compiles user or domain knowledge into configurable reasoning topologies, induces differentiable latent fields from those topologies, and optimizes a latent state toward a verified solution.
 
-# Overview
+> **Knowledge is compiled into persistent structure. Reasoning is latent optimization over an activated field. Language is the interface.**
 
-The **Latent Topology Model (LTM)** is a research program exploring an alternative computational foundation for artificial intelligence.
+## Intended product
 
-Modern Large Language Models (LLMs) perform reasoning implicitly through sequential next-token prediction. LTM investigates a different hypothesis:
+An end user creates an LTM workspace, selects one or more domain configurations, and adds documents, code, rules, databases and other data. The system compiles that material into persistent topology modules. The user then interacts through a familiar chat interface and can ask the system to:
 
-> **Reasoning is fundamentally a continuous geometric optimization process occurring within a learned cognitive topology rather than a sequence generation process.**
+- answer questions using a 10–20 million-token knowledge collection;
+- combine evidence across many sources;
+- find contradictions, dependencies and causes;
+- generate plans that satisfy explicit constraints;
+- reason about a large codebase or project over time;
+- update its knowledge without resending the full corpus;
+- return answers with evidence, assumptions and verification results.
 
-Instead of representing intelligence as autoregressive language computation, LTM represents intelligence as the evolution of latent cognitive states inside a continuous reasoning manifold governed by first-principles cognitive relationships.
+LTM is initially intended to be a specialized reasoning coprocessor, not a replacement for all language-model capabilities.
 
-Language becomes the final interface—not the reasoning mechanism itself.
+### Product distinction
 
----
+| Conventional LLM system | Intended LTM system |
+| --- | --- |
+| Broad pretrained knowledge | User-owned, expandable domain knowledge |
+| Corpus inserted or retrieved for each request | Corpus compiled into persistent topology modules |
+| Reasoning performed primarily through token generation | Candidate solution found through latent optimization |
+| Context is conversational and temporary | Knowledge persists and can be incrementally updated |
+| Plausibility is often the final criterion | Constraints, provenance and verification are first-class |
+| Cost depends strongly on active tokens and tools | Compute can be explicitly budgeted per request |
 
-# Central Research Question
+The relevant comparison is LTM versus an LLM combined with retrieval, tools, memory and an agent harness—not only a raw language model.
 
-The project is built around one primary scientific question:
+## System boundary
 
-> **Can a learnable cognitive topology be constructed such that arbitrary knowledge can be embedded into it, and continuous optimization over its induced reasoning field naturally produces general reasoning?**
+The user-facing system has four primary runtime components and one essential offline pipeline.
 
-Everything else in LTM exists to answer this question.
+### Offline: topology compilation
 
----
-
-# Core Hypothesis
-
-LTM proposes that intelligence consists of three independent components:
-
-```
-Knowledge
-
-↓
-
-Cognitive Topology
-
-↓
-
-Latent Optimization
-
-↓
-
-Reasoning
-
-↓
-
-Language
-```
-
-Unlike transformer architectures, language generation is treated as the final decoding step rather than the computational substrate of reasoning.
-
----
-
-# Fundamental Ideas
-
-LTM is built upon two primary architectural innovations.
-
-## 1. Consequence Manifold
-
-Instead of organizing latent space according to semantic similarity, LTM organizes latent space according to first-principles cognitive structure.
-
-Every embedded cognitive state participates in relationships such as
-
-- Constraints
-- Causality
-- Consequences
-- Dependencies
-- Conflicts
-- Goals
-- Abstractions
-- Evidence
-
-The resulting manifold represents the structural organization of reasoning rather than the statistical organization of language.
-
----
-
-## 2. Gravity-like Latent Optimization
-
-Inference is modeled as continuous state evolution.
-
-Instead of searching knowledge or generating intermediate text,
-
-an encoded cognitive state is placed into the manifold where it evolves according to a globally induced reasoning field.
-
-Reasoning is therefore interpreted as the trajectory of a cognitive state toward a stable low-energy equilibrium.
-
----
-
-# High-Level Architecture
-
-```
-User Prompt
-
-↓
-
-State Encoder
-
-↓
-
-Initial Cognitive State
-
-↓
-
-First-Principles Cognitive Topology
-
-↓
-
-Global Reasoning Field
-
-↓
-
-Latent Optimization
-
-↓
-
-Stable Cognitive State
-
-↓
-
-Language Decoder
-
-↓
-
-Final Response
+```text
+Raw data
+    ↓
+LLM-assisted structured extraction
+    ↓
+Reasoning Intermediate Representation (RIR)
+    ↓
+Deterministic validation and normalization
+    ↓
+Domain-configured topology encoder
+    ↓
+Instantiated topology and field modules
 ```
 
----
+### Online: reasoning
 
-# Architectural Components
+```text
+Prompt
+    ↓
+Prompt and goal encoder
+    ↓
+Relevant topology activation
+    ↓
+Query-conditioned latent dynamic field
+    ↓
+Latent optimization
+    ↓
+Verification
+    ↓
+Language decoder
+    ↓
+Answer, evidence and constraint report
+```
 
-## Cognitive State Encoder
+## Core definitions
 
-Transforms language into a continuous latent cognitive state representing
+- **Template topology:** A domain configuration defining state types, relation meanings, constraints, energy terms and validators.
+- **Instantiated topology:** The validated states, relationships and provenance compiled from a corpus.
+- **Topology encoder/compiler:** The ingestion system that places validated knowledge into the configured topology.
+- **Latent dynamic field:** A differentiable, prompt-conditioned energy or vector field induced by active topology modules.
+- **Latent optimizer:** The procedure that evolves a latent reasoning state toward a low-energy candidate.
+- **Verifier:** An independent check that distinguishes convergence from correctness.
+- **Decoder:** A language or symbolic model that expresses an already selected and checked result.
 
-- knowledge
-- goals
-- context
-- intent
-- constraints
-- beliefs
+## Reasoning primitives
 
-rather than text tokens.
+Every domain specializes a shared reasoning vocabulary:
 
----
+- states;
+- premises and consequences;
+- causes;
+- constraints;
+- dependencies;
+- conflicts;
+- evidence;
+- goals;
+- abstractions;
+- uncertainty;
+- provenance.
 
-## Dual-Vector Cognitive Embedding
+An optional dual-vector representation assigns each state an Origin vector and a Target vector, making directed transitions such as premise → consequence asymmetric.
 
-Every cognitive state is represented using two complementary vectors:
+## What “global satisfaction” means
 
-- Origin Vector
-- Target Vector
+LTM does not attempt to satisfy every stored statement. Real knowledge contains contradictions, outdated claims and irrelevant information.
 
-This asymmetric representation captures directed reasoning and consequence propagation rather than symmetric semantic similarity.
+The actual objective is:
 
----
+> Find the state that best satisfies the prompt-relevant, reliability-weighted constraints while minimizing unresolved conflict and uncertainty.
 
-## First-Principles Cognitive Topology
+\[
+E(x\mid q)=
+\sum_i w_i(q)E_i(x)
++\lambda_gE_{\mathrm{goal}}(x,q)
++\lambda_uE_{\mathrm{uncertainty}}(x)
+\]
 
-The latent manifold is organized according to universal cognitive invariants instead of language statistics.
+The weights \(w_i(q)\) depend on relevance, provenance, confidence, recency and domain applicability.
 
-These include
+## Scaling position
 
-- constraints
-- causality
-- dependencies
-- consequences
-- conflicts
-- abstractions
-- goals
+“Practically unlimited context” means an expandable persistent knowledge store, initially targeting 10–20 million tokens. It does not mean exact simultaneous attention to unlimited information.
 
-This topology serves as the knowledge substrate of the architecture.
+Total topology capacity may grow through sharded field modules, external payload storage or—in a long-term sparse design—trillions of total parameters. Per-request compute remains bounded only when the system activates or streams a limited subset of this capacity.
 
----
+The defensible scaling claim is:
 
-## Global Reasoning Field
+> LTM aims to expand total accessible knowledge while keeping average active inference bounded through prompt-conditioned routing, sparse field activation, caching and offline compilation.
 
-Every embedded cognitive state contributes to a continuous reasoning field.
+Exact global questions may still require corpus-dependent work.
 
-The field represents the collective influence of all embedded knowledge.
+## Current status
 
-Inference never explicitly searches stored knowledge.
+**Stage:** Formal specification and POC design.
 
-Instead, the optimizer evaluates only the local reasoning field.
+No LTM performance, cost, general-reasoning or scaling claim has been experimentally established. All scores, costs and probabilities in this repository are projections or research targets unless explicitly marked as measured.
 
-This principle is referred to as
+### Planning estimates
 
-> **Global Influence, Local Computation**
+These are subjective estimates, not experimental measurements:
 
----
+| Outcome | Estimated probability |
+| --- | ---: |
+| Complete end-to-end POC | 90–95% |
+| Useful domain topology compilation | 80–90% |
+| Useful retrieval and field navigation | 70–90% |
+| Useful bounded-domain reasoning | 60–75% |
+| Handle 10–20M tokens of accessible knowledge | 70–85% |
+| Useful specialized product | 50–65% |
+| Broadly useful LLM reasoning coprocessor | 30–50% |
+| Broad frontier-model equivalence | 10–20% |
 
-## Cognitive Energy
+The primary risks are teacher-extraction error, inadequate topology primitives, field-distillation loss, bad optimization attractors, sparse-routing misses, decoder leakage and failure to outperform strong RAG or solver baselines.
 
-Reasoning is formulated as minimizing cognitive inconsistency.
+## Immediate objective
 
-Potential energy terms include
+Build two experimental gates:
 
-- constraint violations
-- dependency violations
-- causal inconsistency
-- contradiction
-- abstraction inconsistency
-- goal distance
+1. Demonstrate that a query-conditioned field can navigate a compiled semantic corpus.
+2. Demonstrate that a configured reasoning topology can solve unseen, verifiable multi-step constraint problems.
 
-Lower energy corresponds to more globally consistent cognitive states.
+The second gate determines whether LTM performs reasoning rather than compressed retrieval.
 
----
+## Documentation
 
-## Latent Optimizer
-
-Inference follows the reasoning field until equilibrium.
-
-Rather than generating reasoning chains,
-
-optimization continuously updates the cognitive state until no further reduction in cognitive energy is possible.
-
----
-
-## Language Decoder
-
-Only after optimization converges is language generated.
-
-The decoder converts the final cognitive state into natural language.
-
----
-
-# Guiding Principles
-
-LTM is based on the following principles:
-
-- Knowledge and reasoning should be separate computational processes.
-- Language should be treated as an interface rather than the reasoning substrate.
-- Intelligence should emerge from geometry rather than sequential computation.
-- Knowledge should reorganize topology instead of requiring complete retraining.
-- Reasoning should optimize cognitive consistency rather than predict the next token.
-- Inference should depend primarily on optimization dynamics rather than total stored knowledge.
-
----
-
-# Expected Advantages (Hypotheses)
-
-If validated experimentally, LTM may provide:
-
-- Improved global reasoning consistency
-- Better long-horizon planning
-- More efficient constraint satisfaction
-- Better continual learning
-- Reduced dependence on autoregressive reasoning
-- Improved scalability with growing knowledge
-- A modular separation between knowledge, reasoning, and language
-
-These are research hypotheses, not established results.
-
----
-
-# Current Research Problems
-
-The project is currently focused on five open questions.
-
-## 1. Cognitive Embedding
-
-Can an embedding model be trained to organize knowledge according to first-principles reasoning rather than semantic similarity?
-
----
-
-## 2. Consequence Topology
-
-Can consequence relationships emerge as a continuous latent geometry?
-
----
-
-## 3. Reasoning Field
-
-Can a globally induced reasoning field be learned from embedded knowledge?
-
----
-
-## 4. Latent Optimization
-
-Can continuous optimization over this field produce reasoning that generalizes beyond autoregressive generation?
-
----
-
-## 5. Scaling Laws
-
-Does reasoning quality improve primarily through better topology rather than larger autoregressive models?
-
----
-
-# Status
-
-**Stage:** Foundational Research
-
-The project is currently at the theoretical formulation stage.
-
-No claims regarding performance or superiority over existing architectures have yet been experimentally validated.
-
-The immediate objective is to formalize the mathematical framework, construct an initial cognitive embedding model, and determine experimentally whether a learnable consequence topology and globally induced reasoning field can produce general reasoning through continuous latent optimization.
-
----
-
-# Vision
-
-The long-term goal of LTM is to investigate whether intelligence can be modeled as a geometric dynamical system rather than a sequential language model.
-
-If the central hypothesis is validated, LTM would establish a new class of foundation models in which reasoning emerges through continuous optimization over a learned cognitive topology, providing an alternative computational paradigm to autoregressive transformers.
+- [Canonical architecture](docs/architecture.md)
+- [Inference and scaling](docs/inference-and-scaling.md)
+- [POC and evaluation plan](docs/poc-and-evaluation.md)
+- [Research abstract](docs/research-abstract.md)

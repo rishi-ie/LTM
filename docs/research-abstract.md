@@ -1,0 +1,19 @@
+# Research Abstract
+
+**Status:** Foundational research proposal; no LTM results have yet been measured.
+
+Latent Topology Models (LTM) propose a complementary architecture for persistent knowledge and machine reasoning. Instead of relying exclusively on autoregressive token generation, LTM compiles domain data into configurable reasoning topologies and formulates inference as optimization of a latent state over a prompt-conditioned dynamic field. Language models remain important as interfaces and as supervised extraction tools, while knowledge compilation, solution search, verification and verbalization are treated as separate processes.
+
+The ingestion pipeline begins with a domain template defining state types, directed relations, constraints, energy terms, provenance requirements and validators. A teacher language model converts raw documents and structured data into a source-grounded Reasoning Intermediate Representation. A deterministic compiler validates, normalizes and versions this representation before encoding it into an instantiated topology. Shared primitives—including premises, consequences, causes, dependencies, conflicts, evidence, goals, abstractions and uncertainty—permit common reasoning structure while domain configurations determine their concrete meaning. A dual-vector Origin/Target representation is proposed as one candidate method for modeling asymmetric transitions.
+
+Validated topology can induce an explicit cognitive energy function or be distilled into differentiable neural field modules. At inference, a prompt encoder produces an initial latent state and goal representation. A router activates relevant topology modules, which collectively define a query-conditioned energy landscape. The latent optimizer evolves the state toward a candidate that minimizes applicable constraint, dependency, causal, conflict, goal and uncertainty energies. Convergence alone is not treated as correctness: an independent verifier checks hard constraints, evidence support and domain validity before a language or symbolic decoder communicates the result.
+
+The intended product is a persistent reasoning workspace over approximately 10–20 million tokens of user or domain knowledge. Total capacity may grow through sharded topology modules, sparse field experts and exact external payload storage. LTM does not claim literal unlimited context or constant worst-case computation. Its scaling hypothesis is that average per-request compute can remain bounded relative to a growing knowledge store through offline compilation, prompt-conditioned routing, sparse activation, caching and batched streamed inference. Rare global questions may still require corpus-dependent computation.
+
+The research program is divided into two initial experimental gates. The first tests whether continuous query-conditioned field optimization provides useful semantic navigation relative to exact and approximate vector retrieval. The second tests whether configured topology and latent optimization solve unseen, verifiable multi-step constraint problems relative to graph search, constraint solvers, graph neural networks and LLM-plus-RAG baselines. Further experiments measure contradiction handling, incremental updates, 10–20M-token scaling, routing recall, evidence fidelity and fully loaded inference cost.
+
+The central scientific question is therefore:
+
+> Can validated, domain-configurable reasoning structure be compiled into a differentiable field such that latent optimization produces useful and generalizable reasoning behavior at a better persistence, verification or cost frontier than existing retrieval, solver and autoregressive systems?
+
+LTM remains a theoretical and experimental proposal. Claims of broad general reasoning, frontier-model equivalence, hallucination immunity and fixed-cost unlimited context require empirical evidence and are not assumed by the architecture.
