@@ -1,0 +1,2 @@
+LTM phase one stores exact source evidence beside semantic vectors.
+The optimizer is bounded and returns an evidence trace.

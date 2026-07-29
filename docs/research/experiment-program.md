@@ -1,4 +1,60 @@
-# First-Principles Experiment Specification
+# LTM Experimental Program
+
+This is the consolidated first-principles evaluation program for LTM. The
+[canonical architecture](../architecture.md) defines the system, while the
+[experimental report](../report.md) records what has actually been measured.
+
+The program separates four claims:
+
+1. the complete latent-field pipeline can execute;
+2. field optimization adds value beyond retrieval or averaging;
+3. a native typed topology supports reasoning;
+4. sparse activation preserves quality as persistent knowledge grows.
+
+Success on one claim does not establish the others. In particular, the
+completed semantic-surrogate POC validates pipeline mechanics but does not test
+the native reasoning topology.
+
+## Dated frontier context
+
+The following public values were recorded on **2026-07-28** as comparison
+context, not as LTM results. Vendor harnesses may differ and should be
+independently reproduced before direct comparison.
+
+| Benchmark | GPT-5.6 Sol | Claude Fable 5 |
+| --- | ---: | ---: |
+| Artificial Analysis Intelligence Index | 58.9 | 59.9 |
+| Agents' Last Exam | 52.7% | 40.5% |
+| SWE-Bench Pro | 64.6% | 80.0% |
+| Terminal-Bench 2.1 | 88.8% | 83.1% |
+| GPQA Diamond | 94.6% | 92.6% |
+| FrontierMath Tier 1–3 | 89.0% | 87.0% |
+| FrontierMath Tier 4 | 83.0% | 87.8% |
+| HealthBench Professional | 60.5% | 60.9% |
+| AutomationBench | 18.1% | 17.4% |
+| Toolathlon | 58.0% | 61.7% |
+
+Sources:
+
+- [OpenAI GPT-5.6 launch evaluation](https://openai.com/index/gpt-5-6/)
+- [OpenAI GPT-5.6 Sol model reference](https://developers.openai.com/api/docs/models/gpt-5.6-sol)
+- [Anthropic Claude Fable 5 model reference](https://platform.claude.com/docs/en/about-claude/models/introducing-claude-fable-5-and-claude-mythos-5)
+
+## Planning targets, not measurements
+
+These ranges are hypotheses retained for future experiment design.
+
+| Evaluation | First credible POC | Mature domain LTM |
+| --- | ---: | ---: |
+| MRCR-style retrieval at 512K–1M | 65–85% | 85–95% |
+| GraphWalks-style BFS at 1M | 70–88 F1 | 88–97 F1 |
+| MRCR-style retrieval at 10M | 55–75% | 75–90% |
+| MRCR-style retrieval at 20M | 50–70% | 70–88% |
+| Evidence-grounded multi-hop QA | 55–75% | 75–90% |
+| Configured constraint validity | 80–95% | 92–99% |
+| Contradiction resolution with citations | 65–85% | 85–95% |
+
+No completed LTM experiment has established these values.
 
 **Status:** Specification for review; implementation has not started.  
 **Target machine:** 16 GB Apple Silicon MacBook Pro.  
@@ -783,4 +839,3 @@ A definitive first POC is achieved when all of the following are reproduced acro
 - run artifacts contain enough information for exact dataset regeneration.
 
 This outcome would justify a larger-scale LTM program. It would still leave natural-language ingestion, real-world topology quality, 10–20M-token scaling and production economics as separate later stages.
-

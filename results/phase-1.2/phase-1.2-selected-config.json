@@ -1,0 +1,24 @@
+{
+  "config": {
+    "query_anchor": 0.5,
+    "average_weight": 1.0,
+    "max_weight": 2.0,
+    "beta": 10.0,
+    "relevance_floor": 0.0001,
+    "relevance_temperature": 0.05,
+    "steps": 8,
+    "hard_evaluations": 16,
+    "learning_rate": 0.05,
+    "backtracking_retries": 3,
+    "state_tolerance": 0.0001,
+    "energy_tolerance": 1e-08
+  },
+  "summary": {
+    "worst_high_weight_residual": 0.5564595756127196,
+    "average_weighted_residual": 0.7251422128851547,
+    "prompt_cosine": 0.9775986233468938,
+    "approximation_error": 2.7963202849683605e-17,
+    "latency_ms": 0.48845577955944464,
+    "hierarchy_elements": 120.0
+  }
+}

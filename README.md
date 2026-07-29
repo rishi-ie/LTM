@@ -132,7 +132,19 @@ Exact global questions may still require corpus-dependent work.
 
 ## Current status
 
-**Stage:** Formal specification and POC design.
+The semantic-surrogate pipeline is complete.
+
+| Question | Result |
+| --- | --- |
+| Can the complete embed → field → optimize → evidence → decode pipeline run? | **Pass** |
+| Does the tested single-state semantic field beat retrieval? | Result B |
+| Does multi-state semantic diversification improve evidence? | Result B |
+| Does semantic equilibrium beat weighted averaging? | E-B |
+| Does a native typed reasoning topology enable reasoning? | Not implemented or tested |
+
+Phase 1 proved pipeline mechanics. Phase 1.1 and Phase 1.2 tested additional
+semantic objectives; their negative comparisons do not test the defining
+reasoning topology. See the canonical [experimental report](docs/report.md).
 
 No LTM performance, cost, general-reasoning or scaling claim has been experimentally established. All scores, costs and probabilities in this repository are projections or research targets unless explicitly marked as measured.
 
@@ -155,20 +167,21 @@ The primary risks are teacher-extraction error, inadequate topology primitives, 
 
 ## Immediate objective
 
-Build a first-principles experimental program that can run on a 16 GB Apple Silicon Mac. The program begins with representation, analytic-field and optimization sanity tests before attempting an end-to-end POC.
+Design the first native reasoning-topology experiment using typed facts,
+directed implications, conflicts, goals, and an independent verifier. It must
+compare latent optimization against retrieval, graph traversal, and
+constraint-solver controls on unseen compositions.
 
-The two product-facing gates remain:
-
-1. Demonstrate that a query-conditioned field can navigate a compiled semantic corpus.
-2. Demonstrate that a configured reasoning topology can solve unseen, verifiable multi-step constraint problems.
-
-The second gate determines whether LTM performs reasoning rather than compressed retrieval.
+This next gate determines whether LTM performs reasoning rather than semantic
+navigation or compressed retrieval.
 
 ## Documentation
 
 - [Canonical architecture](docs/architecture.md)
-- [Inference and scaling](docs/inference-and-scaling.md)
-- [POC and evaluation plan](docs/poc-and-evaluation.md)
-- [Primary-literature map](docs/literature-review.md)
-- [First-principles experiment specification](docs/experiment-specification.md)
-- [Research abstract](docs/research-abstract.md)
+- [Canonical experimental report](docs/report.md)
+- [Documentation index](docs/README.md)
+- [Research roadmap](docs/research/roadmap.md)
+- [Experimental program](docs/research/experiment-program.md)
+- [Inference and scaling](docs/research/inference-and-scaling.md)
+- [Primary-literature map](docs/research/literature-review.md)
+- [Research abstract](docs/research/abstract.md)

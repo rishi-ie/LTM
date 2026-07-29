@@ -1,366 +1,491 @@
-# Canonical Architecture
+# Latent Topology Models: Canonical Architecture
 
-## Architectural thesis
+## Status and boundary
 
-LTM separates five responsibilities:
+This document defines the intended LTM architecture. It is a research
+hypothesis, not a description of a completed reasoning model.
 
-1. language interpretation;
-2. knowledge compilation;
-3. persistent reasoning structure;
-4. latent solution search;
-5. output expression.
+The current implementation proves that a semantic surrogate can drive the
+complete encode → field → optimize → evidence → decode pipeline. It does not
+contain the native reasoning topology described here. Consequently, the
+central reasoning hypothesis remains untested.
 
-This separation is intended to let language models and topology models improve independently.
+Measured claims belong in the [experimental report](report.md). Supporting
+research and citations are indexed in the
+[literature map](research/literature-review.md).
 
-## Offline architecture
+## Architectural hypothesis
 
-### 1. Domain topology configuration
+> A domain's knowledge and reasoning rules can be compiled into a persistent
+> typed topology. That topology can induce a prompt-conditioned latent field in
+> which optimization finds a state satisfying the most relevant, reliable
+> constraints. A decoder then expresses the independently verified state in
+> natural language.
 
-A template topology defines what reasoning means in a domain. Configuration includes:
+This thesis contains five separate, falsifiable hypotheses.
 
-- state and entity types;
-- valid relation types;
-- relation directionality;
-- hard and soft constraints;
-- energy components and weights;
-- deterministic validators;
-- provenance rules;
-- update and versioning rules;
-- mappings to shared reasoning primitives.
+### H1 — Topology representation
 
-JSON configures trusted implementations; it should not become an unrestricted executable language.
+Typed premises, implications, conflicts, dependencies, goals, uncertainty,
+and provenance can be represented in a geometry that preserves their
+operational meaning.
 
-### 2. LLM-assisted reasoning extraction
+This fails if the representation reduces directed or logical relations to
+ordinary similarity, or if valid reasoning paths cannot be distinguished from
+nearby but invalid states.
 
-A teacher or reasoning LLM converts raw data into a strict Reasoning Intermediate Representation (RIR). The system requests structured, source-grounded analysis rather than private or free-form chain-of-thought.
+### H2 — Field compilation
 
-The teacher proposes:
+An instantiated topology can produce a controlled latent energy or vector
+field whose forces correspond to the topology's typed relations and
+constraints.
 
-- states and claims;
+This fails if low energy is unrelated to constraint validity, contradictions
+are silently averaged away, or field approximation destroys the relevant
+structure.
+
+### H3 — Latent optimization
+
+Movement through the field can solve unseen relation compositions or
+constraint problems that retrieval, weighted averaging, and direct decoding
+cannot solve.
+
+This fails if optimization merely moves toward semantically similar evidence,
+if a closed-form average dominates it, or if ordinary graph or constraint
+search is consistently better on quality and cost.
+
+### H4 — Sparse scaling
+
+An expandable persistent knowledge store can influence a request through exact
+activation and hierarchical summaries without ordinary request cost growing
+in direct proportion to the full corpus.
+
+This fails if accurate requests require scanning or loading most stored
+knowledge, or if routing and aggregation lose too much evidence.
+
+### H5 — Faithful decoding
+
+A compact language model can express an already selected and verified result
+without performing, replacing, or fabricating the measured reasoning.
+
+This fails if answer quality disappears when the decoder is restricted to the
+verified evidence bundle.
+
+## System boundary
+
+LTM has four primary reasoning components:
+
+1. reasoning topology;
+2. latent dynamic field;
+3. latent optimizer;
+4. decoder.
+
+Two supporting systems are also required:
+
+- an offline topology compiler;
+- an independent verifier.
+
+The compiler constructs the persistent reasoning substrate. The verifier
+decides whether convergence corresponds to a valid result. Neither is counted
+as one of the four runtime reasoning components, but a credible product cannot
+omit them.
+
+## Component 1: reasoning topology
+
+The reasoning topology stores typed reasoning structure rather than only
+semantic proximity.
+
+### Required objects
+
+The initial shared vocabulary includes:
+
+- entities and states;
+- observations and claims;
 - premises and consequences;
-- dependencies and causes;
-- goals and constraints;
-- conflicts;
-- valid and invalid transitions;
-- evidence spans;
-- uncertainty.
+- directed implications;
+- dependencies and prerequisites;
+- causal hypotheses;
+- supporting and opposing evidence;
+- conflicts and incompatibilities;
+- hard and soft constraints;
+- goals and acceptable terminal states;
+- confidence, authority, and uncertainty;
+- recency and domain applicability;
+- source provenance.
 
-Teacher output is untrusted input to the compiler.
+A native topology must preserve direction. `A implies B` must not be
+interchangeable with `B implies A`, even when their language embeddings are
+close.
 
-### 3. Validation and normalization
+### Domain configuration
 
-A deterministic program:
+Each domain supplies a validated configuration describing:
 
-- validates the RIR schema;
-- checks source grounding;
-- rejects unsupported relationships;
-- normalizes identifiers and units;
-- deduplicates equivalent states;
-- checks type compatibility;
-- records contradictions;
-- preserves provenance;
-- runs domain validators;
-- versions topology changes.
+- permitted node and relation types;
+- relation direction and composition rules;
+- hard versus soft constraints;
+- confidence and authority semantics;
+- applicability and recency rules;
+- relation-specific energy terms;
+- verifier requirements;
+- decoder-visible provenance fields.
 
-Multiple extraction or verification passes may be used for difficult material.
-
-### 4. Topology encoding
-
-Validated states and relationships are embedded into an instantiated topology.
-
-A candidate directed representation is:
-
-\[
-f_\theta(s)=(O_s,T_s)
-\]
-
-where:
-
-- \(O_s\) represents the state as a premise, origin or causal source;
-- \(T_s\) represents it as a consequence, target or resolved state.
-
-A valid directed transition \(s_i\rightarrow s_j\) should score more strongly than its reverse:
-
-\[
-O_{s_i}\cdot T_{s_j}
->
-O_{s_j}\cdot T_{s_i}
-\]
-
-This representation is a hypothesis to test, not a required permanent design.
-
-### 5. Field compilation
-
-The explicit topology induces an energy function or vector field. The first implementation should compute this field from explicit relations so behavior can be inspected.
-
-Once validated, the explicit field may be distilled into neural modules:
-
-\[
-F_\phi(x,q)\approx-\nabla_xE_{\mathrm{explicit}}(x,q)
-\]
-
-Distillation reduces runtime cost but may lose detail. Exact source payloads should remain attached to topology nodes for fidelity and verification.
-
-## Online architecture
-
-### 1. Prompt encoding
-
-The language interface maps a prompt into:
-
-- an initial latent state \(x_0\);
-- a goal representation \(g_q\);
-- hard and soft request constraints;
-- domain routing signals;
-- required output form.
-
-### 2. Topology activation
-
-A router selects relevant field modules:
-
-\[
-A(q)=\{m_1,\ldots,m_k\}
-\]
-
-The active field is composed as:
-
-\[
-F(x,q)=\sum_{m\in A(q)}g_m(q)F_m(x,q)
-\]
-
-where \(g_m(q)\) controls module relevance. Sparse activation is essential to bounded inference.
-
-### 3. Query-conditioned energy
-
-The optimizer minimizes prompt-relevant inconsistency:
-
-\[
-E(x\mid q)=
-\lambda_cE_{\mathrm{constraint}}
-+\lambda_dE_{\mathrm{dependency}}
-+\lambda_xE_{\mathrm{causal}}
-+\lambda_rE_{\mathrm{conflict}}
-+\lambda_gE_{\mathrm{goal}}
-+\lambda_uE_{\mathrm{uncertainty}}
-\]
-
-Each term is conditioned by the active topology, prompt, provenance and applicability.
-
-### 4. Latent optimization
-
-A basic update is:
-
-\[
-x_{t+1}=x_t-\alpha\nabla_xE(x_t\mid q)
-\]
-
-Optional momentum, adaptive step sizes, Langevin noise, beam-like particles or discrete repair operations may help avoid poor local minima.
-
-Stopping requires more than a small gradient. Conditions may include:
-
-- low energy;
-- small state change;
-- satisfied hard constraints;
-- stable evidence set;
-- verifier acceptance;
-- explicit timeout or compute budget.
-
-### 5. Verification
-
-Convergence is not correctness. The verifier checks:
-
-- hard constraints;
-- source support;
-- dependency closure;
-- contradictions;
-- domain-specific validity;
-- output completeness.
-
-If verification fails, the system may repair the state, activate more topology modules, increase the reasoning budget or return an unresolved result.
-
-### 6. Decoding
-
-A small language model or symbolic decoder receives the final state, evidence and verifier report. It produces the requested language or structured artifact.
-
-The decoder may improve clarity but may not claim evidence absent from the verified state.
-
-## Knowledge representation modes
-
-### Weights-only research mode
-
-All corpus influence is distilled into parameters. This offers bounded evaluation but risks blurred facts, difficult updates and poor provenance.
-
-### Field plus exact payload
-
-Relationships and global influence are compiled into field weights, while exact facts and source text remain attached to topology nodes. This is the recommended product architecture.
-
-### Explicit topology mode
-
-The field is calculated directly from stored states and relations. This is slower but transparent and is the preferred starting point for scientific validation.
-
-## Topology compiler contract
-
-The topology compiler translates arbitrary domain data into validated reasoning objects, places those objects into a configured topology and produces training material for the latent field. It is not merely a semantic embedding endpoint.
+The configuration is data, not hidden decoder prompting. A JSON configuration
+may tune a shared topology template, but any domain logic required for correct
+reasoning must be represented explicitly and testably.
 
 ### Reasoning Intermediate Representation
 
-The Reasoning Intermediate Representation is the stable contract between extraction, validation, topology encoding and field compilation.
+Teacher-model extraction does not write directly into latent vectors. It
+first emits a structured Reasoning Intermediate Representation (RIR).
 
-A minimal record should contain:
-
-```json
-{
-  "document_id": "source-123",
-  "domain": "software_dependencies",
-  "states": [],
-  "premises": [],
-  "goals": [],
-  "constraints": [],
-  "dependencies": [],
-  "causal_edges": [],
-  "conflicts": [],
-  "valid_transitions": [],
-  "invalid_transitions": [],
-  "evidence": [],
-  "uncertainties": [],
-  "source_spans": []
-}
-```
-
-Each relation must include provenance, confidence and the topology configuration version used to interpret it.
-
-### Template topology
-
-A conceptual domain configuration is:
+A minimal RIR record contains:
 
 ```json
 {
-  "schema_version": "0.1",
-  "domain": "software_dependencies",
-  "state_types": [
-    "package",
-    "version",
-    "requirement",
-    "configuration"
-  ],
-  "relations": {
-    "requires": {
-      "directed": true,
-      "energy": "dependency"
-    },
-    "conflicts_with": {
-      "directed": false,
-      "energy": "conflict"
-    },
-    "supports": {
-      "directed": true,
-      "energy": "evidence"
-    }
-  },
-  "constraints": {
-    "version_compatibility": {
-      "weight": 1.0,
-      "hard": true,
-      "validator": "semver_validator"
-    }
-  },
-  "optimization": {
-    "goal_weight": 1.0,
-    "conflict_weight": 2.0,
-    "uncertainty_weight": 0.5
+  "id": "claim-17",
+  "type": "implication",
+  "premises": ["fact-3", "fact-8"],
+  "conclusion": "state-12",
+  "confidence": 0.91,
+  "authority": 0.80,
+  "applicability": ["domain:thermal-control"],
+  "conflicts_with": ["claim-24"],
+  "source": {
+    "path": "manual.md",
+    "span": [410, 566]
   }
 }
 ```
 
-Validators referenced by JSON are trusted, tested and versioned code.
+The compiler validates identifiers, relation arity, direction, provenance,
+metadata ranges, and domain rules before topology encoding.
 
-### Extraction and validation
+## Component 2: latent dynamic field
 
-An LLM may identify candidate states, typed relations, source evidence, valid and invalid transitions, contradictions and missing premises. It must emit schema-constrained output. Free-form explanations may be retained for debugging but are not topology ground truth.
+The latent dynamic field transforms activated topology objects into forces or
+energy constraints over a latent state.
 
-Validation layers include:
+For prompt \(q\), topology object \(i\), and state \(x\), its influence depends
+on:
 
-- JSON and schema validation;
-- source-span entailment checks;
-- domain type checking;
-- unit and identifier normalization;
-- deterministic constraint evaluation;
-- duplicate detection;
-- contradiction classification;
-- confidence calibration;
-- optional multi-model consensus;
-- human review for high-impact changes.
+- prompt and goal relevance;
+- confidence, authority, and recency;
+- domain applicability;
+- relation type and direction;
+- conflict status;
+- topology position;
+- activation or aggregation level.
 
-The compiler preserves rejected candidates and rejection reasons for audit and future improvement.
+Prompt-relevant objects may be activated exactly. Distant regions may remain
+as aggregate constraints so that the full store remains represented without
+loading every payload into active compute.
 
-### Training examples
+The field must not hide contradictions by placing the final state at an
+unlabelled midpoint. Incompatible important constraints must remain visible as
+separate residuals or branches.
 
-Compilation produces:
+## Component 3: latent optimizer
 
-- positive directed edges;
-- reverse-direction negatives;
-- incompatible-state negatives;
-- dependency-completion examples;
-- constraint-violation examples;
-- evidence-support examples;
-- abstraction mappings;
-- query-goal-state triples.
+The optimizer begins from a prompt and goal state \(x_0=q\), then searches for
+a lower-energy valid state.
 
-A candidate directional loss is:
+It must:
 
-\[
-\mathcal{L}_{\mathrm{dir}}=
--\log
-\frac{\exp(O_s\cdot T_{s^+}/\tau)}
-{\exp(O_s\cdot T_{s^+}/\tau)+
-\sum_k\exp(O_s\cdot T_{s^-_k}/\tau)}
-\]
+- remain within the representation's valid manifold;
+- preserve the prompt goal;
+- reduce relevant weighted violations;
+- respect hard constraints;
+- expose unresolved soft constraints and conflicts;
+- operate under a bounded evaluation budget;
+- emit a convergence trace;
+- distinguish numerical convergence from correctness.
 
-Directional similarity alone is insufficient to establish reasoning. Training must also test constraints, provenance and contradictions.
+Depending on the topology, the state may be a single vector, a set of vectors,
+a structured latent object, or a combination of continuous and discrete
+variables. The representation is not required to remain a 384-dimensional
+semantic vector.
 
-### Incremental updates
+## Component 4: decoder
 
-An update should:
+The decoder is a language interface, not the source of truth.
 
-1. extract and validate only affected material;
-2. locate related topology regions;
-3. add a version rather than destructively overwrite;
-4. identify newly created conflicts;
-5. patch or retrain local field modules;
-6. run retained-knowledge regressions;
-7. promote the update after validation.
+It receives only:
 
-The system measures update latency, retained-answer accuracy, new-fact accuracy, conflict detection, topology drift and recompilation cost.
+- the original prompt;
+- the verified optimized-state summary;
+- exact supporting and opposing evidence;
+- relation or proof paths;
+- constraint residuals;
+- unresolved conflicts;
+- provenance;
+- verifier outcome.
 
-### Domain composition
+It must:
 
-Every domain maps specialized concepts to shared primitives. Cross-domain edges must be explicit.
+- cite factual statements;
+- state assumptions;
+- identify weakly satisfied or incompatible evidence;
+- avoid claiming that every stored item was proven true;
+- refuse or fall back to a deterministic table when verification fails.
 
-```text
-Software package dependency
-        ↓ maps to
-Shared dependency primitive
-        ↑ maps from
-Operational process prerequisite
+If the decoder can access hidden corpus material or regenerate the reasoning
+independently, the experiment cannot attribute success to LTM.
+
+## Supporting system: offline topology compiler
+
+The compiler turns user data into persistent reasoning structure.
+
+```mermaid
+flowchart TD
+    A["Raw data: documents, code, rules, databases"] --> B["Teacher reasoning extraction"]
+    B --> C["Reasoning Intermediate Representation"]
+    C --> D["Deterministic schema and domain validation"]
+    D --> E["Domain topology configuration"]
+    E --> F["Instantiated typed reasoning topology"]
+    F --> G["Field index, hierarchy, and routing compilation"]
+    G --> H["Persistent LTM workspace"]
 ```
 
-This permits joint reasoning without forcing every domain into identical coordinates.
+Teacher output remains untrusted until deterministic validation succeeds.
+Failed records retain source diagnostics and do not silently enter the
+topology.
+
+Incremental updates must preserve stable identifiers and provenance, rebuild
+affected field regions, and invalidate cached activation plans when necessary.
+
+## Supporting system: independent verifier
+
+The verifier evaluates the candidate result outside the optimizer's own
+convergence criterion.
+
+```mermaid
+flowchart TD
+    A["Optimized latent state"] --> B["Constraint evaluation"]
+    B --> C["Proof, path, and evidence validation"]
+    C --> D["Conflict and uncertainty report"]
+    D --> E{"Verification passed?"}
+    E -- Yes --> F["Authorize evidence bundle for decoder"]
+    E -- No --> G["Return failure, partial result, or deterministic report"]
+```
+
+The verifier may use graph traversal, symbolic checks, domain validators,
+constraint solvers, or executable tests. It must not merely repeat the same
+energy calculation and call the result verified.
+
+## Complete online flow
+
+```mermaid
+flowchart TD
+    A["User prompt"] --> B["Prompt and goal encoder"]
+    B --> C["Relevant topology activation"]
+    C --> D["Prompt-conditioned latent dynamic field"]
+    D --> E["Bounded latent optimization"]
+    E --> F["Independent constraint verifier"]
+    F --> G["Evidence, path, conflict, and residual bundle"]
+    G --> H["Language decoder"]
+    H --> I["Answer with citations, assumptions, and conflicts"]
+```
+
+### Persistent state
+
+Persisted between requests:
+
+- validated topology objects and relations;
+- exact source payload and provenance;
+- field modules and hierarchy summaries;
+- routing indexes;
+- domain configurations;
+- topology and schema versions;
+- safe reusable caches.
+
+### Per-request state
+
+Computed for each request:
+
+- prompt and goal encoding;
+- activation plan;
+- fixed or adaptive field frontier;
+- optimization trace;
+- verifier output;
+- bounded decoder bundle.
+
+### Cacheable work
+
+Subject to topology-version invalidation:
+
+- common prompt routes;
+- aggregate region summaries;
+- domain-specific field modules;
+- verified subpaths;
+- compiled decoder evidence templates.
+
+## Current POC versus intended LTM
+
+```mermaid
+flowchart LR
+    subgraph POC["Current semantic-surrogate POC"]
+        A1["Semantic embedder"] --> A2["Semantic field"]
+        A2 --> A3["Latent optimizer"]
+        A3 --> A4["Exact evidence"]
+        A4 --> A5["Decoder"]
+    end
+
+    subgraph Intended["Intended LTM"]
+        B1["Typed reasoning topology"] --> B2["Relation-aware field"]
+        B2 --> B3["Latent optimizer"]
+        B3 --> B4["Independent verifier"]
+        B4 --> B5["Evidence and reasoning paths"]
+        B5 --> B6["Decoder"]
+    end
+```
+
+The semantic embedder is a topology-interface surrogate. It organizes text by
+meaning similarity, not by implication, causality, or constraint structure.
+It was used to test whether the downstream pipeline could consume a latent
+space, optimize a state, recover exact evidence, and decode an answer.
+
+The completed experiments therefore support pipeline compatibility and field
+mechanics. They do not test H1 or establish native-topology reasoning. The
+semantic performance failures in the report cannot be used as evidence that a
+reasoning topology will fail; conversely, pipeline success cannot be used as
+evidence that it will succeed.
+
+## Mathematical contract
+
+A general prompt-conditioned objective is:
+
+\[
+E(x\mid q)=
+E_{\text{goal}}(x,q)
++\sum_i w_i(q)E_i(x)
++E_{\text{conflict}}(x)
++E_{\text{uncertainty}}(x)
+\]
+
+Where:
+
+- \(q\) is the encoded prompt and goal;
+- \(x\) is the candidate reasoning state;
+- \(E_{\text{goal}}\) anchors the state to the requested task;
+- \(E_i\) is a relation- or constraint-specific energy;
+- \(w_i(q)\) combines relevance, reliability, and applicability;
+- \(E_{\text{conflict}}\) preserves incompatible important constraints;
+- \(E_{\text{uncertainty}}\) penalizes unsupported certainty.
+
+An optimization result is incomplete without:
+
+- final state;
+- initial and final energy;
+- accepted-update trace;
+- per-constraint residuals;
+- exact evidence and provenance;
+- unresolved conflicts;
+- verifier result.
+
+“Satisfying all data” means minimizing prompt-relevant, reliability-weighted
+violations while reporting irreducible tension. It does not mean declaring
+contradictory, outdated, or irrelevant statements simultaneously true.
+
+## Scaling model
+
+“Practically unlimited context” means an expandable persistent knowledge
+store, initially targeting the equivalent of 10–20 million source tokens. It
+does not mean infinite information capacity or constant worst-case compute.
+
+The intended storage and activation model is:
+
+- exact hot constraints and active states on GPU or unified memory;
+- warm topology indexes and aggregates in host memory;
+- cold exact payload and inactive modules on SSD;
+- offline compilation for expensive global organization;
+- prompt-conditioned routing for ordinary requests;
+- hierarchical summaries for unexpanded corpus regions;
+- streaming or multi-pass execution for genuinely global questions.
+
+Ordinary request cost can remain approximately bounded only if the active
+frontier remains bounded and approximation preserves answer quality. Questions
+requiring exhaustive comparison may still scale with corpus size.
+
+The architecture makes no established claim of literal unlimited context,
+zero-cost scaling, constant worst-case inference, trillion-parameter
+single-GPU execution, or $0.01 production requests. Those remain engineering
+and economic hypotheses.
+
+## End-user behavior
+
+A mature user flow is:
+
+1. create an LTM workspace;
+2. select or configure one or more domain topologies;
+3. add documents, code, rules, databases, and structured facts;
+4. inspect compiler validation and rejected records;
+5. ask questions through a normal language interface;
+6. receive an answer with evidence, reasoning paths, assumptions, conflicts,
+   uncertainty, and verification status;
+7. update the persistent store without resending the full corpus;
+8. audit which topology version and sources produced an answer.
+
+Expected use cases include persistent domain research, large-project
+reasoning, codebase analysis, constraint-aware planning, contradiction
+inspection, and incremental organizational memory.
+
+LTM is initially a specialized reasoning and memory coprocessor used alongside
+language models, tools, search, and symbolic solvers. It is not initially a
+replacement for all general language-model capabilities.
 
 ## Architectural invariants
 
-- The prompt changes the field, not only the initial coordinate.
-- Contradictions remain representable.
-- New knowledge is versioned and localized where possible.
-- The verifier is independent of optimizer convergence.
-- Claims about fixed cost refer to active compute, not total system storage.
-- Language quality and reasoning quality are evaluated separately.
+A credible implementation must preserve:
 
-## Primary failure modes
+1. source provenance from ingestion to answer;
+2. typed relation meaning through topology and field compilation;
+3. prompt conditioning during activation and optimization;
+4. explicit conflicts rather than hidden averaging;
+5. bounded and inspectable optimization;
+6. independent verification;
+7. decoder access limited to verified evidence;
+8. deterministic or reproducibly seeded evaluation;
+9. comparison against the strongest simpler baseline;
+10. separation between projected claims and measurements.
 
-- teacher hallucination becomes durable topology structure;
-- verbose reasoning traces are mistaken for ground truth;
-- topology configuration encodes designer bias;
-- equivalent entities fragment across modules;
-- contradictions are averaged away;
-- incremental updates destabilize unrelated regions;
-- field distillation loses rare facts;
-- domain mappings create false cross-domain analogies.
+## Failure conditions
+
+The architecture should be redesigned or rejected for a target workload if:
+
+- teacher extraction repeatedly encodes the wrong relations;
+- domain configuration hides logic in prompts rather than topology;
+- relation direction is lost;
+- low energy does not correlate with verified validity;
+- contradictions become an unlabeled semantic compromise;
+- optimization falls into goal-irrelevant attractors;
+- sparse routing omits necessary constraints;
+- hierarchy approximation destroys evidence or reasoning paths;
+- verifier failures are correlated with optimizer failures;
+- the decoder performs most of the measured reasoning;
+- accurate inference activates work proportional to the full store;
+- standard retrieval, graph search, CSP, SAT, or task-specific solvers dominate
+  quality, reliability, and cost.
+
+## Next falsifiable milestone
+
+The next experiment replaces semantic similarity as the topology with a small
+native typed world:
+
+```text
+Typed facts and directed relations
+    ↓
+Native reasoning topology
+    ↓
+Relation-specific latent field
+    ↓
+Latent optimization
+    ↓
+Independent graph or constraint verifier
+    ↓
+Comparison with retrieval, graph search, and CSP/SAT
+```
+
+It succeeds only if it solves unseen relation compositions or constraint
+problems beyond retrieval and averaging while retaining exact evidence and
+validity.
