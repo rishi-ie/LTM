@@ -1,8 +1,0 @@
-{
-  "schema_version": "1",
-  "sources": [
-    "../phase-1/development.json",
-    "../phase-1.1/held-out.json"
-  ],
-  "description": "Development-only manifest reusing the inspected Phase 1 and Phase 1.1 suites."
-}

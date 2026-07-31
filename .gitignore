@@ -1,14 +1,7 @@
+# Local assets retained outside the architecture-only repository.
 .venv/
 .models/
 workspaces/
-artifacts/
-.pytest_cache/
-.ruff_cache/
-.coverage
-coverage.xml
-__pycache__/
-*.py[cod]
-*.egg-info/
+
+# Operating-system metadata.
 .DS_Store
-results/tmp/
-results/*-repeat/
