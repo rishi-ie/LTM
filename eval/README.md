@@ -9,6 +9,8 @@ development or locked held-out data.
 | Phase 1.1 | `phase-1.1/held-out.json` | Locked multi-state evaluation |
 | Phase 1.2 | `phase-1.2/development.json` | Manifest reusing inspected suites |
 | Phase 1.2 | `phase-1.2/held-out.json` | Locked equilibrium evaluation |
+| Phase 1.3 | `phase-1.3/controlled-held-out.json` | Locked LTM/RAG comparison |
+| Phase 1.3 | `phase-1.3/hotpotqa-300.json` | Attributed public multi-hop subset |
 
 Held-out suites must never select or tune configurations. Phase 1.2 writes its
 selected development configuration before opening its held-out fixture.
@@ -17,3 +19,7 @@ selected development configuration before opening its held-out fixture.
 Phase 1.2 fixture. Evaluation reads the static JSON; it does not generate
 documents, queries, or labels at runtime. Experiment outputs record model,
 suite, and corpus hashes.
+
+Phase 1.3 uses checked-in fixtures only. The public HotpotQA source and subset
+manifest record the source URL, license, and SHA-256; evaluation itself is
+offline.

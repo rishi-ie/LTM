@@ -25,6 +25,8 @@ Start with the two canonical documents:
 - Phase 1.1: [results](phases/phase-1.1/results.md)
 - Phase 1.2: [specification](phases/phase-1.2/specification.md) and
   [results](phases/phase-1.2/results.md)
+- Phase 1.3: [specification](phases/phase-1.3/specification.md) and generated
+  results under `results/phase-1.3/`
 
 The phase documents retain detailed historical evidence. When wording differs,
 `architecture.md` governs the intended system and `report.md` governs measured

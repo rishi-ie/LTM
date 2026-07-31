@@ -177,16 +177,22 @@ H4 fails if:
 - aggregate regions lose important evidence or relation paths;
 - update and compaction costs make persistent memory uneconomic.
 
-### 2.5 H5 — Faithful decoding
+### 2.5 H5 — Faithful dual-channel decoding
 
-A compact decoder can express an already selected and verified result without
-performing, replacing, or fabricating the measured reasoning.
+A compact decoder can express an already selected and verified result by
+combining two bounded inputs: a learned projection of the final optimized
+state and an authorized symbolic evidence bundle. The latent channel may
+preserve global equilibrium information that is absent from a four-item
+evidence bundle, but it cannot override the verifier or authorize facts.
 
 H5 fails if:
 
 - answer correctness disappears when the decoder is restricted to the verified
   bundle;
 - a query-only decoder performs similarly;
+- a shuffled, zeroed, or unrelated latent state performs as well as the correct
+  state despite a claimed latent contribution;
+- the latent channel causes claims unsupported by the authorized bundle;
 - the decoder silently resolves conflicts absent from the verifier result;
 - generated citations do not correspond to authorized evidence.
 
@@ -1340,7 +1346,11 @@ remain in the [experimental report](report.md).
 
 ## 11. Candidate materialization
 
-The optimized state is not sent directly to a language model.
+The optimized state is not serialized as arbitrary numbers and sent directly
+to a language model. It follows two controlled paths: materialization produces
+an auditable symbolic candidate, while a versioned learned adapter may project
+the state into a small decoder-native latent prefix. The verifier controls
+whether either path may be used to answer.
 
 Materialization converts it into an auditable symbolic candidate:
 
@@ -1431,18 +1441,31 @@ The verifier should use at least one materially different mechanism:
 ### 13.1 Decoder boundary
 
 ```mermaid
-flowchart LR
-    A["Optimized state"] --> B["Symbolic candidate"]
-    B --> C["Independent verifier"]
-    C --> D["Authorized evidence and residual bundle"]
-    D --> E["Language or symbolic decoder"]
-    E --> F["Cited answer, partial result, or refusal"]
+flowchart TD
+    A["Optimized state"] --> B["Candidate materializer"]
+    A --> C["Versioned latent-to-language adapter"]
+    B --> D["Independent verifier"]
+    D --> E["Authorized symbolic evidence bundle"]
+    D --> F{"Decoder authorization"}
+    C --> G["Bounded latent prefix or soft tokens"]
+    E --> H["Dual-channel language decoder"]
+    G --> H
+    F --> H
+    H --> I["Cited answer, partial result, or refusal"]
 ```
 
-**Requirement:** The decoder does not directly interpret an arbitrary latent
-vector and does not independently search the corpus.
+**Architectural decision:** Mature LTM uses a dual-channel decoder. One channel
+contains verified symbolic information; the second contains a learned,
+bounded projection of the final optimized state. The decoder does not receive
+an untyped list of coordinates, does not independently search the corpus, and
+does not treat the latent channel as factual authorization.
 
-### 13.2 Decoder bundle
+The purpose of the latent channel is expression, not proof. It can tell the
+decoder which equilibrium region, branch pattern, or global balance was
+reached. The structured channel tells it which claims are verified, why they
+are permitted, and which exact sources must be cited.
+
+### 13.2 Authorized symbolic channel
 
 The authorized bundle contains only:
 
@@ -1494,7 +1517,139 @@ Example:
 }
 ```
 
-### 13.3 Decoder obligations
+### 13.3 Learned latent channel
+
+The final state is converted into decoder-native continuous representations by
+a trained adapter:
+
+\[
+P = A_\theta(S^*, d, v),
+\qquad
+P\in\mathbb{R}^{m\times h}
+\]
+
+where:
+
+- \(S^*\) is the final optimized reasoning state;
+- \(d\) contains bounded state diagnostics such as energy, residual summaries,
+  support density, branch activations, and uncertainty;
+- \(v\) identifies the topology, state-schema, and adapter versions;
+- \(A_\theta\) is the learned latent-to-language adapter;
+- \(m\) is a small fixed prefix length, initially 8–32 positions;
+- \(h\) is the decoder's embedding width;
+- \(P\) is supplied as continuous prefix embeddings or cross-attention memory,
+  not converted to decimal text.
+
+The initial candidate mechanism is a small multilayer projection that produces
+soft prefix tokens for a frozen or lightly adapted compact language model.
+Cross-attention adapters, vector quantization, or a learned discrete codebook
+remain candidate mechanisms and require comparative evidence before becoming
+architectural defaults.
+
+The latent channel may encode:
+
+- the equilibrium region reached by the optimizer;
+- continuous confidence and applicability patterns;
+- active conflict-branch configuration;
+- the balance between supporting and opposing constraint families;
+- residual-distribution shape;
+- whether the final state is near a known attractor;
+- support density and distance from exact activated evidence;
+- distinctions between nearby verified candidates that the bounded textual
+  bundle does not express compactly.
+
+It cannot be assumed to encode:
+
+- the complete corpus;
+- exact source text;
+- a recoverable proof unless the state representation explicitly preserves it;
+- facts that were never activated or materialized;
+- universal meaning for each coordinate.
+
+Coordinates are basis-dependent. An orthogonal rotation can preserve geometric
+relations while changing every coordinate. Consequently, an arbitrary latent
+vector is not intrinsically readable. The adapter must be trained and versioned
+for the exact state schema and topology family that produced it. A state from
+an incompatible topology or adapter version must be rejected rather than
+approximately decoded.
+
+### 13.4 Empty-space and support-density semantics
+
+An apparently empty region of the field contains no factual content by itself.
+Its measurable properties may still be useful decoder signals:
+
+- distance to the nearest exact activated constraints;
+- local evidence density;
+- distance to known verified attractors;
+- disagreement among nearby constraint families;
+- hierarchy approximation coverage;
+- out-of-distribution score.
+
+The materializer converts these measurements into named diagnostics such as
+`support_density`, `nearest_exact_distance`, and `out_of_distribution`. The
+latent adapter may also carry their continuous pattern. The decoder must
+interpret sparse support as uncertainty, interpolation, or possible field
+failure. It must never invent a proposition merely because the optimized state
+occupies an unlabelled region.
+
+### 13.5 Fusion and authority rules
+
+The decoder fuses the channels under a strict authority order:
+
+1. verifier authorization and hard-constraint outcome;
+2. exact symbolic candidate, proof paths, conflicts, and provenance;
+3. learned latent-state projection;
+4. language-model prior only for grammatical realization.
+
+If the latent projection conflicts with the verified bundle, the structured
+bundle wins. The event is logged as adapter disagreement. If the verifier
+rejects or cannot authorize a candidate, the latent channel cannot rescue it.
+The decoder must emit the authorized partial, infeasible, unverifiable, or
+rejected response.
+
+The decoder receives an explicit mask indicating which candidate assignments,
+evidence IDs, citations, conflict labels, and certainty levels are authorized.
+The latent prefix cannot add entries to that mask.
+
+### 13.6 Adapter and decoder training contract
+
+Training examples pair the complete controlled decoder input with an approved
+target:
+
+```text
+prompt
++ final optimized state
++ state and field version
++ state diagnostics
++ verified symbolic candidate
++ exact evidence and provenance
++ residuals and conflicts
++ verifier authorization mask
+        ↓
+approved cited explanation, partial answer, abstention, or rejection
+```
+
+Training should combine:
+
+- language-model loss for the approved response;
+- citation loss restricted to authorized source IDs;
+- candidate-consistency loss against verified assignments;
+- conflict-disclosure and uncertainty-calibration losses;
+- contrastive loss separating different verified equilibrium states;
+- counterfactual examples in which one constraint or branch changes;
+- shuffled-state examples teaching the decoder to reject mismatched latent and
+  symbolic channels.
+
+The training set must include states with the same prompt but different
+verified outcomes, and states with similar final vectors but different
+authorized evidence. Otherwise the decoder may ignore one channel or memorize
+surface correlations.
+
+The decoder and adapter are not allowed to train against hidden gold answers in
+an experiment that claims the optimizer performed the measured reasoning. The
+adapter's role must be isolated with registered ablations.
+
+### 13.7 Decoder obligations
 
 The decoder must:
 
@@ -1505,9 +1660,12 @@ The decoder must:
 - report partial verification;
 - avoid claiming that all stored information was proven true;
 - avoid silently changing the candidate;
+- use the latent channel only to express or qualify an authorized result;
+- report sparse support, adapter disagreement, or out-of-distribution state;
+- reject topology, state-schema, and adapter version mismatches;
 - refuse or render a deterministic report when authorization is absent.
 
-### 13.4 Fully verified example
+### 13.8 Fully verified example
 
 Bundle result:
 
@@ -1523,7 +1681,7 @@ Permitted answer:
 > Release 42 is deployable because all three required conditions were verified:
 > tests, security approval, and rollback readiness. [rule and source citations]
 
-### 13.5 Weighted unresolved contradiction example
+### 13.9 Weighted unresolved contradiction example
 
 Permitted answer:
 
@@ -1534,7 +1692,7 @@ Permitted answer:
 
 The decoder must not convert “closer to approved” into “both claims are true.”
 
-### 13.6 Partial result example
+### 13.10 Partial result example
 
 Permitted answer:
 
@@ -1542,14 +1700,14 @@ Permitted answer:
 > no verified state for the message queue. The service's complete readiness
 > cannot be established.
 
-### 13.7 Failed verification example
+### 13.11 Failed verification example
 
 Permitted answer:
 
 > The optimizer returned a candidate, but it violates the package exclusion
 > rule. No answer was authorized.
 
-### 13.8 Deterministic fallback
+### 13.12 Deterministic fallback
 
 When the language decoder fails or is disabled, the system returns a table:
 
@@ -1565,19 +1723,33 @@ Conclusion: do not treat approval as certain
 The deterministic path preserves usability without allowing a generative model
 to conceal field or verifier failures.
 
-### 13.9 Decoder leakage tests
+### 13.13 Dual-channel decoder ablations and leakage tests
 
 Evaluation must compare:
 
-- correct bundle;
+- verified bundle only;
+- correct latent channel only;
+- verified bundle plus the correct latent channel;
+- verified bundle plus a zeroed latent channel;
+- verified bundle plus a shuffled state from another case;
+- verified bundle plus a rotated or otherwise incompatible state;
 - corrupted candidate;
 - swapped evidence;
 - random evidence;
 - query-only input;
 - unauthorized extra corpus access.
 
-If the decoder recovers correct answers from corrupted or query-only inputs,
-the experiment cannot attribute reasoning to the topology and optimizer.
+The latent channel demonstrates value only if the correct combined input
+outperforms the verified-bundle-only decoder and shuffled or mismatched states
+degrade the dimensions of output that the channel claims to carry. A
+latent-only decoder may be measured diagnostically, but it cannot establish
+grounded correctness because it lacks exact provenance.
+
+If the decoder recovers correct answers from corrupted, query-only, or
+unauthorized inputs, the experiment cannot attribute reasoning to the topology
+and optimizer. If shuffling the latent state has no effect, the adapter is
+redundant and should be removed. If the latent channel improves fluency while
+reducing citation or verifier consistency, it fails H5.
 
 ## 14. Persistent conversational context
 
@@ -2043,7 +2215,7 @@ flowchart LR
 | Structured optimizer | Single- and multi-vector optimization | Bounded numerical convergence and traces | Hybrid continuous/discrete reasoning state |
 | Candidate materializer | Evidence ranking and residual bundle | Exact chunk provenance | Native symbolic assignments and proof paths |
 | Independent verifier | Evidence and numerical controls | Provenance and invariant checks | Independent native constraint validation |
-| Decoder | Small grounded decoder and deterministic fallback | Bounded evidence decoding | Verbalization of a verified native reasoning state |
+| Decoder | Small grounded decoder and deterministic fallback | Bounded evidence decoding | Dual-channel adapter, latent-prefix interpretation, and verbalization of a verified native reasoning state |
 
 ### 17.1 What the semantic surrogate was for
 
@@ -2160,6 +2332,10 @@ A credible LTM must preserve:
 
 - decoder searches outside its bundle;
 - decoder repairs an invalid candidate by guessing;
+- decoder treats the latent prefix as authority over the verifier;
+- arbitrary or version-mismatched vectors are accepted;
+- shuffled latent states do not change behavior despite a claimed contribution;
+- sparse latent space is translated into invented facts;
 - citations are fabricated or mismatched;
 - unresolved conflicts are hidden;
 - assumptions are presented as facts;

@@ -23,6 +23,8 @@ from ltm_poc.experiments.phase_1 import run as run_evaluation
 from ltm_poc.experiments.phase_1 import write_report
 from ltm_poc.experiments.phase_1_1 import run as run_set_evaluation
 from ltm_poc.experiments.phase_1_2 import run as run_equilibrium_evaluation
+from ltm_poc.experiments.phase_1_3 import run as run_rag_evaluation
+from ltm_poc.experiments.phase_1_3 import write_report as write_rag_report
 from ltm_poc.field import LatentField
 from ltm_poc.ingest import ingest
 from ltm_poc.models import (
@@ -156,6 +158,13 @@ def main(argv: Sequence[str] | None = None) -> int:
     evaluate_equilibrium.add_argument("--dev-suite", type=Path, required=True)
     evaluate_equilibrium.add_argument("--test-suite", type=Path, required=True)
     evaluate_equilibrium.add_argument("--output", type=Path, required=True)
+    evaluate_rag = subcommands.add_parser(
+        "evaluate-rag", help="compare semantic LTM with deterministic RAG baselines"
+    )
+    evaluate_rag.add_argument("--workspace", type=Path, required=True)
+    evaluate_rag.add_argument("--controlled-suite", type=Path, required=True)
+    evaluate_rag.add_argument("--hotpot-suite", type=Path)
+    evaluate_rag.add_argument("--output", type=Path, required=True)
     args = parser.parse_args(argv)
 
     if args.command == "doctor":
@@ -210,4 +219,23 @@ def main(argv: Sequence[str] | None = None) -> int:
                 sort_keys=True,
             )
         )
+    if args.command == "evaluate-rag":
+        suites = [args.controlled_suite] + (
+            [args.hotpot_suite] if args.hotpot_suite else []
+        )
+        combined: dict[str, object] = {"suites": {}}
+        for suite in suites:
+            result = run_rag_evaluation(args.workspace, suite)
+            suite_result = args.output / suite.stem
+            json_path, markdown_path = write_rag_report(result, suite_result)
+            combined["suites"][suite.stem] = {
+                "summary": result["summary"],
+                "json": str(json_path),
+                "markdown": str(markdown_path),
+            }
+        args.output.mkdir(parents=True, exist_ok=True)
+        (args.output / "phase-1.3-summary.json").write_text(
+            json.dumps(combined, indent=2) + "\n", encoding="utf-8"
+        )
+        print(json.dumps(combined, sort_keys=True))
     return 0
