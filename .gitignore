@@ -2,6 +2,16 @@
 .venv/
 .models/
 workspaces/
+results/
+artifacts/
+*.npz
+*.safetensors
+*.gguf
+*.mlx
+*.egg-info/
+__pycache__/
+.pytest_cache/
+.ruff_cache/
 
 # Operating-system metadata.
 .DS_Store

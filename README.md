@@ -1,22 +1,24 @@
 # Latent Topology Models
 
-This repository contains the architecture specification for **Latent Topology
-Models (LTM)**: a proposed system that compiles knowledge and reasoning
-structure into a persistent latent dynamic field, optimizes a prompt state
-inside that field, verifies the resulting state, and decodes it into natural
-language.
+This repository is the documentation-only research record for **Latent
+Topology Models (LTM)**: a proposed system that compiles typed knowledge and
+reasoning structure into a persistent latent dynamic field, optimizes a prompt
+state inside that field, independently verifies the result, and decodes the
+authorized state into natural language.
 
-The current design defines one general reasoning topology containing
-hierarchical, multi-label domain regions, typed cross-domain bridges, and
-nested event or reasoning capsules. Domain-specialist topologies may later be
-derived from the general topology, but they are not the first target.
+Read the documents in this order:
 
-The complete specification is in
-[docs/architecture.md](docs/architecture.md).
+1. [Canonical architecture](docs/architecture.md)
+2. [Scaling laws and runtime metrics](docs/scaling-laws.md)
+3. [CNTG-1-R2 experiment report](docs/report.md)
 
-The size, compute, hardware-envelope, and scaling definitions are in
-[docs/scaling-laws.md](docs/scaling-laws.md).
+The CNTG-1-R2 experiment showed that a controlled conversational topology,
+field, optimizer, verifier, and grounded decoder can work together. It did not
+show unrestricted language-to-topology compilation, frontier-model quality,
+or constant worst-case inference. The next research target is the learned
+reasoning-topology compiler.
 
-This repository intentionally contains architecture only. It does not contain
-benchmark data, experimental results, model weights, implementation code, or
-claims that the architecture has already been validated.
+Implementation code, generated corpora, fields, model weights, raw results,
+and audit files are intentionally not part of this public documentation
+repository. Local ignored workspaces and downloaded models may remain on a
+development machine for future experiments.

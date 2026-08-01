@@ -1,4 +1,4 @@
-# Latent Topology Models: Canonical Architecture
+# Latent Topology Models: Canonical Architecture — Infinity-2
 
 ## 1. Purpose and status
 
@@ -11,9 +11,34 @@ already-compiled field acts on that state, latent optimization moves it toward
 an equilibrium, an independent verifier evaluates the resulting candidate,
 and a small decoder expresses the authorized result in natural language.
 
-This is an architectural specification, not evidence that a native LTM has
-already been built. Mechanisms described as candidates must be experimentally
-validated.
+This is an architectural specification. A controlled conversational native
+topology was implemented and tested in CNTG-1-R2, but the result is not a
+general LTM validation. Mechanisms described as candidates must still be
+experimentally validated outside the registered fictional ontology.
+
+**Infinity-2** is the conversational-first revision. It co-designs topology,
+field state, optimization, verification, and decoding by working backwards
+from the exact verified state a conversational decoder must express. The first
+native target is a persistent multi-turn conversational LTM. General-domain
+reasoning and specialist topologies are later targets.
+
+The measured boundary and limitations are recorded in the
+[CNTG-1-R2 report](report.md). The next gate is a learned topology-compiler
+experiment; a 10 GB quality build is not authorized until that gate passes.
+
+### 1.1 Current evidence boundary
+
+The controlled experiment demonstrated that correctly formed typed topology
+can feed a persistent field, structured optimizer, independent verifier, and
+grounded decoder. Registered relation composition improved by 100 percentage
+points over the no-optimization control, session context was preserved, and
+ordinary field activation remained sparse across the 64 MB–1 GB ladder.
+
+The central unresolved boundary is the topology compiler: the small model
+directly produced valid Turn IR for only 10% of turns, while deterministic
+recovery handled the remaining controlled language. Therefore the current
+evidence supports the downstream architecture given a valid topology; it does
+not yet support unrestricted natural-language topology construction.
 
 The central architectural idea is:
 
@@ -97,6 +122,45 @@ Two supporting systems are mandatory:
 - a topology and field compiler;
 - an independent verifier.
 
+### 2.4 Infinity-2 conversational turn loop
+
+Infinity-2 treats a message, its temporary reasoning state, and its durable
+memory effects as separate objects. A raw turn is preserved exactly. A
+validated turn IR updates a session-delta topology. The current prompt becomes
+an ephemeral goal state, is optimized against the persistent and session
+fields, and is discarded after materialization. The assistant response is
+stored as a conversational event, not as self-authenticating evidence.
+
+```mermaid
+flowchart TD
+    A["User message"]
+    B["Immutable raw turn event"]
+    C["Conversational topology embedder"]
+    D["Validated Turn IR"]
+    E["Session-delta topology and field cache update"]
+    F["Ephemeral prompt and goal state"]
+    G["Persistent general field plus session delta plus exact exceptions"]
+    H["Conversational latent optimization"]
+    I["Materialized answer candidate"]
+    J["Independent verifier"]
+    K["Authorized decoder bundle"]
+    L["Small conversational decoder"]
+    M["Response claim validator"]
+    N["Assistant response event"]
+    O["Episode capsule and session-cache update"]
+
+    A --> B --> C --> D
+    D --> E
+    D --> F
+    E --> G
+    F --> G --> H --> I --> J --> K --> L --> M --> N --> O
+    O -. "next turn" .-> E
+```
+
+The response validator re-extracts factual claims from decoder text and checks
+that each is authorized by the verifier bundle. Rejected decoder text never
+enters conversational memory as a validated claim.
+
 ## 3. Architectural invariants
 
 An implementation qualifies as the intended LTM only if it preserves these
@@ -128,6 +192,78 @@ properties:
 17. Model-inferred causation enters as a hypothesis until validated.
 18. A fictional domain region's axioms are authoritative only inside its
     disclosed scope.
+19. Raw conversation turns are preserved separately from extracted topology
+    claims and temporary prompt states.
+20. Conversational salience and epistemic authority are distinct weight
+    channels; recent text does not become true merely because it is recent.
+21. Assistant responses cannot serve as independent evidence for their own
+    claims.
+22. Corrections supersede matching earlier claims without deleting their
+    provenance or escaping their scope.
+23. Decoder-visible claims must map to verified optimized-state variables, and
+    those variables must map to declared topology factors.
+24. Conversation compression must preserve answers, scopes, corrections,
+    conflicts, preferences, and exact evidence within registered error bounds.
+
+### 3.1 Decoder-to-topology co-design contract
+
+Infinity-2 defines the conversational topology by working backwards from the
+authorized state needed to produce a correct answer:
+
+```text
+Desired conversational answer
+    ↓
+Authorized decoder bundle
+    ↓
+Materialized optimized state
+    ↓
+Registered energy and residual terms
+    ↓
+Typed topology objects and relations
+    ↓
+Validated conversational Turn IR
+```
+
+The canonical conversational state is:
+
+\[
+S_t=(g,a,y,r,p,b,u,e)
+\]
+
+where:
+
+- \(g\) is the current conversational goal;
+- \(a\) is the authorized response act;
+- \(y\) contains proposition assignments;
+- \(r\) contains entity and reference bindings;
+- \(p\) contains active preferences and instructions;
+- \(b\) contains explicit conflict branches;
+- \(u\) contains calibrated uncertainty;
+- \(e\) contains evidence and proof-path authorizations.
+
+The decoder may receive a learned projection of this state, but an arbitrary
+latent vector is never the sole authority for factual language. Every factual
+decoder claim must be recoverable from \((y,b,u,e)\) and accepted by the
+independent verifier.
+
+The conversational objective is:
+
+\[
+\begin{aligned}
+E_{\mathrm{conversation}}(S_t)={}&
+E_{\mathrm{goal}}
++E_{\mathrm{claim}}
++E_{\mathrm{reference}}
++E_{\mathrm{supersession}}\\
+&+E_{\mathrm{scope}}
++E_{\mathrm{preference}}
++E_{\mathrm{conflict}}
++E_{\mathrm{uncertainty}}.
+\end{aligned}
+\]
+
+Each energy term has a topology-side factor, a materialized residual, a
+verifier implementation, a decoder-visible explanation, and exact provenance.
 
 ## 4. Component 1 — Reasoning topology
 
@@ -2761,37 +2897,304 @@ temporal sequence into verified causation.
 
 ## 13. Persistent conversational context
 
-### 13.1 Memory levels
+### 13.1 Conversational topology objective
+
+The first native Infinity-2 topology must support a coherent multi-turn
+conversation before it attempts broad external reasoning benchmarks. It must
+represent not only factual content, but the function of an utterance inside a
+conversation: asking, asserting, correcting, instructing, hypothesizing,
+setting a preference, referring to an earlier entity, reopening an episode, or
+requesting a synthesis.
+
+A conversational topology succeeds only if it preserves the following across
+turn insertion, optimization, decoding, response reinsertion, compression,
+restart, and replay:
+
+- speaker and source identity;
+- turn and episode order;
+- current and historical goals;
+- entities, mentions, and coreference;
+- facts, claims, commitments, and retractions;
+- corrections and temporal supersession;
+- instructions and response preferences;
+- fictional, hypothetical, and session scopes;
+- support, opposition, uncertainty, and unresolved conflict;
+- verified assistant conclusions and unverified assistant language;
+- exact provenance and decoder authorization.
+
+### 13.2 Memory levels
 
 LTM uses three levels of conversational memory:
 
-1. recent verbatim working memory;
-2. compiled episodic conversation topology;
-3. consolidated long-term reasoning topology.
+1. **Recent verbatim working memory** — a bounded exact window used for
+   phrasing, deixis, ellipsis, and references whose topology bindings remain
+   unresolved.
+2. **Compiled episodic conversation topology** — typed session objects,
+   relations, episode capsules, field variables, and exact provenance.
+3. **Consolidated long-term reasoning topology** — only information explicitly
+   committed, independently verified, or accepted under a registered workspace
+   memory policy.
 
-### 13.2 Incremental conversation compilation
+The raw transcript is an immutable source log. It is not itself the active
+reasoning state, and it is not resent in full to the decoder on every turn.
+
+### 13.3 Conversational object model
+
+The native conversational topology registers at least these object families:
+
+| Object | Meaning |
+| --- | --- |
+| `conversation` | Versioned session boundary |
+| `episode` | Coherent subtopic or activity capsule |
+| `turn` | Immutable user, assistant, system, or tool event |
+| `utterance_span` | Exact source-preserving text interval |
+| `speech_act` | Question, assertion, correction, instruction, preference, hypothetical, or synthesis request |
+| `goal` | Current requested conversational outcome |
+| `entity_mention` | Surface reference in one turn |
+| `canonical_entity` | Session-stable resolved identity |
+| `claim` | Speaker-attributed proposition, not automatically a fact |
+| `commitment` | Proposition explicitly established under a scope |
+| `preference` | Requested response or interaction behavior |
+| `correction` | Scoped supersession operation |
+| `fictional_rule` | Rule authoritative only in a disclosed fictional scope |
+| `assistant_response` | Generated conversational event |
+| `verified_conclusion` | Verifier-authorized materialized result |
+| `conflict_branch` | Preserved incompatible alternative |
+| `uncertainty` | Calibrated missing-information or ambiguity state |
+
+Required native relations include `responds_to`, `continues`, `mentions`,
+`refers_to`, `asks`, `asserts`, `corrects`, `supersedes`, `supports`, `opposes`,
+`contradicts`, `scoped_to`, `sets_preference`, `derived_from`, `verified_by`,
+`commits`, `retracts`, `opens_episode`, and `belongs_to_episode`.
+
+### 13.4 Conversational Turn IR
+
+The topology embedder converts each new turn into a source-linked candidate IR:
+
+```json
+{
+  "turn_id": "session-42:turn-12",
+  "speaker": "user",
+  "speech_acts": ["correction", "question"],
+  "goal": {
+    "type": "request_current_location",
+    "arguments": ["person:alice"]
+  },
+  "mentions": [
+    {
+      "span": "she",
+      "candidate_entities": ["person:alice"],
+      "resolved_entity": "person:alice",
+      "confidence": 0.98
+    }
+  ],
+  "claims": [
+    {
+      "predicate": "located_in",
+      "arguments": ["person:alice", "place:paris"],
+      "polarity": "positive",
+      "scope": "session-42"
+    }
+  ],
+  "supersedes": ["session-42:turn-4:claim-1"],
+  "preferences": [],
+  "uncertainties": [],
+  "provenance": {
+    "source_turn": "session-42:turn-12",
+    "source_spans": [[0, 43]]
+  }
+}
+```
+
+The small topology-compiler model is untrusted. Deterministic validation checks
+schema, source spans, identity bindings, role signatures, scope transitions,
+supersession targets, topology version, and provenance before the candidate IR
+can change the session field.
+
+### 13.5 Incremental conversation compilation
 
 ```mermaid
 flowchart LR
     A["New conversation turn"]
     B["Source-preserving event record"]
-    C["Fact, claim, decision, domain, and event extraction"]
-    D["Nested episode and reasoning capsule construction"]
-    E["Correction, contradiction, and causal-hypothesis detection"]
-    F["Validation"]
-    G["Topology, capsule, and field update"]
-    H["Affected summary invalidation and background consolidation"]
+    C["Speech act, goal, entity, claim, preference, and scope extraction"]
+    D["Identity and coreference resolution"]
+    E["Episode capsule construction or reopening"]
+    F["Correction, contradiction, and supersession detection"]
+    G["Deterministic validation"]
+    H["Session topology and delta-field update"]
+    I["Affected cache and certificate invalidation"]
+    J["Background episode consolidation"]
 
-    A --> B --> C --> D --> E --> F --> G --> H
+    A --> B --> C --> D --> E --> F --> G --> H --> I --> J
 ```
 
-Old conversation need not be resent verbatim on every request after it has been
-compiled. This reduces repeated context processing, but compilation,
-validation, conflict detection, indexing, and compaction still consume
-resources.
+Old conversation need not be resent verbatim after compilation. Compilation,
+validation, conflict detection, indexing, cache invalidation, and compaction
+still consume resources and are measured independently from request inference.
 
-Corrections must supersede rather than silently coexist with older preferences
-unless the scopes differ.
+### 13.6 Persistent and session field caches
+
+Conversational inference combines two compiled field caches:
+
+\[
+F_{\mathrm{turn}}(S\mid q)=
+F_{\mathrm{general}}(S\mid q)
++F_{\mathrm{session}}(S\mid q)
++F_{\mathrm{current}}(S\mid q)
++F_{\mathrm{exact}}(S\mid q).
+\]
+
+- \(F_{\mathrm{general}}\) contains stable conversational reasoning policies,
+  registered relation operators, and domain-independent behavior.
+- \(F_{\mathrm{session}}\) is an incrementally maintained delta containing the
+  current conversation's episodes, commitments, preferences, corrections,
+  conflicts, and summaries.
+- \(F_{\mathrm{current}}\) represents the ephemeral prompt and goal.
+- \(F_{\mathrm{exact}}\) contains bounded decisive constraints that cannot be
+  safely summarized.
+
+The session cache is copy-on-write and isolated by session. Updating it must
+not rebuild the persistent field. A new turn updates local session variables,
+its episode capsule, hierarchical summaries, exact-exception indexes, and the
+certificates whose assumptions changed.
+
+### 13.7 Authority is not salience
+
+Infinity-2 prohibits one undifferentiated conversation weight. Every object has
+separate channels for:
+
+- epistemic authority;
+- conversational salience;
+- recency;
+- explicit commitment;
+- scope applicability;
+- verification status;
+- persistence policy;
+- source kind.
+
+A current user correction may have high session salience and high authority
+inside the session. A user hypothetical may have high authority only inside
+its declared scope. An assistant response has high conversational salience but
+low independent epistemic authority. A validated persistent fact may have high
+authority and low relevance to the current goal.
+
+Facts do not decay merely because they are old. Mention salience may decay.
+Preferences remain active until scoped expiration or supersession. Corrections
+set the temporal applicability of the corrected claim to zero inside the
+matching scope while retaining its provenance.
+
+### 13.8 Conversational optimization contract
+
+For each turn, the optimizer must jointly determine:
+
+- which goal is active;
+- which entities mentions refer to;
+- which claims apply in the current scope and time;
+- which earlier claims were superseded;
+- which preferences constrain the response;
+- which conflict branches remain admissible;
+- what conclusion is supported;
+- whether clarification or abstention is required;
+- what response act the decoder is authorized to perform.
+
+The optimizer does not optimize natural-language tokens. It optimizes the
+structured state \(S_t=(g,a,y,r,p,b,u,e)\). The verifier independently checks
+its assignments, references, scopes, supersession paths, conflicts, evidence,
+and coverage before authorizing decoder claims.
+
+### 13.9 Assistant-response reinsertion
+
+Every assistant response is preserved as a conversational event, but its text
+is not inserted as an ordinary fact. The runtime stores three distinguishable
+objects:
+
+1. the exact assistant response event;
+2. the verified claims the response was authorized to express;
+3. unverified linguistic content, suggestions, or speculation.
+
+The response event links to the user turn, verifier status, authorized claims,
+evidence, topology version, decoder version, and response-validation result.
+It may support continuity and later references. It cannot independently support
+its own claims.
+
+This invariant prevents self-reinforcement:
+
+```text
+Assistant says X
+    ↛ X becomes independent evidence
+    ↛ field now supports X because the assistant said it
+```
+
+Promotion into consolidated memory requires explicit user confirmation,
+external validation, a registered commitment rule, or an independently
+verified topology conclusion.
+
+### 13.10 Decoder round-trip contract
+
+After decoding, the response claim extractor produces a response IR. The
+validator compares it with the authorized decoder bundle:
+
+```text
+Verified state
+→ authorized decoder bundle
+→ generated response
+→ response claim extraction
+→ authorization comparison
+→ accept, repair from templates, or reject
+```
+
+Every factual response claim must be present in the authorized bundle with a
+compatible polarity, scope, uncertainty, and provenance. The decoder may add
+grammar, tone, discourse markers, and registered conversational phrasing. It
+may not add conclusions, evidence, scopes, or certainty absent from the bundle.
+
+### 13.11 Episode capsules and compression
+
+Related turns form source-preserving episode capsules. An episode contains its
+goal history, entities, commitments, corrections, preferences, conflicts,
+assistant outputs, verified conclusions, and unresolved questions. Closed
+episodes may be folded into a summary containing:
+
+- active commitments and final values;
+- supersession map;
+- unresolved conflicts and questions;
+- active preferences and scopes;
+- entity identity map;
+- field summary and approximation bound;
+- exact source and proof pointers.
+
+Referencing an older entity, decision, or topic reopens the relevant episode.
+Compression is accepted only when full-history and compressed-history answers
+agree within the registered semantic, symbolic, scope, and provenance gates.
+
+### 13.12 Conversational failure conditions
+
+The conversational architecture fails if:
+
+- a correction does not supersede the matching earlier claim;
+- a fictional rule escapes its scope;
+- an assistant statement authenticates itself;
+- a pronoun silently binds to the wrong entity;
+- a closed episode cannot be reopened from a valid reference;
+- compression changes a verified answer or removes decisive provenance;
+- recent salience overrides higher-authority applicable evidence without a
+  registered policy;
+- decoder text introduces claims absent from the verified state;
+- session information leaks between conversations;
+- ordinary turns require replaying the complete raw transcript;
+- disabling latent optimization produces the same results on registered
+  topology-composition cases.
+
+### 13.13 Final conversational gate
+
+The native conversational architecture is not authorized for a 10 GB quality
+build until a new locked experiment measures learned topology extraction,
+topology updates, session field caching, optimization advantage, verification,
+decoder faithfulness, response reinsertion, compression equivalence, compute
+scaling, and restart reproducibility without deterministic template recovery.
+The completed CNTG-1-R2 result and its CNTG-C classification are summarized in
+[report.md](report.md).
 
 ## 14. Large-field inference
 

@@ -5,9 +5,11 @@
 This document defines how a Latent Topology Model (LTM) reports size, storage,
 compute, quality, and scaling behavior.
 
-It is a measurement specification. The equations are hypotheses or reporting
-contracts until they are fitted to runs at multiple scales. No value in this
-document should be read as a measured result.
+It is primarily a measurement specification. The equations are hypotheses or
+reporting contracts until they are fitted to runs at multiple scales. The
+controlled CNTG-1-R2 measurements are summarized in
+[report.md](report.md); they should not be generalized beyond that fictional
+distribution.
 
 The central rule is:
 
