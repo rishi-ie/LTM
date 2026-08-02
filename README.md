@@ -15,6 +15,7 @@ Read the documents in this order:
 5. [MICRO-LTM-1 locked report](docs/micro-ltm-report.md)
 6. [MICRO-LTM-2 compression report](docs/micro-ltm-2-report.md)
 7. [MICRO-LTM-3 causal compression report](docs/micro-ltm-3-report.md)
+8. [Remaining gaps to the final shipping product](docs/remaining-gaps.md)
 
 The CNTG-1-R2 experiment showed that a controlled conversational topology,
 field, optimizer, verifier, and grounded decoder can work together. MICRO-LTM-1
