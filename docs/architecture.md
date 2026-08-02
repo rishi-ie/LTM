@@ -5,11 +5,16 @@
 This document defines the intended architecture of a **Latent Topology Model
 (LTM)**.
 
-An LTM compiles information into a persistent, multi-variable latent dynamic
-field. At request time, a prompt becomes an initial reasoning state. The
-already-compiled field acts on that state, latent optimization moves it toward
-an equilibrium, an independent verifier evaluates the resulting candidate,
-and a small decoder expresses the authorized result in natural language.
+An LTM compiles information into a persistent, executable reasoning topology.
+That topology is the authoritative map and storage structure of the
+multi-variable latent dynamic field: it contains stable addresses, typed
+relations, field variables, summaries, influence bounds, exact-data pointers,
+and provenance. At request time, a prompt becomes an initial structured state
+and is mapped to starting addresses in that topology. Topology-directed field
+evaluation acts on the state, latent optimization moves it toward an
+equilibrium, an independent verifier evaluates the resulting candidate and
+coverage, and a small decoder expresses the authorized result in natural
+language.
 
 This is an architectural specification. A controlled conversational native
 topology was implemented and tested in CNTG-1-R2, but the result is not a
@@ -22,9 +27,12 @@ from the exact verified state a conversational decoder must express. The first
 native target is a persistent multi-turn conversational LTM. General-domain
 reasoning and specialist topologies are later targets.
 
-The measured boundary and limitations are recorded in the
-[CNTG-1-R2 report](report.md). The next gate is a learned topology-compiler
-experiment; a 10 GB quality build is not authorized until that gate passes.
+The conversational measured boundary and limitations are recorded in the
+[CNTG-1-R2 report](report.md). The narrower latent-state boundary is recorded
+in the [MICRO-LTM-3 report](micro-ltm-3-report.md). The next product gate is a
+learned topology-compiler and prompt-addressing experiment; a 100-million-token
+quality build is not authorized until compiler validity, required-factor
+activation, and coverage verification pass at smaller scales.
 
 ### 1.1 Current evidence boundary
 
@@ -34,18 +42,62 @@ grounded decoder. Registered relation composition improved by 100 percentage
 points over the no-optimization control, session context was preserved, and
 ordinary field activation remained sparse across the 64 MB–1 GB ladder.
 
-The central unresolved boundary is the topology compiler: the small model
-directly produced valid Turn IR for only 10% of turns, while deterministic
-recovery handled the remaining controlled language. Therefore the current
-evidence supports the downstream architecture given a valid topology; it does
-not yet support unrestricted natural-language topology construction.
+The central unresolved product boundary is the topology compiler: the small
+model directly produced valid Turn IR for only 10% of turns, while
+deterministic recovery handled the remaining controlled language. Therefore
+the current evidence supports the downstream architecture given a valid
+topology; it does not yet support unrestricted natural-language topology
+construction.
+
+MICRO-LTM-3 sharpened the optimizer boundary. Exact topology propagation
+recovered the registered conclusions perfectly, but the strict differentiable
+single-state optimizer plus query-agnostic compression reached only 49.86%
+locked accuracy and failed the causal state-swap gate. The earlier closure-only
+compression diagnostic reached 99.17%, but it did not demonstrate reasoning by
+latent equilibrium. Consequently, the shippable architecture uses exact typed
+relation propagation plus structured field optimization and global
+reconciliation. Pure equilibrium reasoning remains a parallel research track,
+not a prerequisite for the first product.
 
 The central architectural idea is:
 
-> Compile knowledge and reasoning structure once. Reuse the resulting field
-> across requests. During ordinary inference, optimize the prompt state using
-> a bounded set of applicable field variables instead of rereading the entire
-> corpus or executing a large autoregressive model over all stored context.
+> Compile knowledge and reasoning structure once into an explicit, addressable,
+> executable topology. Map each prompt to topology addresses, traverse the
+> typed relations capable of affecting its goal, evaluate exact constraints and
+> certified summaries, and optimize a bounded working state without rereading
+> the entire corpus or resending all stored context to an autoregressive model.
+
+### 1.2 Shippable architecture decision
+
+The initial conversational product follows these decisions:
+
+1. The executable reasoning topology is the persistent map of the latent
+   dynamic field. There is no separately authoritative stored mini-map.
+2. The prompt encoder emits a structured query signature and stable starting
+   topology addresses, not only an undifferentiated semantic vector.
+3. The request constructs a temporary active frontier by following applicable
+   typed relations from those addresses.
+4. Persistent regions contribute through exact opened factors or declared
+   aggregate summaries with measured influence bounds and coverage status.
+5. Registered implications, prerequisites, corrections, temporal relations,
+   hard constraints, and exact exceptions use topology-directed exact
+   propagation for the first product. Structured latent optimization handles
+   soft compatibility, uncertainty, conflicts, references, preferences, and
+   global reconciliation.
+6. Memory-bounded field blocks emit standardized contributions that are
+   reduced before a global update; storage order is not allowed to determine
+   the answer.
+7. The verifier checks prompt addressing, derivation, provenance, hard
+   constraints, omissions, and coverage and widens the frontier or abstains
+   when necessary.
+8. The decoder receives the final structured latent state plus the authorized
+   symbolic, influence, conflict, coverage, and provenance bundle.
+9. Persistent base knowledge and the clearable conversational overlay are
+   separately owned layers. User turns and accepted assistant response events
+   are incrementally compiled into the overlay with distinct authority.
+10. The first capacity target is a 100-million-source-token-equivalent
+    persistent conversation/workspace, reached through locked 1M, 10M, 30M,
+    and 100M scaling gates.
 
 ## 2. The complete flow
 
@@ -59,9 +111,9 @@ flowchart LR
     D["General topology configuration JSON"]
     W["Separate weight bundle"]
     E["Deterministic validation and field compiler"]
-    T["Persistent general reasoning topology"]
-    F["Persistent multi-domain latent dynamic field"]
-    G["Domain regions, capsule summaries, typed factors, indexes, and bridges"]
+    T["Persistent executable reasoning topology"]
+    F["Topology-integrated latent field variables and operators"]
+    G["Addresses, regions, summaries, influence bounds, factors, indexes, and bridges"]
     H["Separate provenance and verifier artifacts"]
 
     A --> B --> C --> E
@@ -83,37 +135,45 @@ flowchart LR
     A["User prompt"]
     B["Prompt and goal encoder"]
     C["Initial structured latent state"]
-    D["Activate domain regions, bridges, and folded capsule summaries"]
-    E["Latent optimization plus valid relation expansion"]
-    O["Open influential capsules into exact factors"]
-    F["Final equilibrium state"]
-    G["Domain, capsule, influence, residual, and coverage materialization"]
-    H["Independent verifier"]
+    D["Map goal, entities, scope, time, and predicates to topology addresses"]
+    E["Construct temporary active frontier by typed topology traversal"]
+    O["Open influential regions and exact exceptions"]
+    P["Evaluate field blocks and aggregate typed forces and constraints"]
+    F["Exact propagation plus structured latent optimization and global reconciliation"]
+    G["Final state, influence ledger, derivation graph, and coverage certificate"]
+    H["Independent verifier; widen frontier when coverage is insufficient"]
     I["Authorized latent and symbolic bundle"]
     J["Small dual-channel decoder"]
     K["Natural-language answer, conflict, or abstention"]
 
     A --> B --> C --> D --> E
     E <--> O
-    E --> F --> G --> H --> I --> J --> K
+    E --> P --> F --> G --> H
+    H -. "coverage retry" .-> E
+    H --> I --> J --> K
 ```
 
 The system does not need to treat request-time inference as document retrieval.
-The compiled field is the reasoning substrate. An implementation may read the
-field coefficients addressed by the state, but it should not need to score all
-source documents on every request.
+The executable topology and its integrated field representation are the
+reasoning substrate. The request creates a temporary active frontier, not a
+second persistent mini-map or copy of the field. An implementation may read
+the coefficients and exact factors addressed through topology traversal, but
+it should not need to score all source documents on every ordinary request.
 
 ### 2.3 Four primary components
 
 The architecture has four primary components:
 
-1. **Reasoning topology** — encodes the universal kernel, hierarchical domain
-   regions, typed bridges, nested capsules, knowledge, relations, rules,
-   conflicts, applicability, uncertainty, and provenance.
-2. **Latent dynamic field** — compiles those topology objects into persistent
-   variables and energy functions that can act on a reasoning state.
-3. **Latent optimizer** — moves the prompt state through the field toward a
-   lower-energy equilibrium.
+1. **Reasoning topology** — is the persistent executable map of knowledge and
+   field structure. It encodes stable addresses, hierarchical domain regions,
+   typed bridges, nested capsules, relations, rules, conflicts, applicability,
+   uncertainty, summaries, influence bounds, indexes, and provenance.
+2. **Latent dynamic field** — is the evaluable force and energy behavior
+   induced by that topology at a request state. It is integrated with the
+   topology rather than stored as an unrelated second knowledge structure.
+3. **Latent optimizer** — combines exact typed relation propagation, field
+   evaluation, batched contribution aggregation, and global reconciliation to
+   move the prompt state toward a lower-energy valid equilibrium.
 4. **Decoder** — translates the verified final state and its most influential
    variables into a grounded natural-language response.
 
@@ -137,10 +197,11 @@ flowchart TD
     B["Immutable raw turn event"]
     C["Conversational topology embedder"]
     D["Validated Turn IR"]
-    E["Session-delta topology and field cache update"]
-    F["Ephemeral prompt and goal state"]
-    G["Persistent general field plus session delta plus exact exceptions"]
-    H["Conversational latent optimization"]
+    E["Separate session-overlay topology and affected-summary update"]
+    F["Ephemeral structured prompt, goal, scope, and address state"]
+    G["Persistent executable base topology plus clearable session overlay"]
+    P["Prompt-addressed temporary active frontier"]
+    H["Exact relation propagation plus conversational field optimization"]
     I["Materialized answer candidate"]
     J["Independent verifier"]
     K["Authorized decoder bundle"]
@@ -153,7 +214,8 @@ flowchart TD
     D --> E
     D --> F
     E --> G
-    F --> G --> H --> I --> J --> K --> L --> M --> N --> O
+    F --> P
+    G --> P --> H --> I --> J --> K --> L --> M --> N --> O
     O -. "next turn" .-> E
 ```
 
@@ -204,6 +266,23 @@ properties:
     those variables must map to declared topology factors.
 24. Conversation compression must preserve answers, scopes, corrections,
     conflicts, preferences, and exact evidence within registered error bounds.
+25. The persistent reasoning topology itself is the executable map of the
+    latent dynamic field; a separately persisted request mini-map is neither
+    required nor authoritative.
+26. Every prompt is encoded into explicit goal, entity, predicate, scope,
+    temporal, polarity, modality, and resource-budget fields before topology
+    activation begins.
+27. A request creates only an ephemeral active frontier whose objects retain
+    stable addresses back to the persistent topology.
+28. Every persistent region contributes either through a declared aggregate
+    field summary or through exact opened factors; omission and approximation
+    must be recorded in the coverage certificate.
+29. Batched or sequential field execution aggregates standardized force,
+    constraint, conflict, and evidence contributions before global state
+    reconciliation. Batch order must not silently determine the answer.
+30. The immutable base topology and clearable conversation overlay remain
+    separately addressable, versioned, attributable, and deletable, including
+    their derived summaries and caches.
 
 ### 3.1 Decoder-to-topology co-design contract
 
@@ -294,6 +373,22 @@ where:
 
 The topology is not just a collection of semantically nearby vectors. It must
 preserve what each object *does* in reasoning.
+
+It is also the persistent executable map of the latent dynamic field. The
+canonical topology instance stores or directly addresses:
+
+- stable node, relation, factor, region, bridge, and capsule addresses;
+- adjacency and reverse-dependency indexes;
+- semantic and reasoning coordinates;
+- relation-specific transfer and residual operators;
+- regional density, mass, summaries, and approximation bounds;
+- maximum possible influence and exact-exception flags;
+- persistent base-field and clearable session-overlay ownership;
+- exact interiors and source records through provenance pointers.
+
+No separately persisted “mini-map” is part of the canonical architecture. A
+runtime may cache traversals or materialized views, but those caches are
+derived, invalidatable artifacts. The topology remains authoritative.
 
 One topology instance defines one general reasoning world containing multiple
 scoped domain interpretations. The same source object may participate in
@@ -2073,10 +2168,11 @@ The state may live on a product manifold containing:
 
 Every optimizer update must preserve or restore the validity of these domains.
 
-### 5.3 Request working topology
+### 5.3 Prompt-conditioned active frontier
 
-The persistent topology is not copied into the request state. Instead, the
-runtime constructs a bounded working topology:
+The persistent topology is not copied into the request state and no second
+persistent mini-map is created. Instead, the runtime constructs an ephemeral,
+bounded active frontier directly from topology addresses:
 
 \[
 \mathcal W_q=(V_q,R_q,F_q,D_q,B_q,C_q,I_q),
@@ -2092,9 +2188,15 @@ where:
 - \(C_q\) contains folded and opened capsule records;
 - \(I_q\) maps every working object back to its persistent topology origin.
 
-The working topology changes under controlled operations as optimization
-reveals new applicable relations. This allows novel multi-step reasoning while
-keeping the persistent field fixed for the topology version.
+The frontier is a request-local view. It changes under controlled operations
+as topology traversal and optimization reveal new applicable relations. This
+allows novel multi-step reasoning while keeping the persistent topology fixed
+for the selected version.
+
+Every persistent region must be represented exactly once in the request's
+coverage accounting: as an opened exact factor set, as a declared aggregate
+summary, or as an explicitly omitted region with a certified influence bound.
+The frontier is therefore both an execution plan and a coverage partition.
 
 Expansion is allowed only when:
 
@@ -2110,10 +2212,37 @@ Expansion is allowed only when:
 This is general-topology reasoning activation. Cross-domain transitions occur
 through registered bridge factors inside the same topology.
 
-### 5.4 Goal representation
+### 5.4 Prompt structure and topology addressing
 
-The prompt encoder must materialize the user's goal, not only its topic. A goal
-record includes:
+The prompt encoder first materializes a structured query signature:
+
+\[
+Q(q)=(G_q,E_q,P_q,S_q,T_q,L_q,M_q,C_q),
+\]
+
+where:
+
+- \(G_q\) is the requested goal and response operation;
+- \(E_q\) contains entities and reference candidates;
+- \(P_q\) contains predicates, relations, and target variables;
+- \(S_q\) contains active domain, fictional, hypothetical, and session scopes;
+- \(T_q\) contains temporal anchors and applicability;
+- \(L_q\) contains polarity, modality, and certainty requirements;
+- \(M_q\) contains conversation-memory and episode references;
+- \(C_q\) contains compute, coverage, and partial-result policy.
+
+The address operator maps this signature into stable starting locations:
+
+\[
+A_0=\operatorname{Address}(Q(q),\mathcal T_G).
+\]
+
+Addressing uses the topology's own entity, predicate, relation, scope,
+temporal, episode, and exception indexes. Semantic similarity may propose
+candidates, but it is not the authority for relation direction or
+applicability.
+
+A goal record includes:
 
 - requested operation: answer, prove, calculate, compare, plan, explain, or
   generate;
@@ -2126,8 +2255,8 @@ record includes:
 - acceptable partial-result policy.
 
 Two prompts mentioning the same entities can therefore induce different
-fields because one requests proof while another requests a counterexample or a
-plan.
+frontiers and fields because one requests proof while another requests a
+counterexample or a plan.
 
 ### 5.5 State-to-topology invariants
 
@@ -2150,20 +2279,24 @@ At every accepted optimizer step:
 
 ### 6.1 Definition
 
-Let \(D\) be the compiled knowledge store and \(\Theta_D\) its persistent field
-variables. The latent dynamic field is an evaluable potential:
+Let \(\mathcal T\) be the compiled executable topology and \(\Theta_{\mathcal
+T}\) its topology-integrated persistent field variables. The latent dynamic
+field is the evaluable potential induced by that topology:
 
 \[
-\Phi_D(S;\Theta_D)
+\Phi_{\mathcal T}(S;\Theta_{\mathcal T})
 \]
 
 It returns the energy and force induced by compiled knowledge at a candidate
-reasoning state \(S\).
+reasoning state \(S\). The field is not a second independent knowledge store.
+Topology objects define what exists and how it is related; field variables
+define how those registered objects act on a request state.
 
 The field is analogous to a precomputed electric field:
 
 - compiled topology objects are analogous to charges and boundary conditions;
-- \(\Theta_D\) stores the field representation;
+- \(\Theta_{\mathcal T}\) stores the field representation inside or directly
+  addressable from the topology;
 - the prompt produces a new movable state;
 - field evaluation calculates how that state should move;
 - equilibrium occurs when permitted movement no longer lowers the request
@@ -2171,6 +2304,22 @@ The field is analogous to a precomputed electric field:
 
 The analogy explains precomputation and force balance. It does not require
 literal inverse-square Coulomb forces.
+
+### 6.1.1 Addressability advantage over weight-only language models
+
+The claimed context advantage is not that LTM knows more merely because it
+stores more. It is that compiled knowledge has explicit, interpretable and
+mutable addresses. Given a validated prompt signature, the runtime can locate
+entities, predicates, relations, scopes, corrections, exceptions, episodes,
+and provenance and can follow declared influence paths. Knowledge represented
+only as distributed model parameters generally lacks this direct fact- and
+relation-level addressing, deletion, supersession, and coverage interface.
+
+This advantage is conditional. If topology compilation omits a relation or the
+prompt encoder maps to the wrong address, explicit structure cannot recover
+the missing path. Compiler validity, prompt-address accuracy, required-factor
+activation, and coverage verification are therefore measured as primary
+correctness properties rather than treated as implementation details.
 
 ### 6.2 What is stored with the field
 
@@ -2190,13 +2339,19 @@ The persistent field can contain multiple families of variables:
 - uncertainty and calibration variables;
 - confidence, authority, priority, and recency weights;
 - topology addresses and routing summaries;
+- entity, predicate, relation, scope, temporal, episode, adjacency, and
+  reverse-dependency indexes;
+- regional centroids, radii, weighted densities, and mass;
+- relation-transfer operators and aggregate force approximations;
+- maximum-influence bounds and exact-exception flags;
 - approximation bounds;
 - provenance references;
 - verifier programs or symbolic checks.
 
 These variables are what allow the field to grow in capacity as knowledge is
-added. The architecture does not compress arbitrary unlimited information into
-one fixed-size vector.
+added. They are maintained as part of the executable topology compilation, not
+as a separately authoritative mini-map. The architecture does not compress
+arbitrary unlimited information into one fixed-size vector.
 
 ### 6.3 Multi-resolution representation
 
@@ -2228,6 +2383,24 @@ where:
 This is field addressing, not necessarily document retrieval. The state
 determines which coefficients are required to evaluate the already-compiled
 function at its current coordinates.
+
+For request \(q\), topology traversal constructs an active frontier
+\(\mathcal A_q\) such that the persistent topology is covered by exact opened
+regions and declared aggregate regions:
+
+\[
+\mathcal T=
+\left(\biguplus_{i\in\mathcal A_q^{\mathrm{exact}}}\mathcal T_i\right)
+\uplus
+\left(\biguplus_{r\in\mathcal A_q^{\mathrm{aggregate}}}\widetilde{\mathcal T}_r\right).
+\]
+
+Each region \(r\) exposes an influence upper bound
+\(U_r(Q(q),S)\). A region is opened when its bound, hard-constraint status,
+exception flags, relation obligations, conflict status, or verifier demand
+shows that its exact interior could materially change the candidate. Otherwise
+its aggregate field term remains active. This is the formal meaning of
+“knowing where to focus” from the topology's known structure.
 
 ### 6.4 Incremental updates
 
@@ -2316,6 +2489,14 @@ f(\text{domain membership},\text{capsule state},\text{relevance},
 
 This modulation must be compiled or cheaply evaluable. It should not require
 rescoring every source document at request time.
+
+The query-independent channels—topology address, relation type, authority,
+confidence, persistent scope, temporal history, regional density, summaries,
+and influence bounds—are compiled once. The prompt-dependent channels—entity
+binding, requested goal, active scope, current time, applicability, and
+relevance—are evaluated from \(Q(q)\) against those explicit structures. Thus
+the topology makes focus addressable, but it does not claim to know a
+prompt-conditioned weight before the prompt exists.
 
 ### 6.7 Candidate typed energies
 
@@ -2496,33 +2677,47 @@ claims simultaneously true.
 
 ### 9.1 Responsibility
 
-The optimizer begins at the prompt-derived state and searches for a valid
-lower-energy state under a bounded computation budget.
+The optimizer begins at the prompt-derived state and its topology addresses,
+then combines exact typed relation propagation with continuous and discrete
+field optimization to search for a valid lower-energy state under a bounded
+computation budget. For the shippable architecture, exact propagation is the
+correctness path for registered implications, prerequisites, corrections, and
+hard constraints. Smooth latent equilibrium alone is not credited with that
+reasoning until a causal locked experiment demonstrates it.
 
 ### 9.2 Request-time procedure
 
-1. Encode the prompt, explicit goal, candidate domains, and requested output.
-2. Initialize structured state \(S_0\).
-3. Activate global summaries and calibrated domain-region gates.
-4. Address applicable field variables, bridges, and folded capsule summaries.
-5. Evaluate total energy, per-term energy, forces, residuals, and coverage
-   obligations.
-6. Open capsules whose relevance, residual, uncertainty, bridge participation,
-   or verifier demand exceeds configured thresholds.
-7. Instantiate newly applicable relations and rule templates.
-8. Propose continuous and discrete state updates.
-9. Project continuous updates onto valid manifolds.
-10. Preserve or branch incompatible alternatives.
-11. Use backtracking, a trust region, or another acceptance rule.
-12. Reject invalid or unjustified energy-increasing updates.
-13. Re-address domains, bridges, capsules, and local coefficients as the state
-    moves.
-14. Continue until convergence, sufficient coverage, infeasibility, or budget
-    exhaustion.
-15. Materialize the final state into explicit candidate assignments and an
-    influence ledger.
-16. Send the candidate, domain path, opened capsules, coverage report, and
-    derivation graph to the independent verifier.
+1. Encode the prompt into \(Q(q)\): explicit goal, entities, predicates, scope,
+   time, polarity, modality, conversation references, and requested output.
+2. Map \(Q(q)\) to stable starting addresses \(A_0\) in the executable topology.
+3. Initialize structured state \(S_0\) without treating its latent coordinates
+   as self-authenticating facts.
+4. Traverse applicable typed adjacency, reverse dependencies, corrections,
+   scopes, bridges, and episode references from \(A_0\).
+5. Construct the temporary active frontier from exact factors and certified
+   aggregate regions.
+6. Always open answer-changing hard constraints, exact exceptions, applicable
+   corrections, and unresolved conflict boundaries.
+7. Instantiate newly applicable relations and rule templates and perform exact
+   propagation for registered logical and temporal operators.
+8. Evaluate field blocks under the current state and emit standardized energy,
+   force, residual, conflict, evidence, and coverage contributions.
+9. Aggregate contributions across sequential or parallel batches before the
+   global state update.
+10. Propose continuous and discrete state updates and reconcile local candidate
+    states in the global field.
+11. Project continuous updates onto valid manifolds and preserve or branch
+    incompatible alternatives.
+12. Use backtracking, a trust region, or another acceptance rule; reject invalid
+    or unjustified energy-increasing updates.
+13. Re-address topology regions and widen the frontier as new bindings,
+    obligations, residuals, or verifier demands appear.
+14. Continue until convergence and sufficient coverage, infeasibility, or
+    budget exhaustion.
+15. Materialize the final state into explicit candidate assignments, a
+    derivation graph, an influence ledger, and a coverage certificate.
+16. Send those artifacts and their exact topology addresses to the independent
+    verifier.
 
 ### 9.3 Relation-jump and capsule-expansion loop
 
@@ -2586,6 +2781,42 @@ unbounded or exponential closures. When the coverage bound is insufficient,
 the system must continue in exhaustive mode, return a partial result, or
 abstain.
 
+### 9.3.2 Memory-bounded batched field evaluation
+
+The active or exhaustive field may exceed available accelerator memory. Field
+blocks may therefore be evaluated sequentially or in parallel batches, but the
+state must not simply be handed through batches in arbitrary storage order.
+Each block \(b\) emits a standardized contribution:
+
+\[
+\mathcal C_b(S)=
+(E_b,F_b,R_b,H_b,X_b,V_b,P_b),
+\]
+
+where \(E_b\) is energy, \(F_b\) is force or a typed update message, \(R_b\)
+contains residuals, \(H_b\) contains hard obligations, \(X_b\) contains
+conflicts and exceptions, \(V_b\) contains exact evidence, and \(P_b\)
+contains provenance and coverage metadata.
+
+The global contribution is reduced using declared order-independent operators:
+
+\[
+E_{\mathrm{total}}=\sum_bE_b,
+\qquad
+F_{\mathrm{total}}=\sum_bF_b,
+\]
+
+with hard obligations, conflict branches, proof messages, and evidence merged
+according to their registered topology semantics. The global optimizer or
+reconciliation field applies the update only after the reduction. Local
+candidate states may be proposed by blocks, but they are never combined by
+naïve averaging.
+
+If a nonlinear field contribution cannot be summarized independently of the
+current state, each optimizer step may require another pass over the applicable
+blocks. That cost is explicit. Batching reduces memory requirements; it does
+not make exhaustive computation constant-time.
+
 ### 9.4 Continuous update
 
 A simple projected update is:
@@ -2648,10 +2879,12 @@ These statements are progressively stronger and must not be conflated:
 1. the numerical update ran;
 2. energy decreased;
 3. the state reached a local equilibrium;
-4. the state is feasible;
-5. the materialized candidate satisfies the applicable constraints;
-6. the independent verifier accepts it;
-7. the decoder faithfully expresses the verified result.
+4. prompt addressing selected the correct starting topology objects;
+5. the active frontier covered all answer-changing applicable constraints;
+6. the state is feasible;
+7. the materialized candidate satisfies the applicable constraints;
+8. the independent verifier accepts it;
+9. the decoder faithfully expresses the verified result.
 
 ## 10. Influence and candidate materialization
 
@@ -2710,6 +2943,8 @@ independent verification.
 
 It checks:
 
+- prompt-to-topology address validity and unresolved address ambiguity;
+- active-frontier required-factor recall and answer-changing omission bounds;
 - hard constraints;
 - domain membership, scoped axiom use, and bridge validity;
 - capsule boundary integrity and summary-to-interior consistency;
@@ -2723,6 +2958,11 @@ It checks:
 - provenance existence;
 - unsupported certainty;
 - aggregation and routing bounds.
+
+When the candidate is otherwise plausible but the coverage certificate cannot
+bound the influence of unopened regions, the verifier does not authorize the
+answer. It requests frontier widening, returns a partial result, invokes an
+explicit exhaustive mode, or requires abstention.
 
 ### 11.2 Outcomes
 
@@ -3033,9 +3273,10 @@ Old conversation need not be resent verbatim after compilation. Compilation,
 validation, conflict detection, indexing, cache invalidation, and compaction
 still consume resources and are measured independently from request inference.
 
-### 13.6 Persistent and session field caches
+### 13.6 Persistent base topology and clearable session overlay
 
-Conversational inference combines two compiled field caches:
+Conversational inference combines separately versioned topology layers whose
+field contributions are evaluated through one temporary active frontier:
 
 \[
 F_{\mathrm{turn}}(S\mid q)=
@@ -3045,19 +3286,28 @@ F_{\mathrm{general}}(S\mid q)
 +F_{\mathrm{exact}}(S\mid q).
 \]
 
-- \(F_{\mathrm{general}}\) contains stable conversational reasoning policies,
+- \(F_{\mathrm{general}}\) is induced by the immutable or explicitly updated
+  base topology containing documents, stable knowledge, reasoning policies,
   registered relation operators, and domain-independent behavior.
-- \(F_{\mathrm{session}}\) is an incrementally maintained delta containing the
-  current conversation's episodes, commitments, preferences, corrections,
-  conflicts, and summaries.
+- \(F_{\mathrm{session}}\) is induced by a separately owned, incrementally
+  maintained session-overlay topology containing the current conversation's
+  episodes, commitments, preferences, corrections, conflicts, and summaries.
 - \(F_{\mathrm{current}}\) represents the ephemeral prompt and goal.
 - \(F_{\mathrm{exact}}\) contains bounded decisive constraints that cannot be
   safely summarized.
 
-The session cache is copy-on-write and isolated by session. Updating it must
-not rebuild the persistent field. A new turn updates local session variables,
-its episode capsule, hierarchical summaries, exact-exception indexes, and the
-certificates whose assumptions changed.
+The session overlay is copy-on-write and isolated by session. Updating it must
+not rebuild the base topology. A new turn updates local session variables, its
+episode capsule, hierarchical summaries, exact-exception indexes, and the
+certificates whose assumptions changed. Cached active frontiers are derived
+artifacts and are invalidated rather than treated as authoritative topology.
+
+Every session-derived node, relation, field coefficient, summary contribution,
+and cache entry retains the source event and overlay ownership that created it.
+Clearing a conversation removes or tombstones those derived objects,
+recomputes affected ancestor summaries, invalidates dependent caches and
+certificates, and leaves the base topology unchanged. Removing raw transcript
+text alone is not a valid clear operation.
 
 ### 13.7 Authority is not salience
 
@@ -3130,6 +3380,34 @@ Promotion into consolidated memory requires explicit user confirmation,
 external validation, a registered commitment rule, or an independently
 verified topology conclusion.
 
+### 13.9.1 Conversational cycle and 100-million-token-equivalent capacity
+
+One conversational cycle is:
+
+```text
+user turn
+→ immutable source event and validated session-topology delta
+→ structured prompt state and topology addresses
+→ active frontier, exact propagation, field optimization, and verification
+→ authorized dual-channel decoding and response validation
+→ assistant response event linked to its authorized evidence
+→ affected session-topology, summaries, indexes, and certificates updated
+→ next turn
+```
+
+The initial product target permits the clearable conversation overlay to grow
+to 100 million source-token-equivalent units, subject to storage quotas,
+compaction, provenance retention, and measured topology expansion. This number
+describes persistent capacity, not the number of raw tokens processed by the
+decoder or held in the optimizer state on every request. Raw source size,
+compiled object count, relation count, field bytes, summary bytes, and active
+request budget are all reported separately.
+
+At the configured threshold the product must apply an explicit policy—reject
+new durable context, request archival, compact verified episodes while
+preserving exact provenance, or allocate more storage. It must not silently
+discard old context or merge it into unauditable model weights.
+
 ### 13.10 Decoder round-trip contract
 
 After decoding, the response claim extractor produces a response IR. The
@@ -3183,18 +3461,25 @@ The conversational architecture fails if:
 - decoder text introduces claims absent from the verified state;
 - session information leaks between conversations;
 - ordinary turns require replaying the complete raw transcript;
-- disabling latent optimization produces the same results on registered
-  topology-composition cases.
+- disabling topology-directed propagation and structured optimization produces
+  the same results on registered topology-composition cases;
+- prompt addressing or active-frontier construction misses an answer-changing
+  factor without forcing wider activation or abstention;
+- clearing a session leaves session-derived nodes, relations, summaries, or
+  cached influences in the base topology.
 
 ### 13.13 Final conversational gate
 
-The native conversational architecture is not authorized for a 10 GB quality
-build until a new locked experiment measures learned topology extraction,
-topology updates, session field caching, optimization advantage, verification,
-decoder faithfulness, response reinsertion, compression equivalence, compute
-scaling, and restart reproducibility without deterministic template recovery.
-The completed CNTG-1-R2 result and its CNTG-C classification are summarized in
-[report.md](report.md).
+The native conversational architecture is not authorized for the final
+100-million-token quality build until smaller locked ladder experiments measure
+learned topology extraction, prompt-to-topology addressing, required-factor
+activation, topology updates, clearable session overlays, exact propagation,
+structured optimization, batch-order invariance, verification, decoder
+faithfulness, response reinsertion, coverage equivalence, compute scaling, and
+restart reproducibility without deterministic template recovery. The completed
+CNTG-1-R2 result and its CNTG-C classification are summarized in
+[report.md](report.md); the strict single-state limitation is summarized in
+[micro-ltm-3-report.md](micro-ltm-3-report.md).
 
 ## 14. Large-field inference
 
@@ -3204,16 +3489,17 @@ A large compiled field may use:
 
 ```mermaid
 flowchart TD
-    A["Persistent topology and field"]
-    B["Global kernel, domain, bridge, and capsule summaries"]
+    A["Persistent executable topology with integrated field variables"]
+    B["Global kernel, addresses, influence bounds, domain, bridge, and capsule summaries"]
     C1["Topology-aware shard 1"]
     C2["Topology-aware shard 2"]
     C3["Topology-aware shard N"]
     D1["Independently readable field blocks"]
     D2["Exact typed factors, opened capsules, and local coefficients"]
-    E["Prompt state addresses applicable blocks"]
-    F["Bounded field evaluation along trajectory"]
-    G["Global reconciliation and verification"]
+    E["Structured prompt maps to topology addresses"]
+    F["Temporary active frontier opens applicable blocks"]
+    H["Memory-bounded block evaluation and contribution reduction"]
+    G["Exact propagation, global reconciliation, coverage verification, and decoding"]
 
     A --> B
     B --> C1
@@ -3222,19 +3508,23 @@ flowchart TD
     C1 --> D1
     C2 --> D1
     C3 --> D1
-    D1 --> D2 --> E --> F --> G
+    D1 --> D2 --> E --> F --> H --> G
 ```
 
-Physical storage may be SSD, memory, or accelerators. Only the field blocks
-needed along the state trajectory need to be resident on the accelerator for
-an ordinary routed request.
+Physical storage may be SSD, memory, or accelerators. Only the topology and
+field blocks required by the temporary active frontier need to be resident on
+the accelerator for an ordinary request. The persistent hierarchy is not a
+separate mini-map; it is part of the executable topology itself.
 
-The present serving target is one accelerator with approximately 96 GB of
-device memory backed by SSD-resident topology and field blocks. Ordinary
-requests should keep only addressed coefficients, active factors, optimizer
-state, verifier state, and the compact decoder resident on the accelerator.
-Topology training, full compilation, global rebalancing, and exhaustive
-verification may use larger or distributed hardware.
+The initial serving target is a high-end consumer machine with approximately
+32–64 GB of unified or system memory, optional 16–24 GB accelerator memory,
+and SSD-resident topology and field blocks. Memory-bounded block evaluation
+allows larger fields to run sequentially, with latency increasing according to
+the number of evaluated blocks. Ordinary requests should keep only addressed
+coefficients, active factors, optimizer state, verifier state, and the compact
+decoder resident in fast memory. Topology training, unrestricted compilation,
+global rebalancing, exhaustive verification, and high-concurrency serving may
+use larger or distributed hardware.
 
 ### 14.2 Local and global variables
 
@@ -3256,8 +3546,9 @@ verified.
 ### 14.3 Complexity
 
 For \(N\) compiled objects, \(K\) optimizer steps, \(V\) addressed field
-variables per step, \(O_C\) capsule-opening work, \(B\) active bridge work, and
-state width \(d\), a target ordinary-request cost is:
+variables per step, \(O_C\) capsule-opening work, \(B\) active bridge work,
+\(J\) evaluated memory-bounded blocks, and state width \(d\), a target
+ordinary-request cost is:
 
 \[
 C_{\mathrm{request}}=
@@ -3265,16 +3556,17 @@ C_{\mathrm{encode}}
 +C_{\mathrm{address}}
 +C_{\mathrm{IO}}
 +\Theta(KVd)
++C_{\mathrm{batch}}(J)
 +C_{\mathrm{capsule}}(O_C)
 +C_{\mathrm{bridge}}(B)
 +C_{\mathrm{verify}}
 +C_{\mathrm{decode}}.
 \]
 
-With hierarchical addressing, \(C_{\mathrm{address}}\) may be approximately
-\(O(\log N)\). If \(K\), \(V\), \(O_C\), \(B\), and \(d\) are bounded, only
-the active request portion can be approximately constant with respect to total
-corpus size.
+With hierarchical topology addressing, \(C_{\mathrm{address}}\) may be
+approximately \(O(\log N)\). If \(K\), \(V\), \(O_C\), \(B\), \(J\), and
+\(d\) are bounded, only the active request portion can be approximately
+constant with respect to total corpus size.
 
 The complete system is not globally \(O(1)\):
 
@@ -3282,6 +3574,8 @@ The complete system is not globally \(O(1)\):
 - compilation and exact ingestion are at least \(O(N)\) over all data;
 - updates require local writes and summary maintenance;
 - genuinely global questions may need to expand many or all field regions;
+- exhaustive memory-bounded inference may require one or more sequential
+  passes over all applicable blocks;
 - deep questions may open many capsules or traverse many bridges;
 - exact worst-case inference can remain \(O(N)\).
 
@@ -3431,6 +3725,18 @@ The architecture should be validated in this order:
     latent state while remaining bounded by verified evidence.
 13. **Large-field addressing:** preserve exact reasoning paths across domains,
     capsules, bridges, and shards with measured approximation and miss rates.
+14. **Prompt-to-topology addressing:** map unseen language to the correct
+    entity, predicate, scope, temporal, episode, and goal addresses without
+    evaluator assistance.
+15. **Required-factor activation:** demonstrate at least 99% recall of every
+    answer-changing registered factor and force a wider pass when the coverage
+    certificate is insufficient.
+16. **Batch-order invariance:** show that sequentially evaluated field blocks
+    produce the same verified candidate, within registered tolerance, under
+    different valid block orders and memory budgets.
+17. **100-million-token ladder:** preserve conversational context, corrections,
+    provenance, and reasoning accuracy across 1M, 10M, 30M, and 100M
+    token-equivalent compiled stores without a full scan on ordinary requests.
 
 The decisive reasoning test is not whether a prompt reaches an equilibrium.
 It is whether the compiled native topology and field cause that equilibrium to
@@ -3441,11 +3747,15 @@ methods cannot produce.
 
 > A Latent Topology Model is a system that incrementally compiles typed
 > knowledge, hierarchical multi-label domain regions, typed cross-domain
-> bridges, and nested event or reasoning capsules into an expandable persistent
-> latent dynamic field; encodes a prompt as an initial structured state;
-> alternates field optimization with valid relation expansion and adaptive
-> capsule opening; reaches and materializes a constraint equilibrium;
-> independently verifies the resulting candidate and its domain, capsule,
-> causal, and proof paths; and uses a small dual-channel decoder to express the
-> verified state together with its strongest influences, unresolved conflicts,
-> coverage bounds, assumptions, and exact provenance.
+> bridges, and nested event or reasoning capsules into an expandable,
+> persistent, executable topology that is itself the authoritative map of its
+> latent dynamic field; encodes a prompt as an initial structured state and a
+> set of stable topology addresses; constructs a temporary active frontier by
+> following applicable typed relations; evaluates exact factors and certified
+> aggregate regions under memory-bounded batching; combines exact relation
+> propagation with structured latent optimization and global reconciliation;
+> independently verifies the candidate, proof paths, omissions, and coverage;
+> and uses a small dual-channel decoder to express the verified state together
+> with its strongest influences, unresolved conflicts, assumptions, and exact
+> provenance. Persistent base knowledge and clearable conversational context
+> remain separately owned layers of the same executable topology.

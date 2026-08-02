@@ -1,0 +1,22 @@
+{
+  "propositions": 24,
+  "dimension": 128,
+  "train_cases": 4080,
+  "dev_cases": 540,
+  "locked_cases_per_seed": 720,
+  "locked_seeds": [20260802, 20260803, 20260804],
+  "train_seed": 1729,
+  "dev_seed": 1730,
+  "bootstrap_seed": 91729,
+  "optimizer_steps": 64,
+  "learning_rate": 0.05,
+  "backtracking_retries": 4,
+  "max_evaluations": 320,
+  "convergence_tolerance": 0.000001,
+  "max_norm": 8.0,
+  "kappa": 8.0,
+  "bias": 0.37,
+  "coherence_cap": 0.35,
+  "runtime_limit_seconds": 600,
+  "memory_limit_bytes": 1073741824
+}

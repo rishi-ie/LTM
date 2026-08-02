@@ -1,0 +1,16 @@
+{
+  "propositions": 24,
+  "dimension": 128,
+  "train_cases": 4080,
+  "dev_cases": 540,
+  "locked_cases_per_seed": 720,
+  "train_seed": 2729,
+  "dev_seed": 2730,
+  "locked_seeds": [20260911, 20260912, 20260913],
+  "bootstrap_seed": 92729,
+  "max_sweeps": 16,
+  "fixed_point_tolerance": 0.0000001,
+  "compression_anchor": 0.05,
+  "runtime_limit_seconds": 600,
+  "memory_limit_bytes": 1073741824
+}

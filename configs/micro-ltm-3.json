@@ -1,0 +1,20 @@
+{
+  "dimension": 128,
+  "micro_propositions": 24,
+  "overcomplete_propositions": 96,
+  "train_cases_per_capacity": 1200,
+  "dev_base_cases_per_capacity": 300,
+  "locked_base_cases_per_capacity_seed": 300,
+  "train_seeds": [3729, 3730],
+  "dev_seeds": [3731, 3732],
+  "locked_seeds": {
+    "24": [20261021, 20261022, 20261023],
+    "96": [20261024, 20261025, 20261026]
+  },
+  "bootstrap_seed": 93729,
+  "max_sweeps": 16,
+  "fixed_point_tolerance": 0.0000001,
+  "ridge_values": [0.000001, 0.001],
+  "runtime_limit_seconds": 600,
+  "memory_limit_bytes": 1073741824
+}
