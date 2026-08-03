@@ -58,5 +58,5 @@ PYTHONPATH=src python -m micro_ltm3 report --workspace workspaces/micro-ltm-3
 PYTHONPATH=src python -m micro_ltm3 verify --workspace workspaces/micro-ltm-3
 ```
 
-The locked result is recorded in [micro-ltm-3-report.md](micro-ltm-3-report.md).
+The locked result is recorded in the [MICRO-LTM-3 report](report.md).
 Generated suites and raw rows remain in the ignored workspace directory.

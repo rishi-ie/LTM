@@ -11,6 +11,7 @@ dependencies = ["numpy>=2.0"]
 
 [project.optional-dependencies]
 dev = ["pytest>=8", "ruff>=0.6"]
+reasoning-embedder = ["sentence-transformers==5.6.1", "torch==2.13.0"]
 
 [tool.setuptools.packages.find]
 where = ["src"]

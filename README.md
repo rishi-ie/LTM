@@ -1,36 +1,43 @@
 # Latent Topology Models
 
-This repository contains the canonical research documents and compact CPU-only
-mechanism experiments for **Latent Topology Models (LTM)**. LTM compiles typed
-knowledge and reasoning structure into a latent dynamic field, optimizes a
-state inside that field, independently verifies the result, and decodes the
-authorized state.
+This repository is a research platform for **Latent Topology Models (LTM)**.
+It contains the canonical architecture, a falsifiable gap-experiment program,
+compact reference implementations, and permanent bounded reports for completed
+experiments.
 
-Read the documents in this order:
+## Start here
 
-1. [Canonical architecture](docs/architecture.md)
-2. [Scaling laws and runtime metrics](docs/scaling-laws.md)
-3. [CNTG-1-R2 experiment report](docs/report.md)
-4. [MICRO-LTM-1 specification](docs/micro-ltm-experiment.md)
-5. [MICRO-LTM-1 locked report](docs/micro-ltm-report.md)
-6. [MICRO-LTM-2 compression report](docs/micro-ltm-2-report.md)
-7. [MICRO-LTM-3 causal compression report](docs/micro-ltm-3-report.md)
-8. [Remaining gaps to the final shipping product](docs/remaining-gaps.md)
+1. [Documentation index](docs/README.md)
+2. [Canonical architecture](docs/architecture/overview.md)
+3. [Remaining product gaps](docs/roadmap/remaining-gaps.md)
+4. [Gap experiment program](docs/roadmap/experiment-program.md)
+5. [Authoritative results ledger](docs/roadmap/results-ledger.md)
 
-The CNTG-1-R2 experiment showed that a controlled conversational topology,
-field, optimizer, verifier, and grounded decoder can work together. MICRO-LTM-1
-then tested the narrower causal field mechanism and classified the locked run
-mechanically. Neither experiment shows unrestricted language-to-topology
-compilation, frontier-model quality, or constant worst-case inference.
+The current isolated progress is G1, G3, G4, G5, G6, and G7 passed; G2 and
+G2.1 failed their registered compiler gates. G8 is the next authorized
+controlled experiment. These results do not establish unrestricted-language
+reasoning, frontier-model equivalence, or 100-million-token reliability.
 
-MICRO-LTM-3 is the current locked result. The exact symbolic field reached
-100%, but the explicit differentiable optimizer plus query-agnostic compressor
-reached only 49.9% and failed the causal state-swap gate. The earlier 99.17%
-closure-only result is retained as a diagnostic, not counted as a latent-
-optimization breakthrough. This is a bounded mechanism study, not a claim of
-unrestricted language reasoning or frontier-model quality.
+## Repository layout
 
-Source packages and configurations are intentionally small; generated suites,
-fields, raw results, and audit files remain in ignored local workspaces. Local
-environments and downloaded models may remain on a development machine for
-future experiments.
+- `docs/` — architecture, roadmap, specifications, and bounded reports;
+- `src/` — independent experiment packages with stable import names;
+- `tests/` — tests matching each source package;
+- `configs/` — one frozen configuration per experiment;
+- `workspaces/` — ignored local suites, manifests, checkpoints, and raw runs.
+
+See the [repository layout convention](docs/conventions/repository-layout.md)
+before adding G8 or another experiment.
+
+## Development
+
+```bash
+.venv/bin/python -m pytest -q
+.venv/bin/python -m ruff check .
+.venv/bin/python -m compileall -q src tests
+git diff --check
+```
+
+Python package names and existing experiment commands remain unchanged.
+Downloaded models, virtual environments, raw results, and workspaces are local
+assets and are intentionally excluded from Git.

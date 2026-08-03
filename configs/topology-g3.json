@@ -1,0 +1,12 @@
+{
+  "experiment_id": "G3",
+  "development_addresses": 10000,
+  "locked_addresses": 10000,
+  "development_prompts": 200,
+  "locked_prompts": 400,
+  "development_seed": 1731,
+  "locked_seed": 20260804,
+  "max_runtime_seconds": 600,
+  "max_peak_rss_mb": 2048,
+  "semantic_candidates": 8
+}

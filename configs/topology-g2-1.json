@@ -1,0 +1,16 @@
+{
+  "experiment_id": "G2.1",
+  "encoder": ".models/all-MiniLM-L6-v2",
+  "embedding_dimension": 384,
+  "reasoning_dimension": 128,
+  "train_cases": 2000,
+  "development_cases": 500,
+  "locked_cases": 1000,
+  "batch_size": 128,
+  "max_epochs": 100,
+  "early_stopping_patience": 15,
+  "seed": 1729,
+  "bootstrap_seed": 91729,
+  "locked_runtime_seconds": 600,
+  "locked_peak_rss_mb": 4096
+}

@@ -1,0 +1,18 @@
+{
+  "experiment_id": "G7",
+  "development_cases": 120,
+  "locked_cases": 240,
+  "development_seed": 1735,
+  "locked_seed": 20260808,
+  "maximum_alternatives": 4,
+  "maximum_steps": 48,
+  "learning_rate": 0.05,
+  "backtracking_retries": 4,
+  "convergence_tolerance": 1e-7,
+  "accepted_energy_tolerance": 1e-10,
+  "maximum_evaluations": 240,
+  "decision_margin": 0.05,
+  "abstention_threshold": 0.75,
+  "runtime_limit_seconds": 60,
+  "peak_rss_limit_mb": 512
+}

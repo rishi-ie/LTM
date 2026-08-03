@@ -1,0 +1,20 @@
+{
+  "experiment_id": "G5",
+  "development_factors": 25000,
+  "development_pairs": 60,
+  "development_seed": 1733,
+  "locked_factors": 100000,
+  "locked_pairs": 240,
+  "locked_seed": 20260806,
+  "region_size": 256,
+  "latent_dimension": 32,
+  "state_tolerance": 0.02,
+  "material_state_change": 0.10,
+  "max_widening_rounds": 4,
+  "max_new_regions": 4,
+  "max_added_exact_factors": 1024,
+  "max_summary_postings": 256,
+  "max_blocks": 16,
+  "runtime_limit_seconds": 600,
+  "peak_rss_limit_mb": 2048
+}

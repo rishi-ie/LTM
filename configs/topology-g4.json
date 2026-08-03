@@ -1,0 +1,18 @@
+{
+  "experiment_id": "G4",
+  "development_factors": 25000,
+  "development_cases": 120,
+  "locked_factors": 100000,
+  "locked_cases": 300,
+  "development_seed": 1732,
+  "locked_seed": 20260805,
+  "max_depth": 8,
+  "max_exact_factors": 512,
+  "max_branches": 16,
+  "max_blocks": 64,
+  "max_obligations": 128,
+  "max_steps": 2048,
+  "block_size": 256,
+  "runtime_limit_seconds": 600,
+  "peak_rss_limit_mb": 2048
+}

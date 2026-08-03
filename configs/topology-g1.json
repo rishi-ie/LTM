@@ -1,0 +1,10 @@
+{
+  "experiment_id": "G1",
+  "schema_version": 2,
+  "fixtures": 160,
+  "development_fixtures": 80,
+  "locked_fixtures": 80,
+  "runtime_limit_seconds": 10,
+  "peak_rss_limit_mb": 200,
+  "dependencies": ["python-standard-library", "sqlite3"]
+}

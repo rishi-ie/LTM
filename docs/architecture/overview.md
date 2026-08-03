@@ -28,8 +28,8 @@ native target is a persistent multi-turn conversational LTM. General-domain
 reasoning and specialist topologies are later targets.
 
 The conversational measured boundary and limitations are recorded in the
-[CNTG-1-R2 report](report.md). The narrower latent-state boundary is recorded
-in the [MICRO-LTM-3 report](micro-ltm-3-report.md). The next product gate is a
+[CNTG-1-R2 report](../experiments/cntg-1-r2/report.md). The narrower latent-state boundary is recorded
+in the [MICRO-LTM-3 report](../experiments/micro-ltm/03/report.md). The next product gate is a
 learned topology-compiler and prompt-addressing experiment; a 100-million-token
 quality build is not authorized until compiler validity, required-factor
 activation, and coverage verification pass at smaller scales.
@@ -3478,8 +3478,8 @@ structured optimization, batch-order invariance, verification, decoder
 faithfulness, response reinsertion, coverage equivalence, compute scaling, and
 restart reproducibility without deterministic template recovery. The completed
 CNTG-1-R2 result and its CNTG-C classification are summarized in
-[report.md](report.md); the strict single-state limitation is summarized in
-[micro-ltm-3-report.md](micro-ltm-3-report.md).
+[CNTG-1-R2 report](../experiments/cntg-1-r2/report.md); the strict single-state limitation is summarized in
+[MICRO-LTM-3 report](../experiments/micro-ltm/03/report.md).
 
 ## 14. Large-field inference
 

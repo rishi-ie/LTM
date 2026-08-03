@@ -1,0 +1,11 @@
+{
+  "experiment_id": "G2",
+  "model": ".models/Qwen2.5-0.5B-Instruct-mlx-4bit",
+  "development_cases": 300,
+  "locked_cases": 300,
+  "max_tokens": 320,
+  "temperature": 0,
+  "repair_limit": 1,
+  "locked_runtime_seconds": 600,
+  "locked_peak_rss_mb": 8192
+}

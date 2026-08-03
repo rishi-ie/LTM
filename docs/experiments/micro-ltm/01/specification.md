@@ -6,7 +6,7 @@ The experiment intentionally excludes language, embeddings, RAG, memory, and a g
 
 ## Stages
 
-`develop` creates balanced training/development problems, selects one of 12 field configurations, and trains the two-feature logistic decoder. `freeze` records immutable hashes. `evaluate` creates the three locked seed groups once, runs controls and interventions, and refuses a second locked run. `report` writes `docs/micro-ltm-report.md`; `verify` checks frozen inputs.
+`develop` creates balanced training/development problems, selects one of 12 field configurations, and trains the two-feature logistic decoder. `freeze` records immutable hashes. `evaluate` creates the three locked seed groups once, runs controls and interventions, and refuses a second locked run. Its permanent report is organized beside this specification. `verify` checks frozen inputs.
 
 ## Required controls
 
@@ -15,4 +15,3 @@ The locked run compares the full directed field with initial state, fact barycen
 ## Pass boundary
 
 `MICRO-LTM-A` requires high held-out accuracy, depth-eight generalization, large margins over averaging and fact-only controls, state-swap causal accuracy, low initial/shuffled/mismatched accuracy, finite-difference agreement, monotonic energy, reproducibility, and the ten-minute/one-GB envelope. Any failed gate is reported mechanically as B–F; no result is promoted to the canonical architecture until the locked report exists.
-
