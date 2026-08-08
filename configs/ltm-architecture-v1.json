@@ -1,0 +1,61 @@
+{
+  "architecture_id": "LTM-ARCH-1.1",
+  "evidence_cutoff": "2026-08-08",
+  "normative_document": "docs/architecture/architecture-lock-v1.md",
+  "semantic_substrate": "mumbrane-ir/1",
+  "implemented_execution_bridge": "ltm-field/2",
+  "exact_topology_authority": "topology_g1.registry.REGISTRY",
+  "hard_reasoning_authority": "G6",
+  "soft_reconciliation_authority": "G7",
+  "independent_verification_authority": "G9",
+  "surface_realization_authority": "G10.1",
+  "compiler_lanes": {
+    "conversation": "G2.14 supplied-span gate; canonical writer pending",
+    "reasoning": "G2.5 provisional, validation and confirmation gated",
+    "formal_mathematics": "I3.1/L1 exact-search lane plus L7 fixed-law acyclic equilibrium",
+    "ordinary_mathematical_language": "L2 planned"
+  },
+  "profiles": [
+    "reasoning",
+    "planning",
+    "evidence_science",
+    "conversation_memory"
+  ],
+  "authority_rules": {
+    "vectors_authorize_facts": false,
+    "unverified_decoder_claims_allowed": false,
+    "partial_commits_allowed": false,
+    "cross_reality_inference_allowed": false,
+    "assistant_self_evidence_allowed": false,
+    "unknown_revisions_fail_closed": true
+  },
+  "current_limit_evidence": {
+    "experiment": "L1",
+    "grounded_formal_observed_hops": 64,
+    "opaque_traversal_observed_hops": 64,
+    "cases_per_depth_and_panel": 20,
+    "per_depth_wilson_lower_bound": 0.8388748419471806,
+    "claim": "observed grounded capacity, not arbitrary 64-hop mathematics"
+  },
+  "fixed_equilibrium_evidence": {
+    "experiment": "L7",
+    "workspace": "workspaces/ltm-limit-l7-r3",
+    "trainable_parameters": 0,
+    "field_bodies": 512,
+    "prompts": 240,
+    "maximum_body_applications": 20,
+    "all_case_exactness": 1.0,
+    "accepted_precision": 1.0,
+    "incorrect_accepted_conclusions": 0,
+    "claim": "bounded supplied-formal acyclic fixed-law equilibrium"
+  },
+  "open_product_gates": [
+    "canonical G2.14 Mumbrane writer",
+    "raw semantic segmentation",
+    "L2 ordinary-math compilation",
+    "broad theorem proving",
+    "cyclic and scaled fixed-law equilibrium",
+    "64-hop fixed-law equilibrium",
+    "G15 serving and isolation"
+  ]
+}

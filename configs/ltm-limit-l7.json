@@ -1,0 +1,21 @@
+{
+  "experiment_id": "L7",
+  "revision": "fixed-law-mathematical-reality/1",
+  "trainable_parameters": 0,
+  "model_bytes": 0,
+  "maximum_sweeps": 256,
+  "residual_tolerance": 1e-8,
+  "objective_tolerance": 1e-10,
+  "materialized_bodies": 512,
+  "locked_prompts": 240,
+  "execution_seconds": 600,
+  "gates": {
+    "accepted_precision": 1.0,
+    "all_case_exactness": 0.95,
+    "depth_20": 0.875,
+    "full_minus_no_optimization": 0.8,
+    "full_minus_one_sweep_deep": 0.5,
+    "full_minus_no_relational_law": 0.8,
+    "full_minus_shuffled_endpoints": 0.5
+  }
+}

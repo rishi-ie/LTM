@@ -1,0 +1,52 @@
+{
+  "experiment": "G2.5 typed atom coordinate compiler and latent-field handoff",
+  "version": 1,
+  "encoder": {
+    "path": ".models/all-MiniLM-L6-v2",
+    "hidden_size": 384,
+    "maximum_wordpieces": 128,
+    "one_forward_per_sentence": true,
+    "cpu_threads": 4
+  },
+  "spaces": {
+    "content": 384,
+    "operator": 128,
+    "role": 64,
+    "context": 64,
+    "binding": 256,
+    "operator_prototypes_per_relation": 4,
+    "reconciliation_cycles": 4
+  },
+  "datasets": {
+    "train_sentences": 36000,
+    "development_sentences": 6000,
+    "kernel_locked_sentences": 4000,
+    "locked_sentences": 12000,
+    "train_documents": 8000,
+    "development_documents": 1500,
+    "locked_documents": 3000,
+    "persistent_atoms": 100000,
+    "seeds": {
+      "train": 1748,
+      "development": 1749,
+      "kernel_locked": 20260818,
+      "locked": 20260819,
+      "bootstrap": 91731
+    }
+  },
+  "training": {
+    "sentence_batch_size": 16,
+    "document_batch_size": 8,
+    "gradient_accumulation": 4,
+    "encoder_learning_rate": 0.00002,
+    "head_learning_rate": 0.0005,
+    "weight_decay": 0.01,
+    "gradient_clip": 1.0,
+    "checkpoint_steps": 100
+  },
+  "compute": {
+    "development_rss_limit_gb": 18,
+    "locked_rss_limit_gb": 12,
+    "total_execution_limit_seconds": 28800
+  }
+}

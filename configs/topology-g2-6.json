@@ -1,0 +1,41 @@
+{
+  "experiment": "G2.6 vector-routed typed FieldIR representation kernel",
+  "version": 1,
+  "identity_space": {
+    "id": "minilm-l6-v2-canonical",
+    "revision": "1",
+    "dimension": 384,
+    "metric": "cosine",
+    "normalized": true,
+    "frozen": true
+  },
+  "compiler": {
+    "base_model": ".models/all-MiniLM-L6-v2",
+    "one_forward_per_sentence": true,
+    "maximum_wordpieces": 128,
+    "cpu_threads": 4
+  },
+  "datasets": {
+    "train_cases": 18000,
+    "development_cases": 3600,
+    "kernel_locked_cases": 3600,
+    "locked_cases": 6000,
+    "locked_accepted_per_operator": 200,
+    "locked_clarification": 1200,
+    "locked_quarantine": 1200,
+    "seeds": {"train": 1760, "development": 1761, "locked": 20260825}
+  },
+  "gates": {
+    "operator_macro_f1": 0.95,
+    "named_role_exact": 0.95,
+    "complete_exact": 0.95,
+    "accepted_exact_precision": 0.95,
+    "safe_coverage": 0.90,
+    "modality_accuracy": 0.95,
+    "scope_accuracy": 0.95,
+    "disposition_accuracy": 0.95,
+    "zero_reversal_false_accepts": true,
+    "zero_invalid_insertions": true
+  },
+  "compute": {"development_rss_limit_gb": 18, "locked_rss_limit_gb": 12, "total_execution_limit_seconds": 14400}
+}

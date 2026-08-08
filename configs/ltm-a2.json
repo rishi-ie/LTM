@@ -1,0 +1,14 @@
+{
+  "experiment_id": "LTM-A2",
+  "revision": "1",
+  "mode": "read_only_replay_and_scenarios",
+  "threads": 4,
+  "max_rss_gb": 8,
+  "historical_locked_runs": "never overwritten",
+  "verdicts": [
+    "CONDITIONAL_GO",
+    "NO_GO",
+    "PLAUSIBLE_BUT_UNPROVEN",
+    "MATERIAL_ARCHITECTURAL_CHANGE_REQUIRED"
+  ]
+}

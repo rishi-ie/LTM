@@ -1,0 +1,31 @@
+{
+  "experiment_id": "I3",
+  "revision": "1",
+  "train_theorems": 24000,
+  "development_theorems": 3600,
+  "locked_theorems": 3600,
+  "stress_theorems": 1200,
+  "maximum_bodies": 64,
+  "maximum_steps": 64,
+  "beam_width": 16,
+  "seeds": {
+    "training": 1910,
+    "development": 1911,
+    "locked": 20270501,
+    "stress": 20270502,
+    "replay": 91771
+  },
+  "optimizer": {
+    "steps": 3600,
+    "batch_size": 64,
+    "learning_rate": 0.0003
+  },
+  "gates": {
+    "accepted_precision": 1.0,
+    "safe_coverage": 0.9,
+    "all_case_exactness": 0.9,
+    "frontier_recall": 0.99
+  },
+  "network_calls": 0,
+  "factual_operations": false
+}

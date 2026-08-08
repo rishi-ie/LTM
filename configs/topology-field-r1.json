@@ -1,0 +1,21 @@
+{
+  "experiment_id": "LTM-R1",
+  "schema_version": "ltmf/2",
+  "offline": true,
+  "authoritative_workspaces": {
+    "G1": "workspaces/topology-g1-final",
+    "G2": "workspaces/topology-g2-5",
+    "G3": "workspaces/topology-g3-r7",
+    "G4": "workspaces/topology-g4-r8",
+    "G5": "workspaces/topology-g5-r4",
+    "G6": "workspaces/topology-g6-r2",
+    "G7": "workspaces/topology-g7-r4",
+    "G8": "workspaces/topology-g8-r3",
+    "G9": "workspaces/topology-g9",
+    "G10": "workspaces/topology-g10-1",
+    "G11": "workspaces/topology-g11-r5",
+    "G12": "workspaces/topology-g12-r1",
+    "G13": "workspaces/topology-g13-r1",
+    "G14": "workspaces/topology-g14-r5"
+  }
+}

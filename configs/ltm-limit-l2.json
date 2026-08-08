@@ -1,0 +1,56 @@
+{
+  "experiment_id": "L2",
+  "status": "development-only",
+  "model": {
+    "path": ".models/all-MiniLM-L6-v2",
+    "max_wordpieces": 128,
+    "encoder_calls_per_source": 1,
+    "frozen_layers": [1, 2, 3, 4],
+    "trainable_layers": [5, 6],
+    "threads": 4
+  },
+  "formal_fragment": "i3.1-ast-v1",
+  "mumbrane_schema": "mumbrane/1",
+  "reality_revision": "standard-v1",
+  "grammar_revision": "math-language/1",
+  "max_ast_nodes": 64,
+  "max_ast_depth": 16,
+  "max_variables": 16,
+  "max_candidates": 8,
+  "max_proof_steps": 64,
+  "max_frontier_bodies": 64,
+  "seeds": {
+    "training": 1880,
+    "development": 1881,
+    "kernel_locked": 20270310,
+    "full_locked": 20270311,
+    "reality": 20270312,
+    "attacks": 20270313,
+    "replay": 91759
+  },
+  "gates": {
+    "activated_body_precision": 1.0,
+    "statement_safe_coverage": 0.95,
+    "statement_exactness": 0.92,
+    "question_precision": 1.0,
+    "question_safe_coverage": 0.95,
+    "end_to_end_precision": 1.0,
+    "end_to_end_safe_coverage": 0.85,
+    "zero_incorrect_activations": true,
+    "zero_incorrect_proofs": true
+  },
+  "trust": {
+    "known_rules_require_registry_match": true,
+    "custom_rules_require_confirmation": true,
+    "open_ended_questions_disposition": "goal_discovery_required",
+    "source_text_in_numeric_execution": false,
+    "factual_operations_from_compiler": false
+  },
+  "compute": {
+    "network_calls": 0,
+    "development_rss_gb": 18,
+    "locked_rss_gb": 12,
+    "max_active_seconds": 14400
+  },
+  "historical_artifacts_immutable": true
+}

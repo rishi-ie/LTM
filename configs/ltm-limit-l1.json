@@ -1,0 +1,16 @@
+{
+  "experiment_id": "L1",
+  "checkpoint": "workspaces/ltm-inference-i3-1-r13/selected-kernel.pt",
+  "maximum_opened_bodies": 64,
+  "beam_width": 16,
+  "legal_proposals": 128,
+  "maximum_proof_steps": 64,
+  "base_cases_per_depth": 20,
+  "reserved_cases_per_depth": 80,
+  "depth_min": 1,
+  "depth_max": 64,
+  "cpu_threads": 4,
+  "offline": true,
+  "prefer_reductions": false,
+  "network_calls": 0
+}

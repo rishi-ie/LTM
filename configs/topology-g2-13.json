@@ -1,0 +1,60 @@
+{
+  "experiment": "G2.13 conversational Mumbrane compiler",
+  "version": 1,
+  "encoder": {
+    "path": ".models/all-MiniLM-L6-v2",
+    "hidden_size": 384,
+    "frozen_layers": 4,
+    "trainable_layers": 2,
+    "max_wordpieces": 128,
+    "cpu_threads": 4
+  },
+  "bounds": {
+    "max_spans": 8,
+    "max_candidates": 16,
+    "max_span_width": 48
+  },
+  "dataset": {
+    "train": 14400,
+    "development": 2400,
+    "kernel_locked": 2400,
+    "locked": 3600,
+    "training_conversations": 1200,
+    "development_conversations": 200,
+    "locked_conversations": 400
+  },
+  "training": {
+    "seed": 1840,
+    "kernel_steps": 1000,
+    "span_steps": 600,
+    "link_steps": 400,
+    "lifecycle_steps": 300,
+    "warmup_steps": 200,
+    "batch_size": 32,
+    "encoder_learning_rate": 0.00001,
+    "head_learning_rate": 0.0003,
+    "weight_decay": 0.01,
+    "direction_margin": 0.35
+  },
+  "gates": {
+    "accepted_precision": 0.97,
+    "safe_coverage": 0.95,
+    "act_macro_f1": 0.97,
+    "action_macro_f1": 0.97,
+    "slot_exactness": 0.97,
+    "reference_precision": 0.99,
+    "correction_precision": 0.99,
+    "context_accuracy": 0.97,
+    "disposition_accuracy": 0.97,
+    "zero_unsafe_mutations": true,
+    "full_accepted_precision": 0.95,
+    "full_safe_coverage": 0.90
+  },
+  "compute": {
+    "development_rss_gb": 18,
+    "locked_rss_gb": 12,
+    "machine_ceiling_gb": 20,
+    "max_active_seconds": 10800
+  },
+  "historical_results_immutable": true
+}

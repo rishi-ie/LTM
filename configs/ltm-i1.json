@@ -1,0 +1,15 @@
+{
+  "experiment": "LTM-I1",
+  "field_schema": "fieldir/2",
+  "field_law": "ltm-soft-field/1",
+  "development_cases": 128,
+  "locked_cases": 512,
+  "g2_5_diagnostic_cases": 360,
+  "attack_cases": 128,
+  "seeds": {"development": 1801, "locked": 20261001, "g2_5": 20261002, "attacks": 20261003, "replay": 91741},
+  "runtime_seconds_gate": 300,
+  "rss_mb_gate": 8192,
+  "network_calls_gate": 0,
+  "historical_results_immutable": true,
+  "confirmed_atoms_only": true
+}

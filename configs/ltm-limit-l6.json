@@ -1,0 +1,33 @@
+{
+  "experiment_id": "L6",
+  "profile_revision": "ltm-causal-reality/1",
+  "state_dimension": 128,
+  "maximum_modes": 8,
+  "maximum_steps": 64,
+  "inner_updates": 4,
+  "maximum_frontier_bodies": 128,
+  "maximum_cumulative_bodies": 2048,
+  "maximum_active_units": 1024,
+  "locked_field_bodies": 25000,
+  "training_bodies": 40000,
+  "development_bodies": 10000,
+  "locked_queries": 8000,
+  "text_diagnostic_cases": 2000,
+  "seeds": {"training": 1960, "development": 1961, "calibration": 1962, "locked": 20270810, "queries": 20270811, "reality": 20270812, "controls": 20270813, "interventions": 20270814, "text": 20270815, "replay": 91771},
+  "gates": {
+    "accepted_precision": 1.0,
+    "safe_coverage": 0.90,
+    "all_case_exactness": 0.90,
+    "depth_20": 0.85,
+    "contradiction_accuracy": 0.95,
+    "alternative_recall": 0.95,
+    "unknown_recall": 0.95,
+    "frontier_recall": 0.99,
+    "global_equilibrium": 0.95,
+    "minimum_geometry_gain": 0.20,
+    "random_geometry_gain": 0.30,
+    "fixed_state_gain": 0.20
+  },
+  "compute": {"cpu_threads": 4, "maximum_weight_bytes": 8000000, "locked_rss_gb": 8, "machine_ceiling_gb": 20, "network_calls": 0},
+  "historical_artifacts_immutable": true
+}

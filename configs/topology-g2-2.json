@@ -1,0 +1,44 @@
+{
+  "experiment": "G2.2 sentence-level reasoning compiler",
+  "version": 1,
+  "encoder": {
+    "path": ".models/all-MiniLM-L6-v2",
+    "hidden_size": 384,
+    "max_wordpieces": 128,
+    "partial_unfrozen_layers": [4, 5]
+  },
+  "state_dimension": 128,
+  "hrm_cycles": 4,
+  "data": {
+    "sentence_train": 12000,
+    "sentence_development": 2000,
+    "sentence_locked": 4000,
+    "link_train": 6000,
+    "link_development": 1000,
+    "link_locked": 2000,
+    "seeds": {"train": 1742, "development": 1743, "locked": 20260815, "bootstrap": 91729}
+  },
+  "training": {
+    "sentence_batch_size": 16,
+    "link_batch_size": 8,
+    "gradient_accumulation": 4,
+    "max_epochs": 30,
+    "patience": 5,
+    "weight_decay": 0.01,
+    "gradient_clip": 1.0,
+    "hrm_learning_rates": [0.0003, 0.001],
+    "encoder_learning_rates": [0.00001, 0.00002]
+  },
+  "calibration": {
+    "confidence": [0.70, 0.75, 0.80, 0.85, 0.90, 0.95],
+    "margin": [0.10, 0.15, 0.20, 0.25],
+    "round_trip_cosine": [0.80, 0.85, 0.90, 0.95]
+  },
+  "compute": {
+    "cpu_only": true,
+    "warning_rss_gb": 16,
+    "hard_abort_rss_gb": 18,
+    "locked_runtime_seconds": 600,
+    "locked_rss_gb": 12
+  }
+}

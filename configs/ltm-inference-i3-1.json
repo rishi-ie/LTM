@@ -1,0 +1,11 @@
+{
+  "experiment_id": "I3.1",
+  "status": "development-only",
+  "maximum_opened_bodies": 64,
+  "beam_width": 16,
+  "maximum_proof_steps": 64,
+  "trainable_parameters": 2000000,
+  "reality_revision": "standard-v1",
+  "network_calls": 0,
+  "factual_field_mutations": false
+}

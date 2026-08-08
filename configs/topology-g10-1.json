@@ -1,0 +1,13 @@
+{
+  "experiment_id": "G10.1",
+  "decoder": "frozen-flan-t5-small-candidate-ranker",
+  "model_path": ".models/flan-t5-small",
+  "development_cases": 64,
+  "locked_cases": 256,
+  "development_seed": 1738,
+  "locked_seed": 20260826,
+  "max_candidate_count": 12,
+  "runtime_limit_seconds": 600,
+  "peak_rss_limit_mb": 8192,
+  "human_naturalness_scored": false
+}

@@ -1,5 +1,6 @@
 # Local assets retained outside the architecture-only repository.
 .venv/
+.venv-*/
 .models/
 workspaces/
 results/

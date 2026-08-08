@@ -1,0 +1,18 @@
+{
+  "experiment_id": "G12",
+  "development_seed": 1740,
+  "locked_seed": 20260813,
+  "development_regions": 100,
+  "development_objects_per_region": 100,
+  "locked_regions": 1000,
+  "locked_objects_per_region": 1000,
+  "objects_per_source": 10,
+  "normal_operations_per_kind": 32,
+  "crash_operations": 20,
+  "corruption_attacks": 8,
+  "query_count": 128,
+  "runtime_limit_seconds": 180,
+  "peak_rss_limit_mb": 512,
+  "store_size_limit_mb": 1024,
+  "schema_version": 1
+}

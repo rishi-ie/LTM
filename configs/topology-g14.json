@@ -1,0 +1,25 @@
+{
+  "experiment_id": "G14",
+  "development_seed": 1741,
+  "locked_seed": 20260814,
+  "development_conversations": 10,
+  "locked_conversations": 50,
+  "turns_per_conversation": 12,
+  "bootstrap_samples": 2000,
+  "bootstrap_seed": 91729,
+  "max_rss_mb": 20480,
+  "warning_rss_mb": 16384,
+  "abort_rss_mb": 18432,
+  "max_core_p95_ms": 3000,
+  "max_output_tokens": 64,
+  "public_sources": {
+    "longmemeval": "https://huggingface.co/datasets/xiaowu0162/longmemeval-cleaned/resolve/main/longmemeval_s_cleaned.json",
+    "locomo": "https://raw.githubusercontent.com/snap-research/locomo/main/data/locomo10.json"
+  },
+  "gates": {
+    "controlled_accuracy": 0.98,
+    "required_factor_recall": 0.99,
+    "advantage_points": 5.0,
+    "product_public_f1": 0.75
+  }
+}

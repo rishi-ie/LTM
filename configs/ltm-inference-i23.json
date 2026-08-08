@@ -1,0 +1,35 @@
+{
+  "experiment_id": "I2.3",
+  "revision": "1",
+  "train_bodies": 24000,
+  "development_bodies": 8000,
+  "development_prompts": 2000,
+  "locked_bodies": 100000,
+  "locked_prompts": 12000,
+  "maximum_bodies": 64,
+  "maximum_units": 512,
+  "maximum_steps": 32,
+  "leaf_body_limit": 64,
+  "tree_fanout": 8,
+  "seeds": {
+    "training": 1900,
+    "development": 1901,
+    "locked": 20270401,
+    "replay": 91763
+  },
+  "optimizer": {
+    "steps": 1000,
+    "batch_size": 128,
+    "learning_rate": 0.0003
+  },
+  "gates": {
+    "candidate_recall": 1.0,
+    "frontier_recall": 0.99,
+    "accepted_precision": 0.95,
+    "safe_coverage": 0.85,
+    "answerable_exactness": 0.9,
+    "energy_increases": 0
+  },
+  "network_calls": 0,
+  "factual_operations": false
+}

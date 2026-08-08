@@ -1,0 +1,23 @@
+{
+  "schema_version": "ltm/v1",
+  "field_schema": "ltm-field/2",
+  "registry_source": "topology_g1.registry.REGISTRY",
+  "id_digest": "sha256",
+  "factor_record_bytes": 64,
+  "binding_record_bytes": 24,
+  "vector_sidecar_format": "LTMFV1",
+  "vector_spaces": {
+    "content": {"dimension": 384, "metric": "cosine", "normalized": true},
+    "operator": {"dimension": 128, "metric": "cosine", "normalized": true},
+    "role": {"dimension": 64, "metric": "cosine", "normalized": true},
+    "context": {"dimension": 64, "metric": "cosine", "normalized": true},
+    "binding": {"dimension": 256, "metric": "cosine", "normalized": true}
+  },
+  "authority": {
+    "exact_topology": "g1",
+    "hard_reasoning": "g6",
+    "soft_reconciliation": "g7",
+    "verification": "g9",
+    "vectors": "routing_and_field_geometry_only"
+  }
+}

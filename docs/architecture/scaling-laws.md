@@ -1,5 +1,8 @@
 # LTM Scaling Laws and Runtime Metrics
 
+> This is non-normative background. The bounded current contract is
+> [LTM-ARCH-1.1](architecture-lock-v1.md).
+
 ## 1. Purpose and claim boundary
 
 This document defines how a Latent Topology Model (LTM) reports size, storage,

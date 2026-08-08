@@ -1,0 +1,63 @@
+{
+  "experiment": "G2.12 factorized atomic operator-role compiler",
+  "version": 1,
+  "encoder": {
+    "path": ".models/all-MiniLM-L6-v2",
+    "hidden_size": 384,
+    "frozen_layers": 4,
+    "trainable_layers": 2,
+    "max_wordpieces": 128,
+    "cpu_threads": 4
+  },
+  "bounds": {
+    "max_span_width": 48,
+    "max_spans": 48,
+    "max_operator_candidates": 6,
+    "max_relations": 2,
+    "max_complete_candidates": 256,
+    "graph_beam_width": 16
+  },
+  "dataset": {
+    "train": 18000,
+    "development": 3600,
+    "kernel_locked": 3600,
+    "locked": 6000,
+    "documents_train": 1500,
+    "documents_development": 300,
+    "documents_locked": 600
+  },
+  "training": {
+    "seed": 1830,
+    "kernel_steps": 1500,
+    "kind_steps": 600,
+    "sentence_steps": 800,
+    "document_steps": 300,
+    "warmup_steps": 250,
+    "batch_size": 16,
+    "gradient_accumulation": 2,
+    "encoder_learning_rate": 0.00001,
+    "head_learning_rate": 0.0003,
+    "direction_margin": 0.35
+  },
+  "gates": {
+    "accepted_precision": 0.95,
+    "safe_coverage": 0.90,
+    "all_case_exactness": 0.90,
+    "operator_macro_f1": 0.95,
+    "operator_recall_at3": 0.99,
+    "role_exactness": 0.95,
+    "direction_accuracy": 0.995,
+    "context_accuracy": 0.95,
+    "disposition_accuracy": 0.95,
+    "two_relation_exactness": 0.90,
+    "zero_severe_errors": true,
+    "round_trip": 1.0
+  },
+  "compute": {
+    "development_rss_gb": 18,
+    "locked_rss_gb": 12,
+    "machine_ceiling_gb": 20,
+    "max_active_seconds": 14400
+  },
+  "historical_results_immutable": true
+}

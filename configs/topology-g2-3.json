@@ -1,0 +1,35 @@
+{
+  "experiment": "G2.3 hierarchical sentence-to-topology compiler",
+  "version": 1,
+  "encoder": {
+    "path": ".models/all-MiniLM-L6-v2",
+    "hidden_size": 384,
+    "state_dimension": 128,
+    "max_wordpieces": 128,
+    "max_span_width": 48,
+    "full_finetune": true
+  },
+  "data": {
+    "sentence_train": 12000,
+    "sentence_development": 2000,
+    "sentence_locked": 4000,
+    "link_train": 6000,
+    "link_development": 1000,
+    "link_locked": 2000,
+    "seeds": {"train": 1744, "development": 1745, "locked": 20260816, "bootstrap": 91729}
+  },
+  "limits": {"span_candidates": 32, "relation_candidates": 96, "beam_width": 8, "max_relations": 3, "max_spans": 8},
+  "training": {
+    "sentence_batch_size": 16,
+    "link_batch_size": 8,
+    "gradient_accumulation": 4,
+    "max_epochs": 30,
+    "patience": 3,
+    "encoder_learning_rate": 0.00002,
+    "head_learning_rate": 0.001,
+    "weight_decay": 0.01,
+    "gradient_clip": 1.0
+  },
+  "compute": {"device": "cpu", "warning_rss_gb": 16, "hard_abort_rss_gb": 18, "locked_rss_gb": 12, "locked_runtime_seconds": 600},
+  "gates": {"accepted_precision": 0.99, "sentence_coverage": 0.85, "link_coverage": 0.85, "sentence_exact": 0.90, "link_exact": 0.90}
+}

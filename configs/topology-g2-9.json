@@ -1,0 +1,66 @@
+{
+  "experiment": "G2.9 post-attention golden-query topology compiler",
+  "version": 1,
+  "atom_bank": {"revision": "v1", "relations": 18, "instances_per_relation": 3},
+  "encoder": {
+    "path": ".models/all-MiniLM-L6-v2",
+    "hidden_size": 384,
+    "frozen_layers": 4,
+    "trainable_layers": 2,
+    "max_wordpieces": 128,
+    "one_forward_per_sentence": true,
+    "cpu_threads": 4
+  },
+  "compiler": {
+    "query_dimension": 192,
+    "role_dimension": 64,
+    "binding_dimension": 128,
+    "operator_delta_dimension": 192,
+    "decoder_blocks": 3,
+    "attention_heads": 6,
+    "maximum_spans": 48,
+    "maximum_span_width": 48,
+    "maximum_relations": 3,
+    "maximum_graph_candidates": 512,
+    "graph_beam_width": 32
+  },
+  "training": {
+    "kernel_steps": 1200,
+    "kind_steps": 600,
+    "sentence_steps": 900,
+    "document_steps": 400,
+    "sentence_batch_size": 32,
+    "document_batch_size": 8,
+    "encoder_learning_rate": 0.00001,
+    "kernel_learning_rate": 0.0003,
+    "weight_decay": 0.01,
+    "gradient_clip": 1.0,
+    "direction_margin": 0.35,
+    "checkpoint_interval": 50
+  },
+  "gates": {
+    "precision": 0.95,
+    "coverage": 0.95,
+    "all_case_exact": 0.90,
+    "operator_macro_f1": 0.95,
+    "role_exact": 0.95,
+    "direction_accuracy": 0.995,
+    "identity_precision": 0.98,
+    "integration_agreement": 0.98
+  },
+  "compute": {
+    "development_rss_gb": 18,
+    "locked_rss_gb": 12,
+    "max_active_seconds": 28800
+  },
+  "seeds": {
+    "training": 1790,
+    "development": 1791,
+    "kernel_locked": 20260910,
+    "locked": 20260911,
+    "documents": 20260912,
+    "migration": 20260913,
+    "integration": 20260914,
+    "bootstrap": 91737
+  }
+}

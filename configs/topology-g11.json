@@ -1,0 +1,11 @@
+{
+  "experiment_id": "G11",
+  "development_conversations": 8,
+  "locked_conversations": 32,
+  "turns_per_conversation": 12,
+  "development_seed": 1739,
+  "locked_seed": 20260812,
+  "runtime_limit_seconds": 30,
+  "peak_rss_limit_mb": 256,
+  "ordinary_query_p95_rows": 24
+}

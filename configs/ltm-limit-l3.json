@@ -1,0 +1,55 @@
+{
+  "experiment_id": "L3",
+  "status": "development-only",
+  "compiler_mode": "exact-controlled-prose-notation",
+  "checkpoint": "workspaces/ltm-inference-i3-1-r13/selected-kernel.pt",
+  "reality_revision": "standard-v1",
+  "formal_fragment": "i3.1-ast-v1",
+  "mumbrane_schema": "mumbrane/1",
+  "field_size": 50000,
+  "grounded_cases": 256,
+  "mixed_cases": 128,
+  "safety_cases": 128,
+  "attack_cases": 128,
+  "required_hop_depth": 45,
+  "maximum_proof_steps": 64,
+  "maximum_frontier_bodies": 64,
+  "beam_width": 16,
+  "legal_proposals": 128,
+  "cpu_threads": 4,
+  "seeds": {
+    "development": 1890,
+    "locked": 20270410,
+    "mixed": 20270411,
+    "attacks": 20270412,
+    "replay": 91761
+  },
+  "gates": {
+    "body_precision": 1.0,
+    "body_safe_coverage": 0.95,
+    "body_ast_exactness": 0.98,
+    "question_precision": 1.0,
+    "question_safe_coverage": 0.95,
+    "grounded_45_success": 0.95,
+    "end_to_end_safe_coverage": 0.90,
+    "mixed_45_success": 0.80,
+    "proof_replay": 1.0,
+    "incorrect_accepted_proofs": 0,
+    "cross_reality_steps": 0
+  },
+  "trust": {
+    "known_rules_require_exact_schema_instance": true,
+    "custom_rules_authoritative": false,
+    "source_text_in_numeric_execution": false,
+    "answer_and_route_metadata_visible": false,
+    "factual_operations_from_compiler": false
+  },
+  "compute": {
+    "network_calls": 0,
+    "per_query_timeout_seconds": 5,
+    "locked_rss_gb": 8,
+    "machine_ceiling_gb": 20,
+    "max_active_seconds": 14400
+  },
+  "historical_artifacts_immutable": true
+}

@@ -1,0 +1,56 @@
+{
+  "experiment": "G2.11 single-pass atomic Mumbrane compiler",
+  "version": 1,
+  "schema": "atomic-mumbrane/1",
+  "encoder": {
+    "path": ".models/all-MiniLM-L6-v2",
+    "hidden_size": 384,
+    "frozen_layers": 4,
+    "trainable_layers": 2,
+    "max_wordpieces": 128,
+    "cpu_threads": 4,
+    "max_trainable_head_parameters": 2000000
+  },
+  "bounds": {
+    "max_span_width": 32,
+    "max_spans": 48,
+    "max_relations": 3,
+    "max_selected_spans": 10,
+    "max_hypotheses": 8
+  },
+  "seeds": {
+    "basis": 1820,
+    "training": 1821,
+    "development": 1822,
+    "kernel_locked": 20261101,
+    "locked": 20261102,
+    "documents": 20261103,
+    "attacks": 20261104,
+    "replay": 91745
+  },
+  "gates": {
+    "basis_reconstruction": 1.0,
+    "kernel_unary_f1": 0.98,
+    "kernel_pair_f1": 0.97,
+    "kernel_context_f1": 0.98,
+    "accepted_precision": 0.95,
+    "safe_coverage": 0.90,
+    "all_case_exactness": 0.88,
+    "direction_accuracy": 0.995,
+    "zero_severe_errors": true
+  },
+  "compute": {
+    "development_rss_gb": 18,
+    "locked_rss_gb": 12,
+    "machine_ceiling_gb": 20,
+    "max_active_seconds": 14400
+  },
+  "training": {
+    "kernel_steps": 1200,
+    "batch_size": 8,
+    "learning_rate": 0.0003,
+    "weight_decay": 0.01,
+    "seed": 1821
+  },
+  "historical_results_immutable": true
+}

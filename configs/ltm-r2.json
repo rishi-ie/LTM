@@ -1,0 +1,27 @@
+{
+  "experiment": "LTM-R2",
+  "schema": "mumbrane/1",
+  "operator_bank": "g1-operator-bank/1",
+  "profiles": ["reasoning", "planning", "evidence", "conversation"],
+  "development_bodies": 256,
+  "locked_bodies": 1024,
+  "profile_executions": 4096,
+  "attack_cases": 320,
+  "seeds": {
+    "development": 1811,
+    "locked": 20261020,
+    "migration": 20261021,
+    "attacks": 20261022,
+    "replay": 91743
+  },
+  "gates": {
+    "profile_agreement": 1.0,
+    "packed_reload": 1.0,
+    "attack_false_accepts": 0,
+    "network_calls": 0,
+    "runtime_seconds": 900,
+    "peak_rss_mb": 8192
+  },
+  "historical_results_immutable": true,
+  "raw_language_compilation_in_scope": false
+}

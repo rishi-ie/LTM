@@ -3,21 +3,30 @@ requires = ["setuptools>=68"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "micro-ltm"
+name = "latent-topology-models"
 version = "0.1.0"
-description = "Compact causal latent equilibrium experiment"
-requires-python = ">=3.11"
-dependencies = ["numpy>=2.0"]
+description = "Evidence-bounded Latent Topology Model research and product foundation"
+requires-python = ">=3.11,<3.12"
+dependencies = ["numpy==2.4.6"]
 
 [project.optional-dependencies]
-dev = ["pytest>=8", "ruff>=0.6"]
-reasoning-embedder = ["sentence-transformers==5.6.1", "torch==2.13.0"]
+dev = ["pytest==8.4.2", "ruff==0.16.0"]
+neural = [
+    "sentence-transformers==5.6.1",
+    "torch==2.13.0",
+    "transformers==5.14.1",
+]
+historical-mlx = [
+    "mlx==0.32.0; platform_system == 'Darwin' and platform_machine == 'arm64'",
+    "mlx-lm==0.31.3; platform_system == 'Darwin' and platform_machine == 'arm64'",
+]
 
 [tool.setuptools.packages.find]
 where = ["src"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
+addopts = "--import-mode=importlib"
 
 [tool.ruff]
 line-length = 100

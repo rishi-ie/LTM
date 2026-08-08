@@ -1,0 +1,44 @@
+{
+  "experiment_id": "I2.1",
+  "revision": "1",
+  "vector_dimension": 384,
+  "state_dimension": 128,
+  "maximum_parameters": 1000000,
+  "maximum_bodies": 64,
+  "maximum_active_units": 512,
+  "maximum_steps": 64,
+  "leaf_body_limit": 64,
+  "fanout": 16,
+  "training_bodies": 24000,
+  "development_bodies": 8000,
+  "development_queries": 2000,
+  "locked_bodies": 100000,
+  "locked_queries": 4000,
+  "seeds": {
+    "training": 1880,
+    "development": 1881,
+    "locked": 20270310,
+    "queries": 20270311,
+    "replay": 91759
+  },
+  "optimizer": {
+    "steps": 1000,
+    "batch_size": 128,
+    "learning_rate": 0.0003,
+    "weight_decay": 0.01,
+    "gradient_clip": 1.0,
+    "cpu_threads": 4
+  },
+  "gates": {
+    "alignment_recall_at_64": 0.995,
+    "one_step_exactness": 0.95,
+    "frontier_recall_at_64": 0.99,
+    "depth_2_4": 0.9,
+    "depth_5_16": 0.85,
+    "depth_17_64": 0.8,
+    "accepted_precision": 0.95,
+    "safe_coverage": 0.85
+  },
+  "network_calls": 0,
+  "factual_operations": false
+}

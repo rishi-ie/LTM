@@ -17,7 +17,7 @@ REGISTRY: dict[str, RelationSpec] = {
     "conjoins": _spec("conjoins", (RoleSpec("premise", CLAIM, 2, 8), RoleSpec("conclusion", CLAIM)), "hard", "derive_all", "conjunction"),
     "requires": _spec("requires", (RoleSpec("dependent", CLAIM), RoleSpec("prerequisite", CLAIM)), "hard", "obligation", "requirement"),
     "excludes": _spec("excludes", (RoleSpec("left", CLAIM), RoleSpec("right", CLAIM)), "hard", "conflict", "exclusion"),
-    "equals": _spec("equals", (RoleSpec("left", VALUE_LIKE), RoleSpec("right", VALUE_LIKE)), "soft", "equal", "equality"),
+    "equals": _spec("equals", (RoleSpec("left", VALUE_LIKE), RoleSpec("right", VALUE_LIKE)), "soft", "equal_bidirectional_v2", "equality"),
     "before": _spec("before", (RoleSpec("first", (NodeKind.EVENT,)), RoleSpec("second", (NodeKind.EVENT,))), "hard", "temporal", "temporal"),
     "after": _spec("after", (RoleSpec("first", (NodeKind.EVENT,)), RoleSpec("second", (NodeKind.EVENT,))), "hard", "temporal_inverse", "temporal"),
     "supersedes": _spec("supersedes", (RoleSpec("older", CLAIM), RoleSpec("newer", CLAIM)), "hard", "supersede", "hard_obligation"),

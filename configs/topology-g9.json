@@ -1,0 +1,13 @@
+{
+  "experiment_id": "G9",
+  "development_pairs": 24,
+  "locked_pairs": 48,
+  "development_seed": 1737,
+  "locked_seed": 20260810,
+  "topology_version": "topology-v1",
+  "field_version": "field-v1",
+  "state_tolerance": 1e-10,
+  "energy_tolerance": 1e-10,
+  "runtime_limit_seconds": 10,
+  "peak_rss_limit_mb": 256
+}

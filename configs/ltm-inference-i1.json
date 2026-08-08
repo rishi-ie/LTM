@@ -1,0 +1,53 @@
+{
+  "experiment_id": "I1",
+  "series": "latent-inference",
+  "revision": "1",
+  "vector_dimension": 384,
+  "hidden_dimension": 128,
+  "maximum_parameters": 1000000,
+  "maximum_bodies": 32,
+  "maximum_active_units": 256,
+  "maximum_candidates": 64,
+  "optimization_steps": 8,
+  "energy_margin": 0.5,
+  "learning_rate": 0.15,
+  "training_bodies": 24000,
+  "development_bodies": 8000,
+  "development_queries": 4000,
+  "locked_bodies": 50000,
+  "locked_queries": 8000,
+  "naturalistic_cases": 1200,
+  "seeds": {
+    "training": 1860,
+    "development": 1861,
+    "locked_field": 20270110,
+    "locked_queries": 20270111,
+    "naturalistic": 20270112,
+    "interventions": 20270113,
+    "bootstrap": 91753
+  },
+  "optimizer": {
+    "steps": 3000,
+    "batch_size": 64,
+    "learning_rate": 0.0003,
+    "weight_decay": 0.01,
+    "gradient_clip": 1.0,
+    "checkpoint_interval": 100,
+    "cpu_threads": 4
+  },
+  "gates": {
+    "accepted_precision": 0.95,
+    "safe_coverage": 0.85,
+    "all_case_exactness": 0.85,
+    "answerable_exactness": 0.90,
+    "multi_hop_exactness": 0.90,
+    "deep_exactness": 0.85,
+    "intervention_accuracy": 0.95,
+    "energy_monotonicity": 1.0,
+    "candidate_recall": 1.0,
+    "severe_errors": 0
+  },
+  "historical_results_immutable": true,
+  "factual_operations": false,
+  "network_calls": 0
+}

@@ -1,0 +1,31 @@
+{
+  "experiment": "G2.7 frozen semantic reasoning-atom coordinate compiler",
+  "version": 1,
+  "encoder": {
+    "path": ".models/all-MiniLM-L6-v2",
+    "dimension": 384,
+    "frozen": true,
+    "one_forward_per_sentence": true,
+    "max_wordpieces": 128,
+    "threads": 4
+  },
+  "reasoning_atoms": 18,
+  "trainable_kernel_parameter_limit": 3000000,
+  "gates": {
+    "accepted_precision": 0.95,
+    "safe_coverage": 0.90,
+    "all_case_exact": 0.90,
+    "operator_macro_f1": 0.95,
+    "role_exact": 0.95,
+    "direction_polarity": 0.99
+  },
+  "datasets": {
+    "train": 18000,
+    "development": 3600,
+    "kernel_locked": 3600,
+    "locked": 6000,
+    "documents_locked": 1200,
+    "seeds": {"train": 1770, "development": 1771, "kernel_locked": 20260826, "locked": 20260827, "documents": 20260828}
+  },
+  "compute": {"development_rss_gb": 18, "locked_rss_gb": 12, "max_seconds": 14400}
+}

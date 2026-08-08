@@ -1,0 +1,22 @@
+{
+  "experiment_id": "G8",
+  "development_cases": 48,
+  "locked_cases": 96,
+  "development_seed": 1736,
+  "locked_seed": 20260809,
+  "field_factors": 65536,
+  "physical_block_size": 256,
+  "selected_blocks_per_request": 16,
+  "batch_widths": [1, 4, 16],
+  "orders": ["ascending", "descending", "random"],
+  "maximum_steps": 48,
+  "learning_rate": 0.05,
+  "backtracking_retries": 4,
+  "convergence_tolerance": 1e-7,
+  "accepted_energy_tolerance": 1e-10,
+  "maximum_evaluations": 240,
+  "decision_margin": 0.05,
+  "abstention_threshold": 0.75,
+  "runtime_limit_seconds": 60,
+  "peak_rss_limit_mb": 512
+}

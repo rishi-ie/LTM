@@ -1,0 +1,11 @@
+{
+  "experiment_id": "G10",
+  "development_cases": 24,
+  "locked_cases": 64,
+  "development_seed": 1738,
+  "locked_seed": 20260811,
+  "max_tokens": 64,
+  "runtime_limit_seconds": 600,
+  "peak_rss_limit_mb": 8192,
+  "model_path": ".models/Qwen2.5-0.5B-Instruct-mlx-4bit"
+}

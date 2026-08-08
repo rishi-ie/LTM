@@ -1,0 +1,23 @@
+{
+  "experiment": "G2.14 margin-gated conversational compiler",
+  "version": 1,
+  "frozen_checkpoint": "workspaces/topology-g2-13-r1/kernel-checkpoint.pt",
+  "max_candidates": 16,
+  "calibration_cases": 2400,
+  "locked_cases": 4800,
+  "seeds": {"calibration": 1850, "locked": 20261220, "lifecycle": 20261221, "attacks": 20261222, "replay": 91751},
+  "gates": {
+    "accepted_precision": 1.0,
+    "safe_coverage": 0.95,
+    "all_case_exactness": 0.95,
+    "act_macro_f1": 0.97,
+    "action_macro_f1": 0.97,
+    "context_accuracy": 0.97,
+    "reference_precision": 1.0,
+    "ambiguity_recall": 1.0,
+    "correction_precision": 1.0,
+    "zero_incorrect_accepts": true
+  },
+  "compute": {"peak_rss_gb": 12, "machine_ceiling_gb": 20, "max_active_seconds": 1800},
+  "historical_results_immutable": true
+}

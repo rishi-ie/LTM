@@ -89,7 +89,10 @@ def execute(
     elif r == "equals":
         left, right = relation.role_ids("left")[0], relation.role_ids("right")[0]
         if state.value(left) == state.value(right):
-            derivations = (Derivation(right, relation.relation_id, (left,), relation.scope_id, relation.provenance),)
+            derivations = (
+                Derivation(right, relation.relation_id, (left,), relation.scope_id, relation.provenance),
+                Derivation(left, relation.relation_id, (right,), relation.scope_id, relation.provenance),
+            )
     elif r == "supersedes":
         older, newer = relation.role_ids("older")[0], relation.role_ids("newer")[0]
         if newer in state.active_claims:
@@ -144,7 +147,8 @@ def verify_derivation(
             return VerificationRecord(False, (), (), "MISSING_PREMISE")
     elif r == "equals":
         left, right = relation.role_ids("left")[0], relation.role_ids("right")[0]
-        if derivation.premise_ids != (left,) or derivation.conclusion_id != right or state.value(left) != state.value(right):
+        permitted = {(left, right), (right, left)}
+        if (derivation.premise_ids[0] if len(derivation.premise_ids) == 1 else None, derivation.conclusion_id) not in permitted or state.value(left) != state.value(right):
             return VerificationRecord(False, (), (), "MISSING_PREMISE")
     else:
         return VerificationRecord(False, (), (), "INVALID_DERIVATION")

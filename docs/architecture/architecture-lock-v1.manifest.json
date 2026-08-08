@@ -1,0 +1,14 @@
+{
+  "architecture_id": "LTM-ARCH-1.1",
+  "evidence_cutoff": "2026-08-08",
+  "files": {
+    "configs/ltm-architecture-v1.json": "d521e9aa2784159ff21e5db9d29d8ac99ab1882e24e736f83a2d25f6d3cb8eeb",
+    "docs/architecture/architecture-lock-v1.md": "25fe42c8d56b65721d29f2d2a1254ada37d55a2de0fdce77b11a399be38f90c1",
+    "docs/architecture/component-internals.md": "36952146bd8cd41ba0f68346e987eaf75787f75154779720aa9816b14542c709",
+    "docs/architecture/mother-architecture.md": "b77fc424183b5689d4363225573328bd2b405cc1a82860e1bb39be8fb205d85c",
+    "docs/experiments/registry.json": "25f4710b8e6c86ecc5cc0da1f52b552ff4dd14adf541d3171013ea5de1bf87d5",
+    "src/ltm/schema.py": "567fc1157f9e19ed87d85139fb26df30aa5b7ef59f220899efccb16d308883a5",
+    "src/ltm_r2/schemas.py": "a0c64123564cb9f85b6bca342374d1ef5bbacb8cd6eea5b3bf583b4310990a28",
+    "src/topology_g1/registry.py": "704271fc70fb205cf938012ff154d72b5deb9067f5d0d8f407489a972fce765c"
+  }
+}

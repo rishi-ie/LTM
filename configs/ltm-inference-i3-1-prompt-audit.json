@@ -1,0 +1,14 @@
+{
+  "experiment": "I3.1-PROMPT-AUDIT",
+  "reality": "standard-v1",
+  "prompt": "In standard arithmetic, prove (5 + 0) x 1 = 5.",
+  "source": {"op": "mul", "args": [{"op": "add", "args": [{"op": "atom", "value": "5"}, {"op": "atom", "value": "0"}]}, {"op": "atom", "value": "1"}]},
+  "goal": {"op": "atom", "value": "5"},
+  "maximum_bodies": 64,
+  "maximum_steps": 16,
+  "use_scorer": true,
+  "use_heuristic": false,
+  "prefer_reductions": false,
+  "threads": 4,
+  "offline": true
+}
