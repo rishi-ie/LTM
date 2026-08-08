@@ -1,6 +1,6 @@
 # LTM v1 Build Plan
 
-Normative architecture: [LTM-ARCH-1.1](../architecture/architecture-lock-v1.md).
+Normative architecture: [LTM-ARCH-1.2](../architecture/architecture-lock-v1.md).
 
 ## Current starting point
 

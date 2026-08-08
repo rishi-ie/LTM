@@ -1,0 +1,11 @@
+{
+  "revision": "parasite-l8-v1",
+  "max_sweeps": 256,
+  "residual": 1e-8,
+  "objective_tolerance": 1e-10,
+  "candidate_threshold": 0.5,
+  "alternative_margin": 0.05,
+  "max_factors": 512,
+  "trainable_parameters": 0,
+  "network": false
+}

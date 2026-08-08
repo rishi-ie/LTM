@@ -1,0 +1,21 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "parasite-l8"
+version = "0.1.0"
+description = "Isolated L8 compiled reasoning-policy equilibrium experiment"
+requires-python = ">=3.11,<3.12"
+dependencies = []
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "--import-mode=importlib"
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"

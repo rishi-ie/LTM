@@ -1,0 +1,14 @@
+{
+  "accepted_compiler_mutation_precision": 1.0,
+  "benchmark_revision": "parasite-baseline/0.1",
+  "compile_ms": 301.575,
+  "decoder_unauthorized_claims": 0,
+  "depth_20_pass": true,
+  "factors": 512,
+  "incorrect_accepted_mutations": 0,
+  "independent_equilibrium_agreement": 1.0,
+  "network_calls": 0,
+  "p50_query_ms": 258.184,
+  "p95_query_ms": 260.637,
+  "queries": 25
+}

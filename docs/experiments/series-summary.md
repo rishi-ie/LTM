@@ -1,11 +1,11 @@
 # LTM Experiment-Series Evidence Compendium
 
-> **Evidence cutoff:** 2026-08-08  
+> **Evidence cutoff:** 2026-08-09
 > **Registry:** [`registry.json`](registry.json)  
-> **Normative architecture:** [LTM-ARCH-1.1](../architecture/architecture-lock-v1.md)  
+> **Normative architecture:** [LTM-ARCH-1.2](../architecture/architecture-lock-v1.md)
 > **Explanatory architecture:** [Mother Architecture](../architecture/mother-architecture.md)
 
-This document is the human-readable history of the 51 experiments registered at
+This document is the human-readable history of the 52 experiments registered at
 the evidence cutoff. The registry is the machine-readable status authority; the
 linked reports are the sole authority for measured results. A specification says
 what an experiment intended to test. It is never evidence that the test passed.
@@ -46,8 +46,9 @@ flowchart LR
     L4 --> L5["L5: pending learned equilibrium"]
     L5 --> L6["L6: development-only equilibrium"]
     L6 --> L7["L7: fixed-law equilibrium pass"]
-    GX --> A["Architecture audit and LTM-ARCH-1.1"]
-    L7 --> A
+    L7 --> L8["L8: provisional policy equilibrium"]
+    GX --> A["Architecture audit and LTM-ARCH-1.2"]
+    L8 --> A
 ```
 
 The dependency graph is not a ladder of monotonically improving scores. Several
@@ -162,11 +163,12 @@ product execution package whose evidence comes from the integration experiment.
 | **L5** — Compiled multi-hypothesis latent field equilibrium | UNCLASSIFIED / pending authoritative execution | Implementation and a pending report exist, but no measured classification is authorized. | It must remain neither pass nor failure until its authoritative lifecycle is executed and audited. | [Spec](limits/l05/specification.md) · [Report](limits/l05/report.md) |
 | **L6** — Causal mathematical reality equilibrium | DEVELOPMENT_ONLY | Bounded smoke implementation only; authoritative training, locked field, independent oracle, and causal run remain pending. | Learned-geometry equilibrium was not established. | [Spec](limits/l06/specification.md) · [Report](limits/l06/report.md) |
 | **L7** — Fixed-law mathematical reality equilibrium | CONTROLLED_PASS / `L7-A` | On the supplied-formal acyclic 512-body probe, all 240 cases were exact, depth-20 cases passed, contradictions and alternatives agreed with the independent oracle, and execution completed in 27.34 seconds. | Validates a zero-parameter fixed-law equilibrium through 20 bodies within this field. It does not validate cycles, minimap scale, raw language, literal counterfactual arithmetic chains, or unrestricted mathematics. | [Spec](limits/l07/specification.md) · [Report](limits/l07/report.md) |
+| **L8** — Compiled reasoning-policy equilibrium | DEVELOPMENT_ONLY / reduced probe | Sixteen opaque supplied-formal observations with zero trainable parameters reached 1.00 independent equilibrium agreement, 1.00 policy-twin divergence and zero incorrect accepted conclusions. | Provisional support that compiled policy can change a fixed-law equilibrium without mutating the field. It is not the complete L8 suite or general post-transformer evidence. | [Spec](limits/l08/specification.md) · [Report](limits/l08/report.md) |
 
 The L-series chain is therefore:
 
 ```text
-L1 → L2 → L3 → L4 → L5 → L6 → L7
+L1 → L2 → L3 → L4 → L5 → L6 → L7 → L8
 ```
 
 It records a scientific course correction: from measuring exact search depth, to
@@ -187,7 +189,7 @@ geometry from a deterministic field-satisfaction law.
 | Compiler | G2–G2.13 failures → G2.14 pass | Use narrow, calibrated, fail-closed compiler modules. Supplied-span conversation routing is validated; raw segmentation and unrestricted reasoning compilation are open. |
 | Retrieval | G3–G5, G13, I2 sequence | Use indexes, bounded frontiers, coverage certificates, and explicit cache validity. Do not call deterministic successor traversal “latent inference.” |
 | Exact reasoning | G6, I3/I3.1, L1, L3, L4 | Exact transitions and proof replay are authoritative. Grounded linear depth is strong; unseen branching selection remains weak. |
-| Equilibrium | MICRO failures, G7, L5/L6, L7 | Keep G7 soft reconciliation separate. For bounded acyclic user realities, L7's fixed unlearned satisfaction law is the validated equilibrium mechanism. |
+| Equilibrium | MICRO failures, G7, L5/L6, L7, L8 | Keep G7 soft reconciliation separate. For bounded acyclic user realities, L7's fixed unlearned satisfaction law is validated; L8 provisionally supports policy-conditioned equilibrium. |
 | Verification | G9, G10.1, formal/equilibrium evaluators | Independent replay or fixed-point verification authorizes claims; internal confidence never does. |
 | Decoder | G10 → G10.1 | Render only an authorized result bundle. A language model may phrase, but may not add facts. |
 | Persistence and scale | G11–G13 | Use session isolation, assistant non-evidence, atomic transactions, replay, deletion, and indexed storage. Production serving remains G15. |
@@ -213,7 +215,8 @@ geometry from a deterministic field-satisfaction law.
 
 ## 12. Current adopted architecture
 
-The evidence-backed architecture is hybrid:
+The evidence-backed architecture is post-transformer and internally hybrid
+between exact topology and continuous energy:
 
 ```text
 source/archive
@@ -226,6 +229,10 @@ source/archive
 → G10.1 constrained realization
 → G11–G13 lifecycle and persistence
 ```
+
+Transformers may temporarily assist compilation or realization, but they are
+replaceable boundary adapters—not persistent state, reasoning authority,
+factual authority, or verification authority.
 
 Validated components are never allowed to lend authority to an unvalidated
 neighbor. For example, G2.14 does not validate raw span extraction, L1 does not
@@ -301,5 +308,5 @@ metrics remain in the linked reports.
 | L5 | L | UNCLASSIFIED | pending authoritative execution |
 | L6 | L | DEVELOPMENT_ONLY | no locked result |
 | L7 | L | CONTROLLED_PASS | L7-A |
+| L8 | L | DEVELOPMENT_ONLY | reduced probe; provisional mechanism evidence |
 | LTM-A2 | AUDIT | CONTROLLED_PASS | bounded audit |
-

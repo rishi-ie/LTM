@@ -1,7 +1,7 @@
 # Repository Layout Convention
 
 The normative architecture is
-[LTM-ARCH-1.1](../architecture/architecture-lock-v1.md). Experiment ownership,
+[LTM-ARCH-1.2](../architecture/architecture-lock-v1.md). Experiment ownership,
 classification, and paths are indexed in the
 [experiment registry](../experiments/registry.json); physical directories are
 not reorganized to make the naming visually uniform.

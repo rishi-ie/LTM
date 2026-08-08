@@ -1,6 +1,6 @@
 # LTM v1 Runtime Pipeline
 
-> Normative contract: [LTM-ARCH-1.1](architecture-lock-v1.md).
+> Normative contract: [LTM-ARCH-1.2](architecture-lock-v1.md).
 
 ## Compilation
 
@@ -24,6 +24,11 @@ direction-sensitive decisions because G2.5 recorded valid-but-reversed false
 accepts. Downstream schema validation cannot detect every semantic reversal.
 
 ## Request execution
+
+The request-time computation is post-transformer: a compiled prompt anchor and
+the persistent field determine an ephemeral exact/continuous state. Optional
+transformers may assist only at validated compiler or renderer boundaries; they
+are not the reasoning substrate or verification authority.
 
 1. Compile the selected signed topology profile into frozen numeric opcodes.
 2. Encode the prompt into goal, entities, predicates, scope, time, polarity,

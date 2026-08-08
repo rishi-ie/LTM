@@ -1,0 +1,30 @@
+{
+  "runtime_revision": "parasite-runtime/0.1",
+  "compiler_revision": "parasite-compiler/0.1",
+  "field_revision": "parasite-field/0.1",
+  "optimizer_revision": "parasite-optimizer/0.1",
+  "decoder_revision": "parasite-decoder/0.1",
+  "integrity_revision": "parasite-integrity/0.1",
+  "architecture_revision": "LTM-ARCH-1.2",
+  "conversation": {
+    "config": "configs/topology-g2-14.json",
+    "calibration": "workspaces/topology-g2-14-r3/calibration.json"
+  },
+  "equilibrium": {
+    "maximum_sweeps": 256,
+    "residual_tolerance": 1e-8,
+    "objective_tolerance": 1e-10,
+    "candidate_threshold": 0.5,
+    "alternative_margin": 0.05,
+    "maximum_factors": 512
+  },
+  "exact": {
+    "maximum_regions": 4,
+    "maximum_rounds": 16
+  },
+  "decoder": {
+    "use_flan_candidate_scorer": false,
+    "model_path": ".models/flan-t5-small"
+  },
+  "offline": true
+}

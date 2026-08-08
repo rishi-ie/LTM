@@ -1392,6 +1392,29 @@ and reality-move checks. This is controlled evidence for a fixed acyclic factor
 law only; language, cyclic global optimization, minimap scaling and
 unrestricted mathematics remain open.
 
+## L8 — Compiled reasoning-policy equilibrium
+
+L8 is registered as development-only, reduced-probe evidence rather than a
+locked architectural pass. Its isolated Parasite-L8 `r6` run used 16 opaque
+supplied-formal observations and zero trainable parameters. The independent
+evaluator matched every result; policy twins changed the selected equilibrium
+on the same field and prompt; no-optimization and one-sweep controls failed to
+produce the deep conclusion; storage order was invariant; and no incorrect
+accepted conclusion occurred. This is provisional evidence that a compiled
+reasoning policy can causally affect fixed-law equilibrium without mutating the
+field. It does not validate the complete L8 suite, raw language, cyclic or
+scaled fields, or general post-transformer reasoning.
+
+## LTM-ARCH-1.2 — Post-transformer architecture lock
+
+The normative [architecture lock](../architecture/architecture-lock-v1.md) now
+uses the `2026-08-09` evidence cutoff. It positions LTM as an independent
+post-transformer energy-based latent architecture: persistent field and
+registered satisfaction/exact laws are the primary computation; transformer
+components are optional, replaceable compiler or renderer adapters and cannot
+be factual, reasoning, or verification authority. L7 remains the validated
+bounded equilibrium result; L8 remains provisional mechanism evidence.
+
 ## LTM-ARCH-1.1 — Architecture lock
 
 The normative [architecture lock](../architecture/architecture-lock-v1.md)

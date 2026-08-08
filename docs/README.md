@@ -7,7 +7,7 @@ authority.
 ## Architecture
 
 - [Architecture index](architecture/README.md)
-- [Normative LTM-ARCH-1.1 lock](architecture/architecture-lock-v1.md)
+- [Normative LTM-ARCH-1.2 lock](architecture/architecture-lock-v1.md)
 - [Mother Architecture thesis](architecture/mother-architecture.md)
 - [Compiler, field, optimization, and decoder internals](architecture/component-internals.md)
 - [Canonical LTM architecture](architecture/overview.md)
@@ -16,6 +16,7 @@ authority.
 - [Evidence boundary](architecture/evidence-boundary.md)
 - [Scaling laws and runtime metrics](architecture/scaling-laws.md)
 - [LTM-R1 compatibility contract](architecture/fieldir-v1.md)
+- [Parasite v0.1 persistent modular runtime](../Parasite/README.md)
 
 ## Audits
 
@@ -46,6 +47,7 @@ authority.
 - L5 compiled multi-hypothesis equilibrium: [specification](experiments/limits/l05/specification.md) · [report](experiments/limits/l05/report.md) — pending authoritative execution; unclassified
 - L6 causal learned-equilibrium attempt: [specification](experiments/limits/l06/specification.md) · [report](experiments/limits/l06/report.md) — development-only historical attempt
 - L7 fixed-law mathematical equilibrium: [specification](experiments/limits/l07/specification.md) · [report](experiments/limits/l07/report.md) — `L7-A` controlled acyclic depth-20 pass
+- L8 compiled reasoning-policy equilibrium: [specification](experiments/limits/l08/specification.md) · [report](experiments/limits/l08/report.md) — reduced isolated probe `L8-A`; full suite remains open
 - [Machine-readable experiment registry](experiments/registry.json)
 - [Human series index](experiments/README.md)
 

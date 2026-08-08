@@ -31,7 +31,7 @@ def test_experiment_registry_is_complete_and_unique():
 
 def test_experiment_summary_and_chain_cover_registry():
     result = audit._registry_audit(ROOT)
-    assert result["count"] == 51
+    assert result["count"] == 52
     assert result["summary_missing_ids"] == []
     assert result["chain_inconsistencies"] == []
 
@@ -44,6 +44,20 @@ def test_component_internals_has_all_required_components():
 
 def test_architecture_manifest_matches_normative_inputs():
     assert audit._lock_mismatches(ROOT) == []
+
+
+def test_post_transformer_boundary_is_explicit_and_l8_is_provisional():
+    lock = (ROOT / "docs/architecture/architecture-lock-v1.md").read_text()
+    config = json.loads((ROOT / "configs/ltm-architecture-v1.json").read_text())
+    registry = json.loads((ROOT / "docs/experiments/registry.json").read_text())
+    assert "LTM-ARCH-1.2" in lock
+    assert "post-transformer" in lock
+    assert config["architecture_class"] == "post_transformer_energy_based_latent"
+    assert config["transformer_dependency_policy"]["verification"] == "transformer_independent"
+    assert not config["transformer_dependency_policy"]["hidden_state_attention_logits_are_reasoning_authority"]
+    l8 = next(row for row in registry["experiments"] if row["experiment_id"] == "L8")
+    assert l8["status"] == "DEVELOPMENT_ONLY"
+    assert l8["authority_level"] == "development"
 
 
 def test_architecture_manifest_detects_changed_input(tmp_path: Path):

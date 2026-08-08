@@ -1,14 +1,15 @@
 # Latent Topology Models
 
 This repository contains the research evidence and first product foundation for
-**Latent Topology Models (LTM)**: a persistent universal Mumbrane topology with
-profile-configured purpose, exact typed reasoning, bounded field execution,
-independent verification, and authorized surface realization.
+**Latent Topology Models (LTM)**: an independent post-transformer energy-based
+latent architecture with a persistent universal Mumbrane topology,
+profile-configured satisfaction laws, exact typed reasoning, independent
+verification, and authorized surface realization.
 
 ## Start here
 
 1. [Documentation index](docs/README.md)
-2. [Normative LTM-ARCH-1.1 lock](docs/architecture/architecture-lock-v1.md)
+2. [Normative LTM-ARCH-1.2 lock](docs/architecture/architecture-lock-v1.md)
 3. [Mother Architecture thesis](docs/architecture/mother-architecture.md)
 4. [Component internals](docs/architecture/component-internals.md)
 5. [Experiment-series evidence compendium](docs/experiments/series-summary.md)
@@ -16,6 +17,8 @@ independent verification, and authorized surface realization.
 7. [Semantic topology representation](docs/architecture/semantic-topology.md)
 8. [LTM v1 build plan](docs/roadmap/ltm-v1-build-plan.md)
 9. [Authoritative results ledger](docs/roadmap/results-ledger.md)
+10. [Parasite v0.1 persistent modular runtime](Parasite/README.md)
+11. [Parasite-L8 policy-equilibrium experiment](Parasite-L8/README.md)
 
 Current status: G1, G3–G9, G10.1, and G11–G13 pass on their registered
 controlled boundaries. G2 is engineering-complete through a modular boundary:
@@ -58,6 +61,8 @@ while Mumbrane IR is promoted from its isolated validated package.
 - `src/topology_*` and `src/micro_ltm*` — independent historical experiments;
 - `tests/` — tests matching each source package;
 - `configs/` — one frozen configuration per experiment;
+- `Parasite/` — the persistent four-component prototype runtime and its tests;
+- `Parasite-L8/` — isolated compiled-policy equilibrium experiment (state ignored);
 - `workspaces/` — ignored local suites, manifests, checkpoints, and raw runs.
 
 See the [repository layout convention](docs/conventions/repository-layout.md)

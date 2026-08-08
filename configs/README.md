@@ -8,7 +8,7 @@ legacy spellings such as `topology_g21`, `topology_g210`, and `topology_g101`.
 FieldIR v2 schema, registered vector spaces, packing widths, and authority
 boundary. It is not a replacement for any frozen experiment configuration.
 
-`ltm-architecture-v1.json` is the machine-readable LTM-ARCH-1.1 decision
+`ltm-architecture-v1.json` is the machine-readable LTM-ARCH-1.2 decision
 boundary. Its tracked hash manifest is stored beside the normative architecture
 document. It does not replace any experiment configuration.
 

@@ -1,6 +1,6 @@
 # LTM v1 Mumbrane Semantic Topology
 
-> Normative contract: [LTM-ARCH-1.1](architecture-lock-v1.md).
+> Normative contract: [LTM-ARCH-1.2](architecture-lock-v1.md).
 
 This is the normative representation architecture for the first LTM build.
 LTM-R2 authorizes **Mumbrane IR v1** as the canonical future compiler target.
@@ -12,6 +12,8 @@ persistence bridge until the isolated Mumbrane codec is promoted into
 
 The active latent dynamic field is a typed numeric program, not text, one
 averaged embedding, or a collection of profile-specific record formats.
+It is transformer-independent: transformer hidden state, attention state,
+logits, and pretrained weights are not semantic authority in this substrate.
 Every compiled semantic object is represented by the same unit structure:
 
 ```text

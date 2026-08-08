@@ -1,6 +1,6 @@
 # LTM v1 Evidence Boundary
 
-> Normative contract: [LTM-ARCH-1.1](architecture-lock-v1.md).
+> Normative contract: [LTM-ARCH-1.2](architecture-lock-v1.md).
 
 The results ledger is the only status authority. Experiment reports remain the
 source of measured details. This document states what the architecture may
@@ -38,6 +38,10 @@ claim from those results.
   accepted conclusions. This is bounded equilibrium evidence, not general
   mathematical reasoning.
 
+The architecture is therefore supported as a controlled post-transformer core:
+its persistent field, exact execution, fixed-law optimization and verification
+do not require transformer state as reasoning authority.
+
 ## Provisional or unproven
 
 - G2.5 is the adopted compiler baseline, but its locked exact recovery was
@@ -69,6 +73,11 @@ claim from those results.
   proofs remained exact, but answerable success was 33.3%, proposal recall@16
   was 27.4%, and scorer/goal/value controls failed. Learned branching proof
   discovery therefore remains unsupported.
+- L8 is a development-only 16-observation reduced probe. It recorded 1.00
+  independent equilibrium agreement and policy-twin divergence with zero
+  trainable parameters and zero incorrect accepted conclusions. It supports
+  the policy-conditioned mechanism provisionally, not general post-transformer
+  reasoning or the full L8 suite.
 
 ## Safety policy
 

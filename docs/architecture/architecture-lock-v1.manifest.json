@@ -1,12 +1,12 @@
 {
-  "architecture_id": "LTM-ARCH-1.1",
-  "evidence_cutoff": "2026-08-08",
+  "architecture_id": "LTM-ARCH-1.2",
+  "evidence_cutoff": "2026-08-09",
   "files": {
-    "configs/ltm-architecture-v1.json": "d521e9aa2784159ff21e5db9d29d8ac99ab1882e24e736f83a2d25f6d3cb8eeb",
-    "docs/architecture/architecture-lock-v1.md": "25fe42c8d56b65721d29f2d2a1254ada37d55a2de0fdce77b11a399be38f90c1",
-    "docs/architecture/component-internals.md": "36952146bd8cd41ba0f68346e987eaf75787f75154779720aa9816b14542c709",
-    "docs/architecture/mother-architecture.md": "b77fc424183b5689d4363225573328bd2b405cc1a82860e1bb39be8fb205d85c",
-    "docs/experiments/registry.json": "25f4710b8e6c86ecc5cc0da1f52b552ff4dd14adf541d3171013ea5de1bf87d5",
+    "configs/ltm-architecture-v1.json": "b99bae82c81f3bf69385caf98eb4924c94ce36a17558b38bbd6d926d038ae888",
+    "docs/architecture/architecture-lock-v1.md": "e071742011fd3a777e181a3eecd3cd35903bc948eebec20179e5fd4f0fce68e7",
+    "docs/architecture/component-internals.md": "66b0b986cafafa447fcc5927cf8fd36df806217e56d8825428a033a9e7d01919",
+    "docs/architecture/mother-architecture.md": "2a1a75818d8e896933b7b921eff425e26adc6fec945271d7943f764b861bd125",
+    "docs/experiments/registry.json": "8d7008249fca208051461e67d47bfb191cfd6e5cec636038f759e597321e938e",
     "src/ltm/schema.py": "567fc1157f9e19ed87d85139fb26df30aa5b7ef59f220899efccb16d308883a5",
     "src/ltm_r2/schemas.py": "a0c64123564cb9f85b6bca342374d1ef5bbacb8cd6eea5b3bf583b4310990a28",
     "src/topology_g1/registry.py": "704271fc70fb205cf938012ff154d72b5deb9067f5d0d8f407489a972fce765c"

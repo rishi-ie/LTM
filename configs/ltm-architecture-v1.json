@@ -1,7 +1,25 @@
 {
-  "architecture_id": "LTM-ARCH-1.1",
-  "evidence_cutoff": "2026-08-08",
+  "architecture_id": "LTM-ARCH-1.2",
+  "evidence_cutoff": "2026-08-09",
   "normative_document": "docs/architecture/architecture-lock-v1.md",
+  "architecture_class": "post_transformer_energy_based_latent",
+  "primary_computation": "topology_constrained_request_time_equilibrium",
+  "transformer_dependency_policy": {
+    "compiler": "transitional_replaceable_non_authoritative_adapter",
+    "latent_dynamic_field": "transformer_independent",
+    "latent_optimizer": "transformer_independent",
+    "exact_execution": "transformer_independent",
+    "verification": "transformer_independent",
+    "decoder": "optional_untrusted_renderer_only",
+    "persistent_weights_are_user_reality": false,
+    "hidden_state_attention_logits_are_reasoning_authority": false
+  },
+  "core_conformance": {
+    "requires_transformer_for_reasoning": false,
+    "requires_transformer_for_verification": false,
+    "adapter_outputs_must_be_validated": true,
+    "transformer_adapters_may_create_factual_authority": false
+  },
   "semantic_substrate": "mumbrane-ir/1",
   "implemented_execution_bridge": "ltm-field/2",
   "exact_topology_authority": "topology_g1.registry.REGISTRY",
@@ -48,6 +66,17 @@
     "accepted_precision": 1.0,
     "incorrect_accepted_conclusions": 0,
     "claim": "bounded supplied-formal acyclic fixed-law equilibrium"
+  },
+  "provisional_policy_equilibrium_evidence": {
+    "experiment": "L8",
+    "status": "DEVELOPMENT_ONLY",
+    "workspace": "Parasite-L8/var/l8-r6",
+    "observations": 16,
+    "trainable_parameters": 0,
+    "independent_equilibrium_agreement": 1.0,
+    "policy_twin_divergence": 1.0,
+    "incorrect_accepted_conclusions": 0,
+    "claim": "reduced structured-policy equilibrium probe; not a full L8 pass"
   },
   "open_product_gates": [
     "canonical G2.14 Mumbrane writer",

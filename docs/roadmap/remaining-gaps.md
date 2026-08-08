@@ -4,7 +4,7 @@ The architecture foundation is now defined. The remaining work is product
 integration and reliability, not another unbounded sequence of G2 kernel
 experiments.
 
-The normative boundary is [LTM-ARCH-1.1](../architecture/architecture-lock-v1.md).
+The normative boundary is [LTM-ARCH-1.2](../architecture/architecture-lock-v1.md).
 
 ## Current truth
 
@@ -18,6 +18,9 @@ The normative boundary is [LTM-ARCH-1.1](../architecture/architecture-lock-v1.md
 - G15 has not run.
 - L7 passes the bounded zero-parameter acyclic equilibrium boundary through 20
   body applications; cyclic, scaled and 64-hop equilibrium remain open.
+- L8 provides development-only reduced-probe evidence that compiled reasoning
+  policy can change an equilibrium without mutating the field; the full suite
+  and informal-policy compilation remain open.
 
 ## Build gaps
 

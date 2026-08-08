@@ -1,6 +1,6 @@
-# LTM-ARCH-1.1 — Normative Architecture Lock
+# LTM-ARCH-1.2 — Normative Architecture Lock
 
-**Evidence cutoff:** 2026-08-08  
+**Evidence cutoff:** 2026-08-09
 **Status:** normative for the first controlled LTM build  
 **Machine configuration:** [`configs/ltm-architecture-v1.json`](../../configs/ltm-architecture-v1.json)  
 **Evidence registry:** [`docs/experiments/registry.json`](../experiments/registry.json)
@@ -16,10 +16,18 @@ about a measurement, the experiment report wins and this lock must be revised.
 
 ## 1. Mission and claim boundary
 
-An LTM is a persistent, user-configurable semantic reality. Source information
-is compiled into a typed numeric field once, then reused through indexed,
-bounded request execution. Exact meaning, continuous geometry, raw source and
-ephemeral request state are separate objects with separate hashes and authority.
+An LTM is an independent post-transformer, energy-based latent architecture for
+persistent user-configurable semantic realities. Source information is compiled
+into a typed numeric field once; an immutable request anchor then induces an
+ephemeral latent activation state that is resolved by registered satisfaction
+or exact execution laws. Exact meaning, continuous activation, raw source and
+request state are separate objects with separate hashes and authority.
+
+LTM is not an LLM complement, wrapper, RAG layer, or context-management
+extension. A transformer may temporarily assist compilation or realization, but
+it is a replaceable, non-authoritative boundary adapter. Transformer hidden
+state, attention, logits, and pretrained weights MUST NOT be the persistent
+reality, reasoning authority, factual authority, or verification authority.
 
 The first controlled LTM MUST:
 
@@ -66,6 +74,21 @@ flowchart LR
 Compilation may be expensive because it is amortized. Ordinary execution is
 bounded by addresses, opened regions, proof states and optimization steps. The
 architecture does not promise constant work independent of problem difficulty.
+
+The primary post-transformer computational cycle is:
+
+```text
+compiled persistent reality
+→ immutable prompt anchor
+→ ephemeral latent activation state
+→ topology-constrained energy/satisfaction optimization
+→ verified equilibrium or exact conclusion
+→ authorized realization
+```
+
+Exact execution remains a first-class lane for registered hard transitions.
+The architecture is internally hybrid between exact structure and continuous
+energy, not a hybrid of LTM reasoning plus transformer reasoning.
 
 ## 3. The five planes
 
@@ -172,6 +195,20 @@ equilibrium profile MUST declare its conjunction, source normalization,
 polarity, tension, update, convergence and abstention laws numerically. It
 MUST NOT contain a learned model or arbitrary callback.
 
+### 6.1 Transformer dependency boundary
+
+| Component | Transformer policy | Authority |
+| --- | --- | --- |
+| Compiler | transitional, replaceable adapter | must emit validated candidate semantics only |
+| Latent dynamic field | transformer-independent | persistent semantic substrate |
+| Latent optimizer | transformer-independent | registered request-time satisfaction only |
+| Exact execution | transformer-independent | legal hard transitions |
+| Verifier | transformer-independent | independent authorization boundary |
+| Decoder | optional untrusted renderer | may only realize an authorized bundle |
+
+No conforming LTM may require transformer hidden state, attention state, logits
+or pretrained weights to establish a factual or reasoning conclusion.
+
 Profile changes are classified before execution:
 
 1. **Tier 1 — dynamics only:** change weights, thresholds, priority or region
@@ -263,6 +300,17 @@ negative channels coexist, and losing opposition remains visible as tension.
 This lane is controlled evidence, not the default product reasoner. It is
 authorized only for bounded acyclic fields whose equilibrium and mathematical
 paths can be reproduced by an independent solver.
+
+### 8.4.1 Provisional policy-conditioned equilibrium evidence
+
+L8 is **development-only** evidence, not a completed L-series pass. Its
+reduced 16-observation supplied-formal probe used zero trainable parameters
+and reported independent-equilibrium agreement and policy-twin divergence of
+`1.00`, with zero incorrect accepted conclusions. It supports the narrower
+mechanism claim that a compiled, validated policy can alter a fixed-law
+equilibrium without changing the persistent field. It does not validate the
+complete planned L8 suite, general reasoning instructions, scaled fields,
+cycles, or general post-transformer capability.
 
 ### 8.5 Ordinary mathematical language
 
@@ -396,7 +444,7 @@ size.
 
 ## 13. Safety and verification invariants
 
-An implementation conforming to LTM-ARCH-1.1:
+An implementation conforming to LTM-ARCH-1.2:
 
 - MUST commit semantic transactions atomically;
 - MUST preserve relation direction, named roles, arity, scope and provenance;
@@ -415,6 +463,11 @@ An implementation conforming to LTM-ARCH-1.1:
 - MUST NOT allow cross-reality or cross-session proof steps;
 - MUST NOT silently use a neutral value for missing required semantics;
 - MUST NOT perform partial factual commits.
+- MUST NOT make transformer hidden state, attention state, logits or pretrained
+  weights a factual, reasoning or verification authority;
+- MUST treat every transformer-assisted compiler or renderer as a replaceable
+  adapter whose output is validated before it affects a semantic transaction or
+  response.
 - MUST keep L7 prompt clamps immutable and initialize all non-prompt
   activations to zero;
 - MUST NOT use exact input-to-outcome propagation in the fixed-equilibrium
@@ -503,3 +556,8 @@ the architecture appear stronger.
 - `LTM-ARCH-1.1` (2026-08-08): adds L7 fixed-law acyclic equilibrium as a
   controlled mathematical-reality lane while retaining G6 exact execution and
   G9/independent verification as authorization boundaries.
+- `LTM-ARCH-1.2` (2026-08-09): positions LTM as an independent
+  post-transformer energy-based latent architecture. It preserves the exact,
+  continuous and verification mechanisms, records L8 only as provisional
+  reduced-probe evidence, and does not claim general post-transformer
+  capability.

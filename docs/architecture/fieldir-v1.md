@@ -1,6 +1,6 @@
 # FieldIR v1 Compatibility Contract
 
-> Normative current architecture: [LTM-ARCH-1.1](architecture-lock-v1.md).
+> Normative current architecture: [LTM-ARCH-1.2](architecture-lock-v1.md).
 
 FieldIR v1 is the source-facing predecessor to the numeric `ltm-field/2`
 program. The canonical product architecture is documented in

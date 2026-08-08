@@ -1,9 +1,14 @@
 # LTM Scaling Laws and Runtime Metrics
 
 > This is non-normative background. The bounded current contract is
-> [LTM-ARCH-1.1](architecture-lock-v1.md).
+> [LTM-ARCH-1.2](architecture-lock-v1.md).
 
 ## 1. Purpose and claim boundary
+
+LTM is positioned as a post-transformer energy-based latent architecture.
+Scaling measurements therefore separate persistent field work, request-time
+optimization, exact execution and verification from optional transformer
+adapter cost at compilation or realization boundaries.
 
 This document defines how a Latent Topology Model (LTM) reports size, storage,
 compute, quality, and scaling behavior.

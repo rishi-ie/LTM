@@ -1,7 +1,7 @@
 # LTM Mother Architecture
 
-**Canonical explanatory companion to:** [LTM-ARCH-1.1](architecture-lock-v1.md)  
-**Evidence cutoff:** 2026-08-08  
+**Canonical explanatory companion to:** [LTM-ARCH-1.2](architecture-lock-v1.md)
+**Evidence cutoff:** 2026-08-09
 **Normative authority:** the architecture lock, registered configurations, and
 measured experiment reports  
 **Audience:** implementers, researchers, operators, and product decision-makers
@@ -29,21 +29,27 @@ validated for supplied formal input and planned for raw language.
 
 ## 1. Abstract
 
-A Latent Topology Model is a persistent, user-configurable semantic reality.
-Instead of placing the complete history into a language model context on every
-request, it compiles source information once into exact semantic units,
-relations, contexts, provenance, identities, continuous coordinates, and
-indexes. A request activates a bounded execution state over that persistent
-field. Exact operations or a registered fixed satisfaction law determine a
+A Latent Topology Model is an independent post-transformer, energy-based latent
+architecture for persistent, user-configurable semantic realities. It compiles
+source information once into exact semantic units, relations, contexts,
+provenance, identities, continuous coordinates, and indexes. A request fixes an
+immutable prompt anchor, then activates an ephemeral execution state over that
+persistent field. Exact operations or a registered satisfaction law determine a
 candidate result. An independent verifier authorizes the candidate before a
 decoder realizes it in language.
 
-The architecture is deliberately hybrid. It does not ask a vector to become a
-fact, a decoder to become a verifier, or a language compiler to silently repair
-uncertain meaning. Exact topology owns identity, direction, roles, polarity,
-scope, time, provenance, and hard legality. Continuous state owns retrieval,
-ranking, soft influence, and—inside the bounded L7 lane—activation equilibrium.
-Verification remains separate from both.
+The architecture is internally hybrid between exact topology and continuous
+energy, not a hybrid of LTM reasoning plus transformer reasoning. It does not
+ask a vector to become a fact, a decoder to become a verifier, or a language
+compiler to silently repair uncertain meaning. Exact topology owns identity,
+direction, roles, polarity, scope, time, provenance, and hard legality.
+Continuous state owns registered retrieval, influence, and—inside the bounded
+L7 lane—activation equilibrium. Verification remains separate from both.
+
+Transformers, when present, are transitional boundary adapters: they may assist
+semantic compilation or paraphrase an already authorized bundle. Their hidden
+state, attention, logits, and pretrained weights are never the persistent
+reality, a reasoning authority, a factual authority, or a verifier.
 
 The present architecture has two reasoning lanes:
 
@@ -56,7 +62,7 @@ The present architecture has two reasoning lanes:
 The compiler boundary is less mature. Supplied-span conversational routing is
 validated, while unrestricted semantic extraction and general reasoning
 compilation remain open. Consequently, the architecture is credible as a
-controlled semantic runtime, not yet as a general replacement for a frontier
+controlled post-transformer semantic runtime, not yet as a demonstrated general replacement for a frontier
 language model.
 
 ## 2. Thesis
@@ -75,10 +81,31 @@ The thesis decomposes into falsifiable claims:
 | Exact typed topology can execute and replay registered relations | **Validated** | G1 and G6 |
 | A supplied-span conversational event can be routed with zero incorrect accepted mutations | **Validated** | [G2.14](../experiments/gaps/g02-14/report.md) |
 | A fixed unlearned law can resolve an acyclic mathematical reality through 20 bodies | **Validated** | [L7](../experiments/limits/l07/report.md) |
+| A compiled reasoning policy can alter a fixed-law equilibrium without changing the field | **Provisional** | [L8 reduced probe](../experiments/limits/l08/report.md), 16 observations only |
 | Indexed exact search can replay grounded paths through 64 steps | **Validated** | [L1](../experiments/limits/l01/report.md), not equilibrium |
 | Raw language can be compiled reliably into universal semantics | **Planned** | no passing unrestricted compiler |
 | Fixed equilibrium scales to cyclic or 64-hop fields | **Planned** | not established by L7 or L1 |
 | The system is production-isolated and operationally robust | **Planned** | G15 not run |
+
+### 2.1 Post-transformer architectural position
+
+LTM's primary computational cycle is not transformer-context processing:
+
+```text
+compiled persistent reality
+→ immutable prompt anchor
+→ ephemeral latent activation state
+→ topology-constrained energy/satisfaction optimization
+→ verified equilibrium or exact conclusion
+→ authorized realization
+```
+
+The Mumbrane field supplies variables, factors, context, provenance and legal
+constraints. A signed topology profile supplies registered objectives and
+update laws. Optimization supplies only request-time latent state; exact
+execution supplies registered hard transitions; verification, not low energy,
+authorizes factual output. This position does not claim that current LTM
+implementations are transformer-free at every input/output boundary.
 
 ## 3. Problem definition
 
@@ -927,15 +954,16 @@ proves the LTM architecture.
 
 ## 31. Final architectural statement
 
-LTM-ARCH-1.1 is a verified semantic-runtime architecture with an incomplete
-language boundary. Its strongest contribution is not a claim that one latent
-vector can replace reasoning. It is the separation of persistent semantic
-reality, exact topology, continuous influence, ephemeral request computation,
-independent verification, and constrained realization. L7 adds credible
-evidence that a fixed unlearned satisfaction law can determine a bounded
-acyclic reality. The architecture becomes a general system only if future work
-preserves these authority boundaries while solving compilation, retrieval,
-cycles, scaling, and production isolation.
+LTM-ARCH-1.2 is a post-transformer energy-based latent architecture with an
+incomplete language boundary. Its strongest contribution is not a claim that
+one latent vector replaces reasoning. It is the separation of persistent
+semantic reality, exact topology, registered continuous influence, ephemeral
+request computation, independent verification, and constrained realization.
+L7 validates bounded fixed-law satisfaction; L8 provisionally shows that a
+compiled reasoning policy can change that equilibrium without mutating the
+field. The architecture becomes a general system only if future work preserves
+these authority boundaries while solving compilation, retrieval, cycles,
+scaling, and production isolation.
 
 ## 32. Formal system model
 
@@ -1940,6 +1968,12 @@ It is: stable compilation can be amortized, and request cost can scale with
 opened semantic work rather than raw archived text. Coverage, frontier
 reopening, proof branching, and decoder cost remain explicit variables.
 
+This comparison is architectural, not a claim that LTM is an LLM accessory.
+LTM's durable substrate and request-time satisfaction/exact execution are its
+primary computation. An optional transformer adapter has separately metered
+compilation or realization cost and cannot substitute for field, optimizer, or
+verifier work.
+
 ### 38.8 Capacity planning
 
 Operators should measure per tenant and per profile:
@@ -2132,6 +2166,12 @@ candidate is authorized only after an independent solver reproduces the fixed
 point. The architecture therefore takes from energy-based work the idea of
 configuration-level satisfaction while rejecting the claim that low learned
 energy alone constitutes truth.
+
+In ARCH-1.2 this is the post-transformer core: registered topology supplies the
+variables and legal constraints, the profile supplies the law, request-time
+optimization supplies ephemeral activation, and verification authorizes the
+result. Transformer components may remain at input/output boundaries during
+migration, but do not supply the core computational state or authority.
 
 ### 40.4 Associative memory and predictive coding
 

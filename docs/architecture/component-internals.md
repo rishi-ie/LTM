@@ -1,13 +1,24 @@
 # LTM Component Internals
 
 **Companion to:** [LTM Mother Architecture](mother-architecture.md)  
-**Normative authority:** [LTM-ARCH-1.1](architecture-lock-v1.md)  
-**Evidence cutoff:** 2026-08-08
+**Normative authority:** [LTM-ARCH-1.2](architecture-lock-v1.md)
+**Evidence cutoff:** 2026-08-09
 
 This document explains the four principal runtime components: the compiler,
 latent dynamic field, latent optimization, and decoder. It uses the maturity
 labels **Validated**, **Provisional**, and **Planned** exactly as defined in the
 Mother Architecture.
+
+LTM-ARCH-1.2 defines these four components as a post-transformer core. A
+transformer may temporarily sit at either language boundary, but no transformer
+state is the persistent reality, the reasoning authority, or the verifier.
+
+| Component | Transformer dependency policy | Authority rule |
+| --- | --- | --- |
+| Compiler | Transitional, replaceable adapter permitted | Validated semantic transaction only |
+| Latent dynamic field | Transformer-independent | Exact Mumbrane/FieldIR semantics |
+| Latent optimization | Transformer-independent | Registered topology profile and satisfaction law |
+| Decoder | Optional, untrusted renderer only | Authorized bundle and post-render validation |
 
 ```mermaid
 flowchart LR
@@ -31,6 +42,10 @@ captures what the source occurrence means, who supplied it, its context, and
 which exact operations are proposed.
 
 The compiler boundary is replaceable; the Mumbrane/G1 contract is not.
+
+Transformer-assisted compilation is a transitional migration adapter. It may
+propose semantics, but hidden state, attention, logits, and pretrained weights
+have no semantic authority: only validated compiler output may enter the field.
 
 ### 1.2 Inputs
 
@@ -539,6 +554,11 @@ Latent optimization reconciles continuous request state under a registered law.
 It is not permitted to invent exact topology. Two distinct mechanisms exist and
 must not be conflated.
 
+This is the post-transformer core: the persistent field and registered law,
+not transformer hidden state, determine the request-time latent state. Exact
+execution constrains hard transitions and independent verification authorizes
+the result.
+
 ### 3.2 Mechanism A: G7 soft reconciliation
 
 **Validated.** G7 operates after exact G6 reasoning. The hard feasible set is
@@ -824,7 +844,8 @@ is unavailable or fails validation.
 ### 4.6 Optional language model
 
 **Planned/replaceable.** A language model may paraphrase an authorized bundle.
-It is treated as an untrusted renderer:
+It is a transitional boundary adapter, never a reasoning component, and is
+treated as an untrusted renderer:
 
 ```text
 authorized bundle

@@ -149,8 +149,8 @@ def _registry_audit(root: Path) -> dict[str, object]:
 
 def architecture_manifest(root: Path) -> dict[str, object]:
     return {
-        "architecture_id": "LTM-ARCH-1.1",
-        "evidence_cutoff": "2026-08-08",
+        "architecture_id": "LTM-ARCH-1.2",
+        "evidence_cutoff": "2026-08-09",
         "files": {str(path): _sha256(root / path) for path in _LOCK_FILES},
     }
 
@@ -390,7 +390,7 @@ def write_audit(root: Path, workspace: Path) -> dict[str, object]:
         if not plan_path.exists() and (root / "workspaces/_repository-catalog/archive-plan.json").exists():
             plan_path.write_text((root / "workspaces/_repository-catalog/archive-plan.json").read_text())
     readiness = {
-        "architecture_id": "LTM-ARCH-1.1",
+        "architecture_id": "LTM-ARCH-1.2",
         "ready": not any((result["gap_contract_missing"], result["broken_markdown_links"], result["tracked_generated"], result["tracked_large_files"], result["architecture_lock_mismatches"], result["archive"]["failures"], result["experiment_registry"]["duplicate_ids"], result["experiment_registry"]["invalid_statuses"], result["experiment_registry"]["missing_fields"], result["experiment_registry"]["missing_paths"], result["experiment_registry"]["unledgered"], result["experiment_registry"]["summary_missing_ids"], result["experiment_registry"]["chain_inconsistencies"], result["experiment_registry"]["missing_component_headings"], result["experiment_registry"]["missing_maturity_labels"], result["canonical_environment"].get("pip_check") != 0)),
         "archive": result["archive"],
         "commit_created": False,

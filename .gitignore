@@ -13,6 +13,8 @@ artifacts/
 __pycache__/
 .pytest_cache/
 .ruff_cache/
+Parasite/var/
+Parasite-L8/var/
 
 # Operating-system metadata.
 .DS_Store

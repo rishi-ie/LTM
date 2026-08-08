@@ -12,7 +12,7 @@ git diff --check
 ```
 
 Then inspect `workspaces/_repository-catalog/push-readiness.json` and the full
-`git diff`. The audit must show matching `LTM-ARCH-1.1` hashes, a valid
+`git diff`. The audit must show matching `LTM-ARCH-1.2` hashes, a valid
 experiment registry, a clean Python 3.11 environment, no tracked generated
 artifacts, and no broken documentation links.
 

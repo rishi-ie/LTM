@@ -1,6 +1,6 @@
 # Architecture documents
 
-- [Normative LTM-ARCH-1.1 lock](architecture-lock-v1.md)
+- [Normative LTM-ARCH-1.2 lock](architecture-lock-v1.md)
 - [Mother Architecture thesis](mother-architecture.md) — canonical comprehensive explanatory companion
 - [Component internals](component-internals.md) — compiler, field, optimization, and decoder
 - [Canonical LTM v1 architecture](overview.md)

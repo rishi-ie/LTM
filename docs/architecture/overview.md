@@ -1,11 +1,11 @@
 # LTM v1 — Canonical Architecture
 
-> Normative contract: [LTM-ARCH-1.1](architecture-lock-v1.md). This overview is
+> Normative contract: [LTM-ARCH-1.2](architecture-lock-v1.md). This overview is
 > a concise explanatory view.
 
 ## Status
 
-This is the current product architecture. Historical Infinity-2 prose remains
+This is the current post-transformer product architecture. Historical Infinity-2 prose remains
 recoverable through repository history; experiment reports remain immutable
 evidence. The architecture is intentionally narrower than the long-term
 vision: it is the first buildable LTM with exact topology, numeric field state,
@@ -22,9 +22,13 @@ remains the implemented packed execution bridge during promotion.
 ## One-sentence definition
 
 An LTM compiles source into universal Mumbrane units, applies a versioned
-topology profile, activates a bounded request frontier, executes exact typed
-relations and certified field influence, independently verifies the result,
-and only then realizes an authorized response.
+topology profile, resolves an ephemeral latent state through exact execution or
+registered field satisfaction, independently verifies the result, and only
+then realizes an authorized response.
+
+The field and optimizer are the primary computation. Transformers may be used
+only as replaceable validated compiler or renderer adapters; they are not LTM's
+persistent state, reasoning authority, factual authority, or verifier.
 
 ## The complete flow
 
@@ -132,6 +136,7 @@ procedurally activate outcomes.
 | Relation-free latent inference | I2.3 summary-dependent development prototype | promising controlled traversal; not frozen or certified |
 | Mathematical realities | I3.1 exact search plus L1 capacity audit | 64-hop grounded capacity observed; not general mathematics |
 | Fixed-law equilibrium | L7 `r3` | controlled 512-body acyclic pass through 20 applications; scaling/cycles open |
+| Policy-conditioned equilibrium | L8 reduced probe | provisional 16-observation causal mechanism evidence; full suite open |
 
 ## Relation-free inference boundary
 
@@ -146,9 +151,9 @@ remains unfrozen.
 These hops are stored semantic-state transitions, not complete natural-language
 reasoning steps. No comparison with a frontier LLM is valid until both systems
 run the same opaque-body suite under the same retrieval and compute policy.
-The architecture may eventually use such a field as an efficient specialized
-substrate behind a compiler, but G6/G9 remain the factual reasoning and
-authorization authorities.
+The architecture may eventually use such a field as a primary specialized
+post-transformer execution substrate once its compiler boundary is reliable;
+G6/G9 remain the factual reasoning and authorization authorities.
 
 ## Formal mathematical-reality prototype
 
@@ -262,7 +267,7 @@ These are dated architecture judgments, not experimental pass metrics:
 | Generic latent optimization replacing exact verification | `<20%` |
 | Full long-term vision after further compiler and retrieval engineering | `60–75%` |
 
-L7 raises confidence in a hybrid design with two explicit reasoning lanes:
+L7 raises confidence in a post-transformer design with two explicit reasoning lanes:
 verified exact search for branching formal problems, and fixed-law equilibrium
 for bounded acyclic factor fields. It does not validate a generic optimizer
 for arbitrary graphs or remove independent verification. G2.14 still supplies
