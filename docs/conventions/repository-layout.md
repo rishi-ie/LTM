@@ -75,9 +75,31 @@ retrospective specifications.
 ## Local environments and generated catalogs
 
 `.venv` is the only supported repository environment and must use Python 3.11.
-`.venv-g101` is an ignored historical G10.1 environment. Models, environments,
+`.venv-g101` is an ignored historical G10.1 environment and is preserved in the
+external pre-prototype archive after the archive operation. Models, environments,
 checkpoints, evaluator data, and every experiment workspace remain ignored.
 
 Repository audits write local catalogs to
 `workspaces/_repository-catalog/`. They catalog existing workspaces in place;
-they never move, delete, or hash all bulk artifacts.
+they never move, delete, or hash all bulk artifacts unless the explicit archive
+command is run. Large top-level workspaces (at least 100 MiB) and unmanifested
+historical models are kept at:
+
+```text
+/Users/rishi/work/ltm-archive/2026-08-08-pre-prototype/
+```
+
+The archive is a reversible local research-artifact store, separate from the
+semantic source/archive plane. Its `archive-manifest.json` and journal are the
+authority. Restore explicitly, without compatibility symlinks:
+
+```bash
+.venv/bin/python -m ltm archive-restore \
+  --archive /Users/rishi/work/ltm-archive/2026-08-08-pre-prototype \
+  --item workspaces/<workspace-name>
+```
+
+The retained prototype assets are `.venv`, MiniLM, FLAN, and
+`.models/model-manifest.json`. Historical reports, source packages,
+specifications, configurations, and classifications are never moved or
+rewritten by archival.

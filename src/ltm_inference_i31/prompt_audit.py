@@ -11,6 +11,7 @@ from pathlib import Path
 
 from ltm.adapters import from_g1
 from ltm.codec import semantic_hash as field_semantic_hash
+from ltm.local_archive import resolve_archived_path
 from ltm_r2.codec import semantic_hash as mumbrane_semantic_hash
 from ltm_r2.generator import SemanticAtom, SemanticBody, SemanticRelation, compile_body
 from topology_g1.registry import validate_relation
@@ -91,7 +92,7 @@ def run(workspace: Path, checkpoint: Path) -> PromptAuditRecord:
     workspace.mkdir(parents=True, exist_ok=True)
     import torch
     model = SearchKernel()
-    model.load_state_dict(torch.load(checkpoint, map_location="cpu", weights_only=True)); model.eval()
+    model.load_state_dict(torch.load(resolve_archived_path(checkpoint), map_location="cpu", weights_only=True)); model.eval()
     field = _field(); problem = _problem(); trace: list[SearchTraceEvent] = []
     # This is the unchanged operational I3.1 path.  The remaining-cost head
     # stays enabled for the audit; its causal contribution is reported by the

@@ -20,5 +20,19 @@ Never stage or push `.models`, `.venv*`, `workspaces`, checkpoints, raw suites,
 evaluator gold, or vector sidecars. Historical reports and classifications are
 evidence records and must not be rewritten to simplify the current narrative.
 
+Large local research artifacts are preserved outside the repository at
+`/Users/rishi/work/ltm-archive/2026-08-08-pre-prototype/`. The archive is
+manifest-backed and reversible; verify it with:
+
+```bash
+.venv/bin/python -m ltm archive-verify \
+  --archive /Users/rishi/work/ltm-archive/2026-08-08-pre-prototype
+```
+
+It contains workspaces at or above 100 MiB, `.venv-g101`, and models not listed
+in `.models/model-manifest.json`. The active repository retains small workspaces,
+the canonical environment, MiniLM, FLAN, and all tracked source and evidence.
+Use `archive-restore` for an explicit item restoration; no symlinks are made.
+
 This procedure does not stage, commit, or push anything. Those actions remain
 an explicit user review step.

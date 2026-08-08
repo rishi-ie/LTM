@@ -10,6 +10,9 @@ import subprocess
 import sys
 from pathlib import Path
 
+from .local_archive import POINTER_RELATIVE, archived_catalog
+from .local_archive import status as archive_status
+
 _LINK = re.compile(r"\[[^\]]*\]\(([^)]+)\)")
 _GAPS = {
     "g01": "topology_g1", "g02": "topology_g2", "g02-1": "topology_g21",
@@ -245,6 +248,11 @@ def _environment_catalog(root: Path) -> dict[str, object]:
             "packages": json.loads(package_result.stdout) if package_result.returncode == 0 else [],
             "ignored": _ignored(root, name),
         })
+    archive = archive_status(root)
+    if archive.get("verified"):
+        manifest = json.loads((Path(archive["archive"]) / "archive-manifest.json").read_text())
+        if any(item["source_relative"] == ".venv-g101" for item in manifest["entries"]):
+            rows.append({"path": ".venv-g101", "role": "historical-unsupported", "present": False, "archived": True})
     return {"running_python": sys.version.split()[0], "environments": rows}
 
 
@@ -255,7 +263,57 @@ def _model_catalog(root: Path) -> dict[str, object]:
         for path in sorted(model_root.iterdir()):
             if path.is_dir():
                 models.append({"name": path.name, "bytes": _directory_size(path), "ignored": _ignored(root, str(path.relative_to(root)))})
-    return {"count": len(models), "models": models}
+    manifest = model_root / "model-manifest.json"
+    allowlisted = set()
+    if manifest.exists():
+        try:
+            value = json.loads(manifest.read_text())
+            records = value.get("models", value.get("entries", []))
+            records = records.values() if isinstance(records, dict) else records
+            for record in records:
+                if isinstance(record, str):
+                    allowlisted.add(Path(record).name)
+                elif isinstance(record, dict):
+                    for key in ("path", "relative_path", "name", "directory"):
+                        if record.get(key):
+                            allowlisted.add(Path(str(record[key])).name)
+                            break
+        except (OSError, json.JSONDecodeError):
+            pass
+    return {
+        "count": len(models),
+        "models": models,
+        "manifest_present": manifest.exists(),
+        "unmanifested_models": sorted(item["name"] for item in models if item["name"] not in allowlisted),
+    }
+
+
+def _archive_audit(root: Path) -> dict[str, object]:
+    info = archive_status(root)
+    failures: list[str] = []
+    if info.get("present") and not info.get("verified"):
+        failures.append("ARCHIVE_UNVERIFIED")
+    if info.get("verified"):
+        manifest = json.loads((Path(info["archive"]) / "archive-manifest.json").read_text())
+        archived_sources = {entry["source_relative"] for entry in manifest["entries"]}
+        if (root / ".venv-g101").exists() and ".venv-g101" in archived_sources:
+            failures.append("HISTORICAL_ENVIRONMENT_STILL_ACTIVE")
+        models = _model_catalog(root)
+        if models["unmanifested_models"]:
+            failures.append("UNMANIFESTED_MODEL_ACTIVE")
+        for required in (".venv", ".models/model-manifest.json", ".models/all-MiniLM-L6-v2", ".models/flan-t5-small"):
+            if not (root / required).exists():
+                failures.append(f"RETAINED_ASSET_MISSING:{required}")
+        registry = json.loads((root / _REGISTRY).read_text())["experiments"]
+        available = {entry["source_relative"] for entry in manifest["entries"]}
+        for row in registry:
+            workspace = row.get("authoritative_workspace")
+            if workspace and not (root / workspace).exists() and workspace not in available:
+                failures.append(f"AUTHORITATIVE_WORKSPACE_MISSING:{workspace}")
+        journal = Path(info["archive"]) / "archive-journal.json"
+        if not journal.exists() or json.loads(journal.read_text()).get("status") != "complete":
+            failures.append("ARCHIVE_JOURNAL_DISAGREEMENT")
+    return {"status": info, "failures": sorted(set(failures))}
 
 
 def audit_repository(root: Path) -> dict[str, object]:
@@ -287,7 +345,9 @@ def audit_repository(root: Path) -> dict[str, object]:
     registry = _registry_audit(root)
     environments = _environment_catalog(root)
     canonical = next((item for item in environments["environments"] if item["path"] == ".venv"), {})
+    archive = _archive_audit(root)
     return {
+        "repository_root": str(root),
         "gap_contract_missing": sorted(missing),
         "broken_markdown_links": _broken_links(root),
         "report_hashes": reports,
@@ -299,6 +359,9 @@ def audit_repository(root: Path) -> dict[str, object]:
         "experiment_registry": registry,
         "architecture_lock_mismatches": _lock_mismatches(root),
         "canonical_environment": canonical,
+        "archive": archive,
+        "archive_pointer": str(root / POINTER_RELATIVE) if (root / POINTER_RELATIVE).exists() else None,
+        "model_catalog": _model_catalog(root),
         "source_packages": len([item for item in (root / "src").iterdir() if item.is_dir()]),
         "test_packages": len([item for item in (root / "tests").iterdir() if item.is_dir()]),
         "config_files": len(list((root / "configs").glob("*.json"))),
@@ -315,12 +378,21 @@ def write_audit(root: Path, workspace: Path) -> dict[str, object]:
     workspace.mkdir(parents=True, exist_ok=True)
     (workspace / "experiment-audit.json").write_text(json.dumps(result, indent=2, sort_keys=True) + "\n")
     (workspace / "workspace-catalog.json").write_text(json.dumps(_workspace_catalog(root), indent=2, sort_keys=True) + "\n")
+    (workspace / "active-workspace-catalog.json").write_text(json.dumps(_workspace_catalog(root), indent=2, sort_keys=True) + "\n")
+    (workspace / "archived-workspace-catalog.json").write_text(json.dumps(archived_catalog(root), indent=2, sort_keys=True) + "\n")
     environments = _environment_catalog(root)
     (workspace / "environment-catalog.json").write_text(json.dumps(environments, indent=2, sort_keys=True) + "\n")
     (workspace / "model-catalog.json").write_text(json.dumps(_model_catalog(root), indent=2, sort_keys=True) + "\n")
+    pointer = root / POINTER_RELATIVE
+    if pointer.exists():
+        (workspace / "archive-pointer.json").write_text(pointer.read_text())
+        plan_path = workspace / "archive-plan.json"
+        if not plan_path.exists() and (root / "workspaces/_repository-catalog/archive-plan.json").exists():
+            plan_path.write_text((root / "workspaces/_repository-catalog/archive-plan.json").read_text())
     readiness = {
         "architecture_id": "LTM-ARCH-1.1",
-        "ready": not any((result["gap_contract_missing"], result["broken_markdown_links"], result["tracked_generated"], result["tracked_large_files"], result["architecture_lock_mismatches"], result["experiment_registry"]["duplicate_ids"], result["experiment_registry"]["invalid_statuses"], result["experiment_registry"]["missing_fields"], result["experiment_registry"]["missing_paths"], result["experiment_registry"]["unledgered"], result["experiment_registry"]["summary_missing_ids"], result["experiment_registry"]["chain_inconsistencies"], result["experiment_registry"]["missing_component_headings"], result["experiment_registry"]["missing_maturity_labels"], result["canonical_environment"].get("pip_check") != 0)),
+        "ready": not any((result["gap_contract_missing"], result["broken_markdown_links"], result["tracked_generated"], result["tracked_large_files"], result["architecture_lock_mismatches"], result["archive"]["failures"], result["experiment_registry"]["duplicate_ids"], result["experiment_registry"]["invalid_statuses"], result["experiment_registry"]["missing_fields"], result["experiment_registry"]["missing_paths"], result["experiment_registry"]["unledgered"], result["experiment_registry"]["summary_missing_ids"], result["experiment_registry"]["chain_inconsistencies"], result["experiment_registry"]["missing_component_headings"], result["experiment_registry"]["missing_maturity_labels"], result["canonical_environment"].get("pip_check") != 0)),
+        "archive": result["archive"],
         "commit_created": False,
         "push_performed": False,
     }
@@ -347,10 +419,11 @@ def assert_clean(result: dict[str, object]) -> None:
         failures.append("EXPERIMENT_REGISTRY_INVALID")
     if result["architecture_lock_mismatches"]:
         failures.append("ARCHITECTURE_LOCK_MISMATCH")
+    failures.extend(result["archive"]["failures"])
     environment = result["canonical_environment"]
     if not environment.get("version", "").startswith("Python 3.11") or environment.get("pip_check") != 0:
         failures.append("CANONICAL_ENVIRONMENT_INVALID")
-    if not all(result["ignored_assets"].values()):
+    if any(not ignored and (Path(result["repository_root"]) / path).exists() for path, ignored in result["ignored_assets"].items()):
         failures.append("UNIGNORED_LOCAL_ASSET")
     if failures:
         raise RuntimeError(",".join(failures))

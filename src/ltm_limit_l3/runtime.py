@@ -8,6 +8,7 @@ from pathlib import Path
 import numpy as np
 import torch
 
+from ltm.local_archive import resolve_archived_path
 from ltm_inference_i31.dataset import feature
 from ltm_inference_i31.field import MathFieldIndex, build_field
 from ltm_inference_i31.formal import body_hash, verify_proof
@@ -21,7 +22,7 @@ from .schemas import L3Body, L3Observation, L3Problem
 
 def _model(checkpoint: Path) -> SearchKernel:
     model = SearchKernel()
-    model.load_state_dict(torch.load(checkpoint, map_location="cpu", weights_only=True))
+    model.load_state_dict(torch.load(resolve_archived_path(checkpoint), map_location="cpu", weights_only=True))
     return model.eval()
 
 
